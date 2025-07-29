@@ -1,0 +1,138 @@
+---
+title: First Python file
+description: Write and run your first Python program
+icon: "laptop-code"
+---
+
+## Create a new file
+
+With your `python-for-ai` project open in VS Code:
+
+1. Click the "New File" button in the Explorer (looks like a page with a +)
+2. Name it `hello.py`
+3. Press Enter
+
+<Warning>
+  Make sure to include the `.py` extension! This tells VS Code and Python that this is a Python file.
+</Warning>
+
+## Understanding file extensions
+
+File extensions tell your computer and VS Code what type of file you're working with:
+
+- `.txt` - Plain text file, no special formatting
+- `.md` - Markdown file, for documentation
+- `.py` - Python file, contains Python code
+
+When you save a file with `.py`, VS Code:
+- Adds syntax highlighting (colors your code)
+- Enables Python-specific features
+- Shows Python in the bottom-right corner
+
+## Write your first program
+
+In your `hello.py` file, type:
+
+```python
+print("Hello, World!")
+print("I'm learning Python for AI")
+```
+
+Notice how VS Code colors your code:
+- `print` is highlighted as a function
+- Text in quotes is shown in a different color
+- This helps you spot errors quickly
+
+## Select Python interpreter
+
+Before running your code, make sure VS Code is using the right Python:
+
+1. Look at the bottom-right corner of VS Code
+2. You should see something like "Python 3.x.x"
+3. If not, click the area that says "Select Python Interpreter"
+4. Choose the Python version you installed earlier
+
+<Note>
+  We're using the main Python installation for now. Later in the course, you'll learn about virtual environments for more advanced project management.
+</Note>
+
+## Run your program
+
+There are three ways to run your Python code:
+
+**Method 1: Run button** (easiest)
+- Click the triangle "Run" button in the top-right corner
+
+**Method 2: Right-click menu**
+- Right-click anywhere in your code
+- Select "Run Python File in Terminal"
+
+**Method 3: Keyboard shortcut**
+- Press `Ctrl + F5` (Windows/Linux) or `Cmd + F5` (macOS)
+
+## Understanding the output
+
+When you run your code, the terminal opens at the bottom showing:
+
+```bash
+...\python-for-ai> python hello.py
+Hello, World!
+I'm learning Python for AI
+```
+
+Let's break this down:
+- `PS C:\...\python-for-ai>` - Your current folder (PS = PowerShell on Windows)
+- `python hello.py` - The command VS Code used to run your file
+- The next lines are your program's output
+
+## The integrated terminal
+
+The terminal at the bottom is the same as your system's terminal, but inside VS Code:
+
+- You can type commands directly
+- Try typing `python --version` and press Enter
+- Type `cls` (Windows) or `clear` (Mac/Linux) to clear the terminal
+
+<Tip>
+  The integrated terminal means you never have to leave VS Code. You can write code, run it, and see the results all in one place.
+</Tip>
+
+## Experiment
+
+Try changing your code and running it again:
+
+```python
+print("Hello, World!")
+print("I'm learning Python for AI")
+print("My name is [Your Name]")
+print("Today is a great day to code!")
+```
+
+Each `print()` statement creates a new line of output.
+
+## Save your work
+
+Remember to save your file:
+- Press `Ctrl + S` (Windows/Linux) or `Cmd + S` (macOS)
+- Or use File > Save
+
+VS Code shows a dot next to unsaved files in the tab.
+
+## What you've learned
+
+Congratulations! You've:
+- Created your first Python file
+- Written Python code
+- Selected the Python interpreter
+- Run a Python program
+- Understood the terminal output
+
+This is the foundation for everything else you'll learn in Python.
+
+<Card
+  title="Continue learning"
+  icon="graduation-cap"
+  href="/fundamentals"
+>
+  Start learning Python fundamentals
+</Card>

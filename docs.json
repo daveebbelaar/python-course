@@ -44,12 +44,13 @@
             ]
           },
           {
-            "group": "Your tools",
+            "group": "Code editor",
             "pages": [
-              "getting-started/command-line",
+              "getting-started/vscode-introduction",
               "getting-started/vscode-setup",
-              "getting-started/first-script",
-              "getting-started/python-execution"
+              "getting-started/vscode-workspace",
+              "getting-started/first-python-file",
+              "getting-started/vscode-customize"
             ]
           }
         ]

@@ -1,0 +1,135 @@
+---
+title: Customize VS Code
+description: Extensions and settings I recommend
+icon: "palette"
+---
+
+## Make VS Code yours
+
+VS Code becomes even more powerful with extensions and customizations. Here are the ones I use and recommend for Python development.
+
+<Note>
+  All of these are optional! VS Code works great out of the box, but these additions can make your coding experience even better.
+</Note>
+
+## Recommended Python extensions
+
+### Pylance
+
+The most important extension after the base Python extension:
+
+1. Open Extensions sidebar (click the 4 squares icon)
+2. Search for "Pylance"
+3. Install the one by **Microsoft**
+4. What it does:
+   - Shows errors as you type
+   - Provides better code suggestions
+   - Helps you write Python faster
+
+### Jupyter
+
+Essential for data science and AI work:
+
+1. Search for "Jupyter"
+2. Install the one by **Microsoft**
+3. What it does:
+   - Run Python notebooks (.ipynb files)
+   - Execute code in chunks
+   - Perfect for experimentation
+   - Enables interactive mode (more on this later)
+
+We'll use this later in the course for AI projects and interactive coding.
+
+### Path Intellisense
+
+Makes working with file paths much easier:
+
+1. Search for "Path Intellisense"
+2. Install the one by **Christian Kohler**
+3. What it does:
+   - Auto-completes file paths as you type
+   - Shows available files and folders
+   - No more typos in file paths!
+
+Super helpful when you're loading data files or importing modules.
+
+## Theme and appearance
+
+I've been using the same theme for years because it's easy on the eyes:
+
+### Atom One Dark theme
+
+1. Search for "Atom One Dark"
+2. Install "Atom One Dark Theme"
+3. When prompted, select it as your color theme
+4. Or manually: Press `Ctrl/Cmd + K`, then `Ctrl/Cmd + T` and select "Atom One Dark"
+
+### Material Icon Theme
+
+Makes your file icons more recognizable:
+
+1. Search for "Material Icon Theme"
+2. Install the one by Philipp Kief
+3. When prompted, activate the icon theme
+4. Your files now have colorful, meaningful icons
+
+## My personal settings
+
+### Increase file tree indentation
+
+I find the default indentation too small. Here's how to change it:
+
+1. Open settings:
+   - Press `Ctrl/Cmd + ,` (comma)
+   - Or go to File > Preferences > Settings
+2. In the search bar, type "tree indent"
+3. Find "Workbench > Tree: Indent"
+4. Change the value from 8 to **20**
+
+This makes nested folders much easier to see.
+
+### Alternative: Edit settings directly
+
+For power users, you can edit the settings file:
+
+1. Press `Ctrl/Cmd + Shift + P`
+2. Type "Open User Settings (JSON)"
+3. Add this line:
+```json
+"workbench.tree.indent": 20,
+```
+
+## Your VS Code setup
+
+After these customizations, your VS Code will have:
+- ✓ Python and Pylance for smart coding
+- ✓ Jupyter for notebooks and interactive Python
+- ✓ Path Intellisense for easy file navigation
+- ✓ Atom One Dark theme for comfortable viewing
+- ✓ Material icons for better file recognition
+- ✓ Increased tree indent for clearer folder structure
+
+<Tip>
+  You'll be spending a lot of time in VS Code throughout this course, so make it yours! Feel free to explore other settings and extensions to create a development environment you love working in.
+</Tip>
+
+## Other useful extensions
+
+While not required for this course, you might enjoy:
+- **Python Docstring Generator** - Auto-generate documentation
+- **Better Comments** - Colorize different types of comments
+
+## Reset if needed
+
+Changed something you don't like? You can always:
+- Disable extensions individually
+- Change themes back: `Ctrl/Cmd + K`, then `Ctrl/Cmd + T`
+- Reset all settings: Command Palette > "Preferences: Open Settings (UI)" > click the gear icon > "Reset Setting"
+
+<Card
+  title="Start coding"
+  icon="rocket"
+  href="/fundamentals"
+>
+  Your environment is ready! Let's learn Python
+</Card>

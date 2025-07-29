@@ -1,29 +1,103 @@
 ---
-title: VS Code
-description: Install and configure your code editor
-icon: "code"
+title: Install VS Code
+description: Download and install Visual Studio Code
+icon: "download"
 ---
 
-## Setting Up VS Code
+## Download VS Code
 
-Install Visual Studio Code for Python development.
+Visual Studio Code is available for all operating systems. The installation is quick and straightforward.
+
+<Tabs>
+  <Tab title="Windows">
+    1. Go to [code.visualstudio.com](https://code.visualstudio.com/)
+    2. Click the big download button (it detects Windows automatically)
+    3. Run the downloaded installer
+    4. **Important**: Check these options during installation:
+       - ✓ Add "Open with Code" action to Windows Explorer file context menu
+       - ✓ Add "Open with Code" action to Windows Explorer directory context menu
+       - ✓ Register Code as an editor for supported file types
+       - ✓ Add to PATH
+    5. Click "Next" and "Install"
+    6. Click "Finish" when done
+  </Tab>
+  
+  <Tab title="macOS">
+    1. Go to [code.visualstudio.com](https://code.visualstudio.com/)
+    2. Click the download button (it detects macOS automatically)
+    3. Open the downloaded `.zip` file
+    4. Drag **Visual Studio Code** to your **Applications** folder
+    5. Optional but recommended:
+       - Right-click VS Code in Applications
+       - Select "Options" > "Keep in Dock"
+    
+    **First time opening**:
+    - You might see "Visual Studio Code is from an unidentified developer"
+    - Go to System Preferences > Security & Privacy
+    - Click "Open Anyway"
+  </Tab>
+  
+  <Tab title="Linux">
+    VS Code is available through multiple installation methods:
+    
+    **Ubuntu/Debian** (recommended):
+    ```bash
+    # Download the .deb package
+    wget -O vscode.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+    
+    # Install it
+    sudo apt install ./vscode.deb
+    ```
+    
+    **Snap package** (works on most distributions):
+    ```bash
+    sudo snap install code --classic
+    ```
+    
+    **Other distributions**:
+    Visit [code.visualstudio.com](https://code.visualstudio.com/) and select your package format (.rpm, .tar.gz, etc.)
+  </Tab>
+</Tabs>
+
+## Verify installation
+
+Once installed, let's make sure VS Code is working:
+
+1. Open VS Code:
+   - **Windows**: Search "Visual Studio Code" in Start menu
+   - **macOS**: Find it in Applications or press `Cmd + Space` and search
+   - **Linux**: Type `code` in terminal or find it in your applications menu
+
+2. You should see the Welcome tab
+3. The interface should look clean and modern
+
+## Install Python extension
+
+VS Code needs the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python) to work properly with Python files:
+
+1. Click the Extensions icon in the left sidebar (it looks like 4 squares)
+2. Search for "Python"
+3. Find the one by **Microsoft** (it has millions of downloads)
+4. Click "Install"
+5. Wait for installation to complete
 
 <Note>
-  This section covers VS Code installation and essential Python extensions.
+  The Python extension adds syntax highlighting, code completion, debugging, and more. It's essential for Python development.
 </Note>
 
-## Topics Covered
+## Check Python detection
 
-- Installing VS Code
-- Python extension
-- Essential settings
-- AI-powered alternatives
+After installing the Python extension:
+
+1. Press `Ctrl + Shift + P` (Windows/Linux) or `Cmd + Shift + P` (macOS)
+2. Type "Python: Select Interpreter"
+3. You should see your Python installation listed
+4. If not, we'll fix this in the next section
 
 <Card
-  title="Next: First Script"
-  icon="arrow-right"
-  href="/getting-started/first-script"
-  color="#3455ee"
+  title="Create a workspace"
+  icon="folder-open"
+  href="/getting-started/vscode-workspace"
 >
-  Write your first Python program
+  Learn how to organize your Python projects
 </Card>

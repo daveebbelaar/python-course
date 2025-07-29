@@ -155,4 +155,4 @@ docs/
 - You don't need to use `<br>` in accordings when it follows a code block or bullet list. Only use `<br>` with an explanation and then a code block or list.
 
 ## Project Memories
-- I replaced 'all with this > , should be standard for arrow icon in project
+- I replaced 'all arrows with this > , should be standard for arrow icon in project
