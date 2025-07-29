@@ -1,0 +1,179 @@
+---
+title: Install on Windows
+description: Installing Python on Windows 10/11
+icon: "windows"
+---
+
+## Download Python
+
+1. Go to [python.org/downloads](https://www.python.org/downloads/)
+2. The site will detect you're on Windows and show the latest version
+3. Click the download button to get the installer
+4. Save it to your Downloads folder
+
+<Tip>
+  Always get Python from the official website to ensure it's secure and up-to-date.
+</Tip>
+
+## Install Python
+
+This is the most important part - pay close attention to step 2!
+
+1. Find and run the downloaded installer
+2. **Important**: Check ✓ "Add python.exe to PATH" at the bottom 
+
+<Warning>
+  If you miss the "Add to PATH" checkbox, Python won't work from Command Prompt. This is the #1 installation mistake.
+</Warning>
+
+3. Click "Install Now" (not "Customize installation" unless you know what you're doing)
+4. If Windows asks "Do you want to allow this app to make changes?", click "Yes"
+5. Wait for installation (usually takes 1-2 minutes)
+6. Click "Close" when you see "Setup was successful"
+
+## Verify installation
+
+Let's make sure Python installed correctly:
+
+1. Open Command Prompt:
+   - Press `Windows + R`
+   - Type `cmd` and press Enter
+   - Or search "Command Prompt" in Start menu
+
+2. Type this command:
+```bash
+python --version
+```
+
+3. You should see the Python version you just installed
+
+<Note>
+  On Windows, you can usually use `python` (not `python3` like on Mac/Linux).
+</Note>
+
+## Test Python
+
+Let's run Python for the first time:
+
+1. In Command Prompt, type:
+```bash
+python
+```
+
+2. You'll see something like:
+```
+Python 3.13.5 (tags/v3.13.5:0fa1754, Jul 29 2025, 12:03:01) [MSC v.1935 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+3. The `>>>` means Python is running! Try:
+```python
+print("Hello from Python!")
+```
+
+4. Press Enter to see:
+```
+Hello from Python!
+```
+
+5. To exit Python:
+   - Type `exit()` and press Enter
+   - Or press `Ctrl + Z` then Enter
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="'python' is not recognized" icon="circle-exclamation">
+    This means Python wasn't added to PATH. Here's how to fix it.<br /><br />
+    
+    **Quick Fix**: Try `py` instead of `python`:
+    ```bash
+    py --version
+    ```
+    
+    **Solution 1**: Reinstall Python
+    
+    1. Uninstall Python from Settings > Apps
+    2. Download and run installer again
+    3. CHECK the "Add to PATH" box this time!
+    
+    **Solution 2**: Add to PATH manually
+    
+    1. Search "Environment Variables" in Start menu
+    2. Click "Environment Variables" button
+    3. Under "System variables", find and double-click "Path"
+    4. Click "New" and add these two paths:
+       ```
+       C:\Users\[YourName]\AppData\Local\Programs\Python\Python313
+       C:\Users\[YourName]\AppData\Local\Programs\Python\Python313\Scripts
+       ```
+    5. Replace `[YourName]` with your Windows username
+    6. Replace `Python313` with your actual Python version folder
+    7. Click OK on all windows
+    8. **Close and reopen** Command Prompt
+  </Accordion>
+  
+  <Accordion title="Permission denied" icon="lock">
+    **During installation**:
+    
+    - Right-click the installer
+    - Select "Run as administrator"
+    
+    **When running Python**:
+    
+    - Open Command Prompt as administrator
+    - Right-click Command Prompt > Run as administrator
+  </Accordion>
+  
+  <Accordion title="Windows Defender blocking Python" icon="ban">
+    Windows might flag Python as suspicious:
+    
+    1. When warning appears, click "More info"
+    2. Click "Run anyway"
+    3. Or add Python to Windows Defender exceptions:
+       - Settings > Windows Security > Virus & threat protection
+       - Add an exclusion > Folder
+       - Add Python installation folder
+  </Accordion>
+  
+  <Accordion title="Multiple Python versions" icon="code-branch">
+    Windows can have multiple Python versions. To manage them:<br /><br />
+    
+    **See all versions**:
+    ```bash
+    py -0
+    ```
+    
+    **Use specific version**:
+    ```bash
+    py -3.13 --version
+    py -3.12 script.py
+    ```
+    
+    **Set default version**: Create `py.ini` in your home folder with:
+    ```ini
+    [defaults]
+    python=3.13
+    ```
+  </Accordion>
+  
+  <Accordion title="Microsoft Store Python" icon="store">
+    If typing `python` opens Microsoft Store:
+    
+    1. Settings > Apps > Apps & features
+    2. Click "App execution aliases"
+    3. Turn OFF the Python aliases
+    4. Use the python.org installer instead
+    
+    The Microsoft Store version has limitations for development.
+  </Accordion>
+</AccordionGroup>
+
+<Card
+  title="Continue to VS Code setup"
+  icon="arrow-right"
+  href="/getting-started/vscode-setup"
+>
+  Install and configure Visual Studio Code
+</Card>

@@ -228,6 +228,6 @@
 ---
 
 ### **Next Steps**
-1. **Building Your Own AI Projects** → Watch more videos
+1. **Building Your Own AI Projects** > Watch more videos
 2. **Recommended Learning Path**
 3. **Take this short quiz to continue learning**

@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Learn Python for AI - Complete Beginner Course",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -11,58 +11,130 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Introduction",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Welcome",
             "pages": [
               "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "introduction/welcome",
+              "introduction/why-python",
+              "introduction/ai-assistants"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Getting Started",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Python setup",
             "pages": [
-              "api-reference/introduction"
+              "getting-started/index",
+              "getting-started/what-is-python",
+              "getting-started/installing-python"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Platform guides",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "getting-started/installing-python-windows",
+              "getting-started/installing-python-macos",
+              "getting-started/installing-python-linux"
+            ]
+          },
+          {
+            "group": "Your tools",
+            "pages": [
+              "getting-started/command-line",
+              "getting-started/vscode-setup",
+              "getting-started/first-script",
+              "getting-started/python-execution"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Python Fundamentals",
+        "groups": [
+          {
+            "group": "First steps",
+            "pages": [
+              "fundamentals/index",
+              "fundamentals/variables",
+              "fundamentals/data-types",
+              "fundamentals/strings"
+            ]
+          },
+          {
+            "group": "Program logic",
+            "pages": [
+              "fundamentals/operators",
+              "fundamentals/error-messages",
+              "control-flow/index",
+              "control-flow/if-statements",
+              "control-flow/loops",
+              "control-flow/match-case"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Advanced",
+        "groups": [
+          {
+            "group": "Functions",
+            "pages": [
+              "functions/index",
+              "functions/defining-functions",
+              "functions/parameters",
+              "functions/return-values"
+            ]
+          },
+          {
+            "group": "Data structures",
+            "pages": [
+              "data-structures/index",
+              "data-structures/lists",
+              "data-structures/dictionaries",
+              "data-structures/tuples",
+              "data-structures/sets"
+            ]
+          },
+          {
+            "group": "External tools",
+            "pages": [
+              "libraries-apis/index",
+              "libraries-apis/importing-modules",
+              "libraries-apis/working-with-apis",
+              "libraries-apis/data-libraries"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Build",
+        "groups": [
+          {
+            "group": "AI projects",
+            "pages": [
+              "projects/index",
+              "projects/web-scraper",
+              "projects/pdf-processor",
+              "projects/ai-chatbot"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Next",
+        "groups": [
+          {
+            "group": "Keep learning",
+            "pages": [
+              "resources/next-steps",
+              "resources/essential-tools",
+              "resources/community"
             ]
           }
         ]
@@ -71,19 +143,9 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Watch on YouTube",
+          "href": "https://youtube.com/@daveebbelaar",
+          "icon": "youtube"
         }
       ]
     }
@@ -95,21 +157,53 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Community",
+        "href": "https://www.skool.com/data-alchemy"
+      },
+      {
+        "label": "Datalumina",
+        "href": "https://datalumina.com"
+      },
+      {
+        "label": "YouTube",
+        "href": "https://youtube.com/@daveebbelaar"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
+    ]
   },
   "footer": {
+    "copyright": "© 2025 Datalumina. All rights reserved.",
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/daveebbelaar",
+      "github": "https://github.com/daveebbelaar",
+      "linkedin": "https://linkedin.com/in/daveebbelaar",
+      "youtube": "https://youtube.com/@daveebbelaar"
     }
+  },
+  "appearance": {
+    "defaultMode": "light",
+    "toggleButton": true
+  },
+  "feedback": {
+    "thumbsRating": true,
+    "suggestEdit": true
+  },
+  "modeToggle": {
+    "default": "light",
+    "isHidden": false
+  },
+  "typography": {
+    "fontSize": 16,
+    "lineHeight": 1.6,
+    "headings": {
+      "weight": 600
+    }
+  },
+  "layout": {
+    "maxWidth": "1200px"
+  },
+  "seo": {
+    "site": "https://learn-python.ai",
+    "title": "Learn Python for AI - Complete Beginner Course",
+    "description": "From zero to confident with Python fundamentals and AI workflows in just 3 hours. Free course by Dave Ebbelaar."
   }
 }

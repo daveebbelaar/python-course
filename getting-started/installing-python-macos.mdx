@@ -1,0 +1,209 @@
+---
+title: Install on macOS  
+description: Installing Python on Mac computers
+icon: "apple"
+---
+
+## Check existing Python
+
+macOS includes an older Python version for system use. Let's check what you have:
+
+1. Open Terminal:
+   - Press `Cmd + Space` to open Spotlight
+   - Type "Terminal" and press Enter
+   - Or find Terminal in Applications > Utilities
+
+2. Check Python version:
+```bash
+python3 --version
+```
+
+If you see a recent Python 3 version, you might already be set!
+
+<Note>
+  Some Mac users can use just `python` instead of `python3`, but this depends on your system configuration. When in doubt, use `python3`.
+</Note>
+
+## Download Python
+
+1. Go to [python.org/downloads](https://www.python.org/downloads/)
+2. The site will detect you're on macOS and show the latest version
+3. Click the download button to get the `.pkg` installer
+
+<Tip>
+  Always download from python.org to ensure you get the official, secure version.
+</Tip>
+
+## Install Python
+
+1. Open the downloaded `.pkg` file
+2. The Python installer will open
+3. Click "Continue" through the introduction and license screens
+4. Click "Agree" to accept the license
+5. Click "Install" (you'll need to enter your Mac password)
+6. Wait for installation to complete
+7. Click "Close" when you see "The installation was successful"
+
+## Verify installation
+
+Open a **new** Terminal window (important!) and check the version:
+
+```bash
+python3 --version
+```
+
+You should see the version you just installed. The exact number depends on when you download.
+
+## Test Python
+
+Let's make sure Python works properly:
+
+1. In Terminal, type:
+```bash
+python3
+```
+
+2. You'll see something like:
+```
+Python 3.13.5 (v3.13.5:0fa1754080, Jul 29 2025, 09:45:56) [Clang 15.0.0] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+3. Try your first Python command:
+```python
+print("Hello from Python!")
+```
+
+4. You should see:
+```
+Hello from Python!
+```
+
+5. To exit Python:
+   - Type `exit()` and press Enter
+   - Or press `Ctrl + D`
+
+## Install certificates
+
+Python on macOS needs certificates for secure internet connections:
+
+1. Go to **Applications** > **Python 3.x** folder
+2. Double-click **Install Certificates.command**
+3. A Terminal window will open and install certificates
+4. Close the window when it says "Process completed"
+
+<Warning>
+  Skip this step and you'll get SSL errors when Python tries to download packages or access HTTPS websites.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="'python3' command not found" icon="circle-exclamation">
+    The Terminal might not see the new installation yet.<br /><br />
+    
+    **Solution 1**: Close Terminal completely and open a new window.<br /><br />
+    
+    **Solution 2**: Check if Python is installed but not in PATH:
+    ```bash
+    ls /Library/Frameworks/Python.framework/Versions/
+    ```
+    
+    **Solution 3**: Add Python to your PATH manually:
+    ```bash
+    echo 'export PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:$PATH"' >> ~/.zshrc
+    source ~/.zshrc
+    ```
+  </Accordion>
+  
+  <Accordion title="'python' command doesn't work" icon="code">
+    This is normal on macOS. You have three options:<br /><br />
+    
+    **Option 1**: Always use `python3` (recommended)<br /><br />
+    
+    **Option 2**: Create an alias:
+    ```bash
+    echo 'alias python=python3' >> ~/.zshrc
+    echo 'alias pip=pip3' >> ~/.zshrc
+    source ~/.zshrc
+    ```
+    
+    **Option 3**: Check if the installer created a `python` link:
+    ```bash
+    which python
+    ```
+  </Accordion>
+  
+  <Accordion title="SSL/Certificate errors" icon="lock">
+    You forgot to install certificates. Fix it by<br /><br />
+    
+    Running from Terminal:
+    ```bash
+    /Applications/Python\ 3.*/Install\ Certificates.command
+    ```
+    
+    Or manually installing certificates:
+    ```bash
+    pip3 install --upgrade certifi
+    ```
+  </Accordion>
+  
+  <Accordion title="Multiple Python versions" icon="circle-exclamation">
+    macOS can have multiple Python versions. To manage them:<br /><br />
+    
+    **See all installed versions**:
+    ```bash
+    ls -la /usr/local/bin/python*
+    ```
+    
+    **Use a specific version**:
+    ```bash
+    python3.13 --version
+    python3.12 --version
+    ```
+    
+    **Set a default** (example for 3.13):
+    ```bash
+    ln -s -f /usr/local/bin/python3.13 /usr/local/bin/python3
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Alternative: Homebrew installation
+
+If you prefer using a package manager:
+
+<Steps>
+  <Step title="Install Homebrew">
+    ```bash
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
+  </Step>
+  <Step title="Install Python">
+    ```bash
+    brew install python@3
+    ```
+  </Step>
+  <Step title="Verify installation">
+    ```bash
+    python3 --version
+    ```
+  </Step>
+</Steps>
+
+<Note>
+  Homebrew Python might use different paths than the official installer. Both work fine.
+</Note>
+
+## Next steps
+
+Perfect! Python is now installed on your Mac. Let's set up your code editor.
+
+<Card
+  title="Continue to VS Code setup"
+  icon="arrow-right"
+  href="/getting-started/vscode-setup"
+>
+  Install and configure Visual Studio Code
+</Card>

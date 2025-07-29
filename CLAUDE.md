@@ -1,28 +1,129 @@
-# Mintlify documentation
+# Learn Python for AI - Documentation Project
 
-## Working relationship
-- You can push back on ideas-this can lead to better documentation. Cite sources and explain your reasoning when you do so
-- ALWAYS ask for clarification rather than making assumptions
-- NEVER lie, guess, or make up information
+## Project Overview
+This is a comprehensive beginner course for learning Python specifically for AI development. The course teaches Python foundations that students need to confidently work with Python in AI applications.
 
-## Project context
+## Project Setup
+- **Course Name**: Learn Python for AI
+- **Domain**: learn-python.ai
+- **Author**: Dave Ebbelaar
+- **Company**: Datalumina
+
+## Navigation Structure
+The course uses a progressive horizontal tab structure:
+1. **Introduction** - Course welcome, why Python, AI assistants
+2. **Getting Started** - Python setup and developer tools
+3. **Python Fundamentals** - Variables, data types, operators, control flow
+4. **Advanced** - Functions, data structures, external tools
+5. **Build** - Real-world AI projects
+6. **Resources** - Additional learning materials
+
+## Style Guide
+
+### Capitalization Patterns
+**Navigation & Menu Items**
+- Tab names: Title case (e.g., "Introduction", "Getting Started")
+- Page titles: Sentence case (e.g., "Course welcome", "Why Python")
+- Card titles: Sentence case (e.g., "Complete beginner", "AI focused")
+- Navigation cards: Sentence case (e.g., "Begin the course", "Setup Python")
+
+**Headers**
+- H1: Not used (page title in frontmatter)
+- H2: Sentence case for all section headers (e.g., "Complete beginner course", "Learning with AI assistants")
+- H3+: Sentence case throughout
+
+**Cards**
+- Card titles: Sentence case
+- Card descriptions: Sentence case, no ending punctuation unless multiple sentences
+
+**Technical Terms**
+- Product names: Always capitalize (Python, Claude, OpenAI)
+- Model names: Title case with versions (Claude 4 Sonnet)
+- Features/concepts: Lowercase unless proper nouns
+
+### Tone of Voice
+- **Perspective**: Second-person ("you") for direct communication
+- **Style**: Concise and direct, no fluff or preamble
+- **Length**: Keep sections short - 2-3 sentences per paragraph
+- **Focus**: Python foundations for AI, not building actual AI applications
+- **Examples**: "Learn Python from scratch" not "Build AI applications"
+
+### Content Structure Patterns
+
+**Key Principles**
+- Brevity is essential - get to the point quickly
+- No lengthy introductions or conclusions
+- Combine short sections into cohesive ones
+
+**Paragraphs**
+- Maximum 2-3 sentences per paragraph
+- One main idea per paragraph
+- No verbose explanations
+
+**Cards (CardGroup)**
+- Use 2-3 columns for feature highlights
+- Navigation cards: 2 columns max
+- No color attributes on cards - use default styling
+- Include href links for all tool mentions
+- Keep descriptions to one line when possible
+
+**Bullet Points**
+- Prerequisites or requirements
+- Quick feature lists
+- Step-by-step instructions (numbered for sequences)
+- Key takeaways or summaries
+
+**Code Blocks**
+- Always include language tag
+- Add filename/context comment when helpful
+- Test all examples before publishing
+- Keep examples focused and minimal
+
+**Notes/Tips/Warnings**
+- `<Note>` for important context
+- `<Tip>` for best practices
+- `<Warning>` for potential issues
+- Use sparingly for emphasis
+
+### Title Guidelines
+- All page titles use 2-3 words in sentence case
+- Group names use sentence case
+- Keep titles short and clear for visual consistency
+- All pages include FontAwesome icons in frontmatter
+
+## Course Content Structure
+```
+docs/
+├── index.mdx                    # Main landing page
+├── introduction/                # Welcome and motivation
+├── getting-started/             # Environment setup
+├── fundamentals/                # Basic Python concepts
+├── control-flow/                # Program logic
+├── functions/                   # Reusable code
+├── data-structures/             # Lists, dicts, etc.
+├── libraries-apis/              # External tools
+├── projects/                    # Hands-on projects
+└── resources/                   # Additional learning
+```
+
+## Mintlify Configuration
 - Format: MDX files with YAML frontmatter
 - Config: docs.json for navigation, theme, settings
-- Components: Mintlify components
+- Components: Mintlify components (Card, CardGroup, Note, Tip, etc.)
 
-## Content strategy
-- Document just enough for user success - not too much, not too little
-- Prioritize accuracy and usability of information
-- Make content evergreen when possible
-- Search for existing information before adding new content. Avoid duplication unless it is done for a strategic reason
+## Content Strategy
+- Keep content concise - aim for brevity without sacrificing clarity
+- Each section should be 2-3 paragraphs maximum
+- Focus on Python foundations, not building actual AI applications
+- Prioritize practical learning over theory
 - Check existing patterns for consistency
-- Start by making the smallest reasonable changes
+- When mentioning tools, always include working links
 
-## Frontmatter requirements for pages
-- title: Clear, descriptive page title
+## Frontmatter Requirements
+- title: 2-3 words in sentence case
 - description: Concise summary for SEO/navigation
 
-## Writing standards
+## Writing Standards
 - Second-person voice ("you")
 - Prerequisites at start of procedural content
 - Test all code examples before publishing
@@ -32,15 +133,23 @@
 - Alt text on all images
 - Relative paths for internal links
 
-## Git workflow
+## Git Workflow
 - NEVER use --no-verify when committing
 - Ask how to handle uncommitted changes before starting
 - Create a new branch when no clear branch exists for changes
 - Commit frequently throughout development
 - NEVER skip or disable pre-commit hooks
 
-## Do not
+## Do Not
 - Skip frontmatter on any MDX file
 - Use absolute URLs for internal links
 - Include untested code examples
 - Make assumptions - always ask for clarification
+- Use more than 3 words in titles
+- Add color codes to cards (e.g., color="#3455ee")
+- Use emojis in content
+- Create lengthy explanations - be concise
+- Use Title Case for headers or card titles (use sentence case)
+
+## Markdown and Formatting Tips
+- You don't need to use `<br>` in accordings when it follows a code block or bullet list. Only use `<br>` with an explanation and then a code block or list.

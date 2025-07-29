@@ -1,0 +1,266 @@
+---
+title: Install on Linux
+description: Installing Python on Linux distributions
+icon: "linux"
+---
+
+## Check existing Python
+
+Most Linux distributions come with Python pre-installed. Let's check:
+
+```bash
+python3 --version
+```
+
+If you see a recent Python 3 version, you're ready! Most modern Linux distributions include Python 3.
+
+<Note>
+  Linux uses `python3` to distinguish from the older Python 2. Some distributions let you use just `python`, but `python3` always works.
+</Note>
+
+## Install or update Python
+
+Choose your Linux distribution below:
+
+<Tabs>
+  <Tab title="Ubuntu/Debian">
+    ### Update package lists
+    ```bash
+    sudo apt update
+    ```
+    
+    ### Install Python and essential tools
+    ```bash
+    sudo apt install python3 python3-pip python3-venv
+    ```
+    
+    ### Install development headers (for compiling packages)
+    ```bash
+    sudo apt install python3-dev build-essential
+    ```
+    
+    ### For the latest Python version
+    If your distribution doesn't have the latest Python:
+    ```bash
+    # Add the deadsnakes PPA
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    sudo apt update
+    
+    # Install specific version (example: 3.13)
+    sudo apt install python3.13 python3.13-venv python3.13-dev
+    ```
+  </Tab>
+  
+  <Tab title="Fedora/RHEL/CentOS">
+    ### Install Python and pip
+    ```bash
+    sudo dnf install python3 python3-pip python3-devel
+    ```
+    
+    ### Install compilation tools
+    ```bash
+    sudo dnf groupinstall "Development Tools"
+    ```
+    
+    ### For newer Python versions
+    ```bash
+    # Check available versions
+    dnf search python3
+    
+    # Install specific version
+    sudo dnf install python3.13
+    ```
+  </Tab>
+  
+  <Tab title="Arch/Manjaro">
+    ### Python is usually pre-installed
+    ```bash
+    # If needed, install Python
+    sudo pacman -S python python-pip
+    ```
+    
+    ### Install base development tools
+    ```bash
+    sudo pacman -S base-devel
+    ```
+    
+    ### For specific versions
+    ```bash
+    # Search available versions
+    pacman -Ss python3
+    
+    # Install from AUR if needed
+    yay -S python313
+    ```
+  </Tab>
+  
+  <Tab title="openSUSE">
+    ### Install Python and pip
+    ```bash
+    sudo zypper install python3 python3-pip python3-devel
+    ```
+    
+    ### Install development pattern
+    ```bash
+    sudo zypper install -t pattern devel_basis
+    ```
+  </Tab>
+  
+  <Tab title="Alpine">
+    ### Install Python and pip
+    ```bash
+    apk add python3 py3-pip python3-dev
+    ```
+    
+    ### Install build tools
+    ```bash
+    apk add build-base
+    ```
+  </Tab>
+</Tabs>
+
+## Verify installation
+
+Check that Python and pip are installed:
+
+```bash
+python3 --version
+pip3 --version
+```
+
+You should see version numbers for both.
+
+## Test Python
+
+1. Start Python:
+```bash
+python3
+```
+
+2. You'll see the Python prompt:
+```
+Python 3.13.5 (main, Jul 29 2025, 12:03:01) [GCC 11.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
+
+3. Try a simple command:
+```python
+print("Hello from Linux!")
+```
+
+4. Exit Python:
+   - Type `exit()` or press `Ctrl + D`
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Permission denied" icon="lock">
+    **For system packages**: Always use `sudo`:
+    
+    ```bash
+    sudo apt install python3-pip
+    ```
+    
+    **For pip packages**: Install in user space:
+    
+    ```bash
+    pip3 install --user package-name
+    ```
+    
+    **Best practice**: Use virtual environments to avoid permission issues entirely.
+  </Accordion>
+  
+  <Accordion title="python3: command not found" icon="circle-exclamation">
+    Python isn't installed. Install it using your package manager:
+    
+    ```bash
+    # Ubuntu/Debian
+    sudo apt update && sudo apt install python3
+    
+    # Fedora
+    sudo dnf install python3
+    
+    # Arch
+    sudo pacman -S python
+    ```
+  </Accordion>
+  
+  <Accordion title="pip3: command not found" icon="box">
+    pip isn't installed. Fix it.
+    
+    ```bash
+    # Ubuntu/Debian
+    sudo apt install python3-pip
+    
+    # Fedora
+    sudo dnf install python3-pip
+    
+    # From Python
+    python3 -m ensurepip
+    ```
+  </Accordion>
+  
+  <Accordion title="Outdated Python version" icon="clock">
+    Your distribution has an old Python. Options:<br /><br />
+    
+    **Option 1**: Use deadsnakes PPA (Ubuntu/Debian):
+    ```bash
+    sudo add-apt-repository ppa:deadsnakes/ppa
+    sudo apt update
+    sudo apt install python3.13
+    ```
+    
+    **Option 2**: Compile from source:
+    ```bash
+    # Install dependencies
+    sudo apt install build-essential zlib1g-dev libncurses5-dev \
+      libgdbm-dev libnss3-dev libssl-dev libreadline-dev \
+      libffi-dev libsqlite3-dev wget libbz2-dev
+    
+    # Download and compile
+    wget https://www.python.org/ftp/python/3.13.5/Python-3.13.5.tgz
+    tar -xf Python-3.13.5.tgz
+    cd Python-3.13.5
+    ./configure --enable-optimizations
+    make -j $(nproc)
+    sudo make altinstall
+    ```
+    
+    **Option 3**: Use pyenv for version management<br /><br />
+  </Accordion>
+  
+  <Accordion title="externally-managed-environment error" icon="ban">
+    Modern Linux prevents pip from installing system-wide. Solutions:<br /><br />
+    
+    **Use virtual environments** (recommended):
+    ```bash
+    python3 -m venv myenv
+    source myenv/bin/activate
+    pip install package-name
+    ```
+    
+    **Install in user directory**:
+    ```bash
+    pip3 install --user package-name
+    ```
+    
+    **Use pipx for applications**:
+    ```bash
+    sudo apt install pipx
+    pipx install application-name
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+Great! Python is ready on your Linux system. Let's set up your development environment.
+
+<Card
+  title="Continue to VS Code setup"
+  icon="arrow-right"
+  href="/getting-started/vscode-setup"
+>
+  Install and configure Visual Studio Code
+</Card>
