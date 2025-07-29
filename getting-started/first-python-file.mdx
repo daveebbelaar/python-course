@@ -73,28 +73,39 @@ There are three ways to run your Python code:
 
 ## Understanding the output
 
-When you run your code, the terminal opens at the bottom showing:
+When you run your code, the terminal opens at the bottom. You'll see something like this (yours will look slightly different):
 
 ```bash
+cd /path/to/your/project
+/path/to/python /path/to/your/project/hello.py
 Hello, World!
 I'm learning Python for AI
 ```
 
-Let's break this down:
-- `PS C:\...\python-for-ai>` - Your current folder (PS = PowerShell on Windows)
-- `python hello.py` - The command VS Code used to run your file
-- The next lines are your program's output
+What's happening here:
+1. **First line**: VS Code navigates to your project folder
+2. **Second line**: VS Code runs Python with the full path to your file
+3. **Following lines**: Your program's output!
+
+Don't worry about the long paths - VS Code handles all of this automatically. The important part is seeing your output: "Hello, World!"
 
 ## The integrated terminal
 
-The terminal at the bottom is the same as your system's terminal, but inside VS Code:
+The terminal at the bottom is the same as your system's terminal, but inside VS Code. Here's how to work with it:
 
+### Opening and closing the terminal
+- **Open**: View > Terminal (or press `` Ctrl + ` `` on Windows/Linux, `` Cmd + ` `` on macOS)
+- **Hide**: Click the X or press the same shortcut again
+- **New terminal**: Click the + button or Terminal > New Terminal
+
+### Terminal basics
 - You can type commands directly
 - Try typing `python --version` and press Enter
-- Type `cls` (Windows) or `clear` (Mac/Linux) to clear the terminal
+- Type `cls` (Windows) or `clear` (Mac/Linux) to clear the screen
+- Use the up arrow to recall previous commands
 
 <Tip>
-  The integrated terminal means you never have to leave VS Code. You can write code, run it, and see the results all in one place.
+  The integrated terminal means you never have to leave VS Code. You can write code, run it, install packages, and manage files all in one place.
 </Tip>
 
 ## Experiment
