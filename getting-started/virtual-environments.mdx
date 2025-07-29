@@ -1,0 +1,159 @@
+---
+title: Virtual environments
+description: Keep your Python projects organized
+icon: "box"
+---
+
+## Your Python installation
+
+Remember when we installed Python? That installation lives in a specific folder on your computer:
+- **Windows**: `C:\Users\[YourName]\AppData\Local\Programs\Python\Python313\`
+- **macOS**: `/Library/Frameworks/Python.framework/Versions/3.13/`
+- **Linux**: `/usr/bin/python3`
+
+This is your "system Python" - it's shared by everything on your computer.
+
+## The problem with sharing
+
+Imagine you're working on two projects:
+- **Project A** needs version 1.0 of a tool
+- **Project B** needs version 2.0 of the same tool
+
+If you install version 2.0 for Project B, you just broke Project A! This is where virtual environments save the day.
+
+## What are virtual environments?
+
+A virtual environment is like a private copy of Python for each project. Think of it as:
+- A separate folder for each project
+- Its own Python installation
+- Its own place to install packages
+- Complete isolation from other projects
+
+<Note>
+  Virtual environments are so important that I create a new one for EVERY project. It's a Python best practice that will save you from many headaches.
+</Note>
+
+## Understanding packages
+
+Before we continue, let's understand what packages are:
+
+**Packages** are pre-written code that others have created for us to use. Instead of writing everything from scratch, we can import these packages. For example:
+- `requests` - for downloading web pages
+- `pandas` - for working with data
+- `openai` - for using AI models
+
+Each package has different versions, and different projects might need different versions.
+
+## Create your first virtual environment
+
+Let's create one for our `python-for-ai` project. You have two methods:
+
+### Method 1: VS Code Command Palette (easier)
+
+1. Open your project in VS Code
+2. Press `Ctrl/Cmd + Shift + P`
+3. Type "Python: Create Environment"
+4. Select "Venv"
+5. Select your Python installation
+6. VS Code creates and activates everything for you!
+
+### Method 2: Terminal command
+
+1. Open the terminal in VS Code (View > Terminal)
+2. Make sure you're in your project folder
+3. Run this command:
+
+<Tabs>
+  <Tab title="Windows">
+    ```bash
+    python -m venv .venv
+    ```
+  </Tab>
+  <Tab title="macOS/Linux">
+    ```bash
+    python3 -m venv .venv
+    ```
+  </Tab>
+</Tabs>
+
+What this does:
+- `python -m venv` - Run Python's virtual environment module
+- `.venv` - The name of the folder to create (convention is to use ".venv" with a dot)
+
+## What just happened?
+
+Look at your project folder - you now have a new `.venv` folder:
+
+```
+python-for-ai/
+├── .venv/          # Your virtual environment (hidden folder)
+├── hello.py        # Your code
+└── python-for-ai.code-workspace
+```
+
+<Note>
+  The dot in `.venv` makes it a hidden folder on Mac/Linux. This keeps your project clean since you don't need to see this folder often.
+</Note>
+
+This `.venv` folder contains:
+- A copy of Python
+- A place to install packages
+- Scripts to activate/deactivate
+
+## Activate your virtual environment
+
+VS Code makes activation super easy:
+
+1. Press `Ctrl/Cmd + Shift + P` to open Command Palette
+2. Type "Python: Select Interpreter"
+3. Choose the one that says `.venv` (it will show the full path like `./.venv/bin/python`)
+4. That's it! VS Code automatically activates it for you
+
+You'll know it's working when you see `(.venv)` in your terminal:
+```bash
+(.venv) PS C:\...\python-for-ai>
+```
+
+<Tip>
+  This is my recommended approach. VS Code remembers your choice and automatically activates the environment every time you open the project!
+</Tip>
+
+## Common issues
+
+<AccordionGroup>
+  <Accordion title="Command not found" icon="circle-exclamation">
+    If `python -m venv` doesn't work, you might need to install it:
+    
+    **Ubuntu/Debian**:
+    ```bash
+    sudo apt install python3-venv
+    ```
+    
+    **Other systems**: It should come with Python by default
+  </Accordion>
+  
+  <Accordion title="Permission denied" icon="lock">
+    On macOS/Linux, you might need to make the activate script executable:
+    ```bash
+    chmod +x .venv/bin/activate
+    ```
+  </Accordion>
+  
+  <Accordion title="VS Code not recognizing venv" icon="code">
+    1. Reload VS Code window: `Ctrl/Cmd + Shift + P` > "Developer: Reload Window"
+    2. Manually select interpreter again
+    3. Make sure the Python extension is installed
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Your virtual environment is ready! Now let's learn about Python packages and how to install them.
+
+<Card
+  title="Python packages"
+  icon="box"
+  href="/getting-started/packages-and-pip"
+>
+  Understanding pip and package management
+</Card>

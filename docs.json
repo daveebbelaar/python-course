@@ -49,8 +49,15 @@
               "getting-started/vscode-introduction",
               "getting-started/vscode-setup",
               "getting-started/vscode-workspace",
-              "getting-started/first-python-file",
-              "getting-started/vscode-customize"
+              "getting-started/first-python-file"
+            ]
+          },
+          {
+            "group": "Python environment",
+            "pages": [
+              "getting-started/virtual-environments",
+              "getting-started/packages-and-pip",
+              "getting-started/interactive-python"
             ]
           }
         ]

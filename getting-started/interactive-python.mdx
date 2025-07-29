@@ -1,0 +1,163 @@
+---
+title: Interactive Python
+description: My favorite way to write Python code
+icon: "sparkles"
+---
+
+## The best of both worlds
+
+Interactive Python mode is my favorite way to write Python code, and I rarely use anything else. It combines the organization of Python files with the interactivity of Jupyter notebooks.
+
+<Note>
+  This is how I'll be coding throughout the entire course. Once you try it, you'll understand why it's so powerful for learning and developing AI applications.
+</Note>
+
+## What is Interactive Python?
+
+Imagine you're cooking and tasting as you go, rather than waiting until the entire meal is done. That's Interactive Python:
+
+- Write code in a `.py` file (organized and clean)
+- Run pieces of it instantly with `Shift + Enter`
+- See results immediately in a side panel
+- Keep all your variables in memory
+
+## Why it's perfect for AI development
+
+When working with AI and data:
+- You're constantly inspecting data
+- Testing transformations
+- Checking outputs
+- Experimenting with different approaches
+
+Running an entire file every time (like we did with `hello.py`) would be slow and frustrating. Interactive mode lets you work iteratively.
+
+## Prerequisites
+
+Interactive Python requires the IPython kernel. Let's install it:
+
+1. Make sure your virtual environment is activated:
+   ```bash
+   # You should see (venv) in your terminal
+   ```
+
+2. Install the required package:
+   ```bash
+   pip install ipykernel
+   ```
+
+This package allows Jupyter to run Python code interactively.
+
+## Set up Interactive Python
+
+Now let's enable the interactive feature:
+
+1. Open VS Code settings:
+   - Press `Ctrl/Cmd + ,` (comma)
+   - Or File > Preferences > Settings
+
+2. Search for "execute selection"
+
+3. Find this setting:
+   **Jupyter > Interactive Window > Text Editor: Execute Selection**
+
+4. Check the box to enable it
+
+What this does: When you press `Shift + Enter`, your selected code will run in the Jupyter interactive window instead of the Python terminal. This gives you a much richer, more visual experience.
+
+That's it! You're ready to use interactive mode.
+
+## Your first interactive session
+
+1. Create a new file called `interactive_demo.py`
+
+2. Type this code:
+```python
+# Let's explore interactive mode
+name = "Python Learner"
+print(f"Hello, {name}!")
+
+# Some data to work with
+numbers = [1, 2, 3, 4, 5]
+print(f"Numbers: {numbers}")
+
+# Calculate something
+total = sum(numbers)
+print(f"Total: {total}")
+```
+
+3. Place your cursor on the first line
+
+4. Press `Shift + Enter`
+
+Watch what happens:
+- An Interactive window opens on the right
+- Your code runs line by line
+- You see output immediately
+
+## Interactive superpowers
+
+### Run selected code
+- Highlight any code
+- Press `Shift + Enter`
+- Only that selection runs
+
+### Variables stay in memory
+
+Run this step by step:
+```python
+# First, create a variable
+message = "Hello"
+
+# Later, use it (even in a different cell)
+print(message + " World!")
+
+# Modify it
+message = message.upper()
+print(message)
+```
+
+The variable `message` stays available throughout your session!
+
+## Jupyter notebooks explained
+
+You might have heard of Jupyter notebooks (`.ipynb` files). They're popular in data science because:
+- Code lives in "cells"
+- You can run cells independently
+- Results appear right below the code
+- Great for exploration and documentation
+
+Interactive Python gives you these benefits while keeping your code in clean `.py` files.
+
+## When to use what
+
+**Interactive mode** (my preference):
+- Developing new code
+- Exploring data
+- Testing ideas
+- Learning Python
+- Building AI applications
+
+**Regular run mode**:
+- Running finished scripts
+- Automated tasks
+- Production code
+
+## Tips
+
+1. **Clear variables**: If things get messy, restart the kernel:
+   - Click "Restart" in the Interactive window
+   - Or simply close the window and start a new one
+
+2. **Mix and match**: You can still run entire files with the Run button when needed
+
+<Warning>
+  Remember: variables in interactive mode persist until you restart. This is usually helpful but can occasionally cause confusion if you forget what's in memory.
+</Warning>
+
+<Card
+  title="Start learning Python"
+  icon="rocket"
+  href="/fundamentals"
+>
+  Your environment is perfect. Let's dive into Python fundamentals!
+</Card>

@@ -1,0 +1,183 @@
+---
+title: Packages and pip
+description: Understanding Python's package ecosystem
+icon: "box"
+---
+
+## Standing on the shoulders of giants
+
+One of Python's superpowers is its massive collection of packages. Instead of writing everything from scratch, you can use code that others have already written, tested, and shared.
+
+Think of it like cooking:
+- You could grow wheat, mill flour, and bake bread from scratch
+- Or you could buy a loaf from the bakery
+- Both get you bread, but one is much faster!
+
+## What are packages?
+
+**Packages** are collections of Python code that solve specific problems:
+
+- **requests** - Download web pages and data
+- **pandas** - Work with spreadsheets and data
+- **numpy** - Fast mathematical operations
+- **openai** - Connect to AI models
+- **beautifulsoup4** - Extract data from websites
+
+Each package is like a toolbox with specialized tools for a specific job.
+
+## Meet pip
+
+**pip** (Pip Installs Packages) is Python's package manager. It:
+- Downloads packages from the internet
+- Installs them in your environment
+- Manages versions and dependencies
+
+<Note>
+  pip comes with Python, so you already have it! When you activated your virtual environment, you got your own copy of pip.
+</Note>
+
+## Your first package installation
+
+Let's install a real package to see how it works:
+
+1. Make sure your virtual environment is activated:
+   ```bash
+   # You should see (.venv) in your terminal
+   ```
+
+2. Install the `requests` package:
+   ```bash
+   pip install requests
+   ```
+
+3. You'll see output like:
+   ```
+   Collecting requests
+   Downloading requests-2.31.0-py3-none-any.whl (62 kB)
+   Installing collected packages: requests
+   Successfully installed requests-2.31.0
+   ```
+
+That's it! You just installed your first package.
+
+## Using installed packages
+
+Now you can use this package in your Python code:
+
+```python
+import requests
+
+# Download a web page
+response = requests.get("https://api.github.com")
+print(response.status_code)  # Should print 200
+```
+
+Without the requests package, downloading web data would require dozens of lines of complex code. With it, it's just two lines!
+
+## See what's installed
+
+To check which packages you have:
+
+```bash
+pip list
+```
+
+Output:
+```
+Package            Version
+------------------ --------
+certifi           2024.2.2
+charset-normalizer 3.3.2
+idna              3.6
+pip               24.0
+requests          2.31.0
+urllib3           2.2.0
+```
+
+Notice how installing `requests` also installed other packages it needs (like `urllib3`). pip handles this automatically!
+
+## Install specific versions
+
+Sometimes you need a specific version of a package:
+
+```bash
+# Install exact version
+pip install requests==2.30.0
+
+# Install minimum version
+pip install requests>=2.28.0
+
+# Install compatible version
+pip install requests~=2.31.0
+```
+
+## Uninstall packages
+
+Made a mistake or no longer need something?
+
+```bash
+pip uninstall requests
+```
+
+pip will ask for confirmation before removing it.
+
+## Where packages come from
+
+pip downloads packages from [PyPI](https://pypi.org/) (Python Package Index), which hosts over 500,000 packages! Anyone can upload packages there, which is why Python has tools for everything.
+
+## Common packages you'll use
+
+As you progress through this course, you'll use packages like:
+
+- **ipykernel** - For interactive Python (next section!)
+- **pandas** - Data analysis
+- **matplotlib** - Creating charts
+- **openai** - AI integration
+- **streamlit** - Building web apps
+
+## Best practices
+
+1. **Install in virtual environments** - Never in system Python
+2. **Install only what you need** - Don't bloat your project
+3. **Document your packages** - We'll learn about requirements.txt later
+4. **Check package reputation** - Look for well-maintained, popular packages
+
+## Common issues
+
+<AccordionGroup>
+  <Accordion title="pip: command not found" icon="exclamation-circle">
+    Your virtual environment might not be activated:
+    
+    1. Check for `(.venv)` in your terminal prompt
+    2. If missing, activate it using VS Code's Python interpreter selection
+    3. Or activate manually with the terminal commands from the previous section
+  </Accordion>
+  
+  <Accordion title="Permission denied" icon="lock">
+    You're probably trying to install in system Python:
+    
+    - Make sure your virtual environment is activated
+    - Never use `sudo pip install`
+    - Always see `(.venv)` before installing
+  </Accordion>
+  
+  <Accordion title="Package not found" icon="search">
+    The package name might be different from what you expect:
+    
+    - Check the exact name on [pypi.org](https://pypi.org)
+    - Example: "Beautiful Soup" is actually `beautifulsoup4`
+    - Example: "OpenAI" is just `openai` (lowercase)
+  </Accordion>
+</AccordionGroup>
+
+## Ready for interactive Python
+
+Now that you understand packages, let's install what we need for interactive Python mode!
+
+<Card
+  title="Interactive Python"
+  icon="sparkles"
+  href="/getting-started/interactive-python"
+>
+  Learn my favorite way to write Python code
+</Card>
