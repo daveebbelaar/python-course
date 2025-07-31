@@ -9,9 +9,9 @@ icon: "code-branch"
 If statements let your program make decisions. They check if something is true or false, then act accordingly.
 
 Real-life logic:
-- IF it's raining → take umbrella
-- IF battery < 20% → charge phone  
-- IF password correct → allow access
+- IF it's raining THEN take umbrella
+- IF battery < 20% THEN charge phone  
+- IF password correct THEN allow access
 
 ## Basic if statement
 
@@ -63,6 +63,10 @@ else:
 ```
 
 Python checks each condition in order and runs the first True one.
+
+<Note>
+  Why `elif` instead of multiple `if` statements? With `elif`, Python stops checking once it finds a true condition. This is more efficient and prevents multiple blocks from running. The order matters - always put more specific conditions first!
+</Note>
 
 ## Multiple conditions
 
@@ -144,12 +148,12 @@ else:
 
 ## What's next?
 
-Learn how to repeat actions with loops!
+Now let's learn about storing multiple values with data structures!
 
 <Card
-  title="Loops"
-  icon="repeat"
-  href="/control-flow/loops"
+  title="Data structures"
+  icon="layer-group"
+  href="/data-structures"
 >
-  Repeat code efficiently
+  Lists, dictionaries, and more
 </Card>

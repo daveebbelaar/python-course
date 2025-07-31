@@ -1,29 +1,201 @@
 ---
-title: Import modules
+title: Import packages
 description: Use Python packages and libraries
 icon: "download"
 ---
 
-## Importing Modules
+## Using packages
 
-Access Python's vast ecosystem of packages.
+Python packages add new functionality to your programs. There are two types:
+- **Built-in**: Come with Python (no installation needed)
+- **External**: Need to install first with pip
+
+## Built-in modules
+
+Python includes many useful modules:
+
+```python
+# Import entire module
+import random
+
+# Use module functions
+number = random.randint(1, 10)
+choice = random.choice(["apple", "banana", "orange"])
+```
+
+### Common built-in modules
+
+```python
+# Date and time
+import datetime
+today = datetime.date.today()
+print(today)  # 2024-01-15
+
+# Operating system
+import os
+current_dir = os.getcwd()
+print(current_dir)
+
+# JSON data
+import json
+data = {"name": "Alice", "age": 30}
+json_string = json.dumps(data)
+```
+
+## Import methods
+
+Different ways to import:
+
+```python
+# Import entire module
+import math
+result = math.sqrt(16)
+
+# Import specific functions
+from math import sqrt, pi
+result = sqrt(16)
+circle_area = pi * radius ** 2
+
+# Import with alias
+import pandas as pd
+df = pd.DataFrame(data)
+
+# Import everything (avoid this!)
+from math import *
+```
+
+<Warning>
+  Avoid `from module import *` as it can cause naming conflicts and makes code harder to understand.
+</Warning>
+
+## Installing packages
+
+External packages need installation:
+
+```bash
+# Install a package
+pip install requests
+
+# Install specific version
+pip install requests==2.28.0
+
+# Install multiple packages
+pip install pandas numpy matplotlib
+```
+
+## Using external packages
+
+After installation, import and use:
+
+```python
+# Web requests
+import requests
+
+response = requests.get("https://api.example.com/data")
+data = response.json()
+
+# Data analysis
+import pandas as pd
+
+df = pd.read_csv("data.csv")
+print(df.head())
+```
+
+## Virtual environments
+
+Keep project dependencies separate:
+
+```bash
+# Create virtual environment
+python -m venv myenv
+
+# Activate it
+# Windows: myenv\Scripts\activate
+# Mac/Linux: source myenv/bin/activate
+
+# Install packages in environment
+pip install requests pandas
+```
 
 <Note>
-  This section covers importing built-in and external modules.
+  Always use virtual environments for projects. They prevent package conflicts between different projects.
 </Note>
 
-## Topics Covered
+## Finding packages
 
-- Import statements
-- Built-in modules
-- Installing packages
-- Module aliases
+Where to find packages:
+- [PyPI](https://pypi.org) - Official Python package index
+- [Awesome Python](https://github.com/vinta/awesome-python) - Curated list
+- Google "Python package for [task]"
+
+## Common packages
+
+Packages you'll use often:
+
+```python
+# Web scraping
+import requests
+from bs4 import BeautifulSoup
+
+# Data science
+import pandas as pd
+import numpy as np
+
+# Environment variables
+from dotenv import load_dotenv
+import os
+
+# AI/ML
+import openai
+```
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Import errors">
+    ```python
+    # Wrong - package not installed
+    import pandas  # ModuleNotFoundError
+    
+    # Right - install first
+    # Run: pip install pandas
+    import pandas
+    ```
+  </Accordion>
+
+  <Accordion title="Circular imports">
+    ```python
+    # file1.py
+    from file2 import function2
+    
+    # file2.py
+    from file1 import function1  # Circular!
+    
+    # Better - restructure code to avoid circles
+    ```
+  </Accordion>
+
+  <Accordion title="Name conflicts">
+    ```python
+    # Wrong - overwrites built-in
+    import datetime
+    datetime = "2024-01-01"  # Now module is gone!
+    
+    # Right - use different names
+    import datetime
+    date_string = "2024-01-01"
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Learn to connect to APIs and fetch data from the internet!
 
 <Card
-  title="Next: APIs"
+  title="Working with APIs"
   icon="arrow-right"
   href="/libraries-apis/working-with-apis"
-  color="#3455ee"
 >
-  Learn API integration
+  Connect to online services
 </Card>

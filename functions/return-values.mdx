@@ -4,26 +4,173 @@ description: Get results back from your functions
 icon: "arrow-turn-down"
 ---
 
-## Function Return Values
+## Getting results from functions
 
-Learn how functions give back results.
+So far, our functions have printed output. But often you want functions to calculate something and give you the result to use elsewhere.
+
+```python
+# This function only prints
+def add_print(a, b):
+    print(a + b)
+
+# This function returns a value
+def add_return(a, b):
+    return a + b
+
+# Now you can use the result
+result = add_return(5, 3)
+print(f"The result is {result}")  # The result is 8
+```
+
+## The return statement
+
+Use `return` to send a value back from a function:
+
+```python
+def calculate_area(width, height):
+    area = width * height
+    return area
+
+# Store the returned value
+room_area = calculate_area(10, 12)
+print(f"Room size: {room_area} sq ft")  # Room size: 120 sq ft
+```
 
 <Note>
-  This section covers the return statement and working with function outputs.
+  When Python hits a `return` statement, it immediately exits the function. Any code after `return` won't run.
 </Note>
 
-## Topics Covered
+## Using returned values
 
-- The return statement
-- Returning multiple values
-- None return type
-- Using returned values
+Returned values can be used in many ways:
+
+```python
+def double(number):
+    return number * 2
+
+# Store in variable
+result = double(5)
+
+# Use in expressions
+total = double(5) + double(3)  # 10 + 6 = 16
+
+# Pass to other functions
+print(double(10))  # 20
+
+# Use in conditions
+if double(7) > 10:
+    print("Big number!")
+```
+
+## Returning multiple values
+
+Python can return multiple values as a tuple:
+
+```python
+def get_min_max(numbers):
+    return min(numbers), max(numbers)
+
+# Get both values
+minimum, maximum = get_min_max([5, 2, 8, 1, 9])
+print(f"Min: {minimum}, Max: {maximum}")  # Min: 1, Max: 9
+
+# Or as a tuple
+result = get_min_max([5, 2, 8, 1, 9])
+print(result)  # (1, 9)
+```
+
+## Return vs print
+
+Understanding the difference is crucial:
+
+```python
+def get_greeting_print(name):
+    print(f"Hello, {name}!")  # Just displays
+
+def get_greeting_return(name):
+    return f"Hello, {name}!"  # Gives back value
+
+# Can't use print version's output
+message = get_greeting_print("Alice")  # Prints but returns None
+print(message)  # None
+
+# Can use return version's output
+message = get_greeting_return("Alice")  # Returns the string
+print(message.upper())  # HELLO, ALICE!
+```
+
+<Tip>
+  Use `return` when you need to use the result elsewhere. Use `print` when you just want to display information.
+</Tip>
+
+## Functions without return
+
+Functions without explicit `return` statements return `None`:
+
+```python
+def greet(name):
+    print(f"Hello, {name}!")
+    # No return statement
+
+result = greet("Alice")  # Prints: Hello, Alice!
+print(result)  # None
+```
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Forgetting to return">
+    ```python
+    # Wrong - calculates but doesn't return
+    def calculate_total(items):
+        total = sum(items)
+        # Forgot return!
+    
+    # Right
+    def calculate_total(items):
+        total = sum(items)
+        return total
+    ```
+  </Accordion>
+
+  <Accordion title="Code after return">
+    ```python
+    # Wrong - code after return never runs
+    def get_status():
+        return "Done"
+        print("This never prints!")  # Unreachable
+    
+    # Right - return last
+    def get_status():
+        print("Checking status...")
+        return "Done"
+    ```
+  </Accordion>
+
+  <Accordion title="Printing instead of returning">
+    ```python
+    # Wrong - prints instead of returning
+    def multiply(a, b):
+        print(a * b)
+    
+    result = multiply(3, 4)  # Prints 12
+    total = result + 10      # Error! result is None
+    
+    # Right - return the value
+    def multiply(a, b):
+        return a * b
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Now that you know functions, let's learn about loops to process multiple items efficiently!
 
 <Card
-  title="Continue to Data Structures"
+  title="Loops"
   icon="arrow-right"
-  href="/data-structures"
-  color="#3455ee"
+  href="/control-flow/loops"
 >
-  Explore data structures
+  Process multiple items
 </Card>

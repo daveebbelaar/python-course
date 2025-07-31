@@ -1,29 +1,163 @@
 ---
 title: Lists
-description: Work with ordered collections of items
+description: Work with ordered collections
 icon: "list"
 ---
 
-## Python Lists
+## What are lists?
 
-Store and manipulate ordered collections.
+Lists are Python's most versatile data structure. They're like containers that can hold multiple items in a specific order.
+
+Think of a list like:
+- A shopping list (milk, eggs, bread)
+- A to-do list (tasks in order)
+- A playlist (songs in sequence)
+
+## Creating lists
+
+```python
+# Empty list
+my_list = []
+
+# List with items
+fruits = ["apple", "banana", "orange"]
+numbers = [1, 2, 3, 4, 5]
+mixed = ["hello", 42, True, 3.14]  # Different types OK!
+```
 
 <Note>
-  This section covers creating, accessing, and modifying lists.
+  Lists use square brackets `[]` and items are separated by commas. You can mix different data types in the same list!
 </Note>
 
-## Topics Covered
+## Accessing items
 
-- Creating lists
-- Accessing elements
-- List methods
-- List comprehensions
+Lists are indexed starting at 0:
+
+```python
+fruits = ["apple", "banana", "orange"]
+
+# Get items
+print(fruits[0])    # "apple" (first item)
+print(fruits[1])    # "banana"
+print(fruits[-1])   # "orange" (last item)
+print(fruits[-2])   # "banana" (second to last)
+
+# Slicing
+print(fruits[0:2])  # ["apple", "banana"]
+print(fruits[1:])   # ["banana", "orange"]
+```
+
+## Changing lists
+
+Lists are mutable - you can change them:
+
+```python
+fruits = ["apple", "banana", "orange"]
+
+# Change an item
+fruits[0] = "mango"
+print(fruits)  # ["mango", "banana", "orange"]
+
+# Add items
+fruits.append("grape")      # Add to end
+fruits.insert(1, "kiwi")    # Insert at position
+
+# Remove items
+fruits.remove("banana")     # Remove by value
+last = fruits.pop()        # Remove and return last
+del fruits[0]              # Remove by index
+```
+
+## List methods
+
+```python
+numbers = [3, 1, 4, 1, 5, 9]
+
+# Information
+print(len(numbers))         # 6 (length)
+print(numbers.count(1))     # 2 (count occurrences)
+print(numbers.index(4))     # 2 (find position)
+
+# Sorting
+numbers.sort()              # Sort in place
+print(numbers)              # [1, 1, 3, 4, 5, 9]
+
+numbers.reverse()           # Reverse order
+print(numbers)              # [9, 5, 4, 3, 1, 1]
+
+# Copy
+new_list = numbers.copy()   # Create a copy
+```
+
+## Checking lists
+
+```python
+fruits = ["apple", "banana", "orange"]
+
+# Check if item exists
+if "apple" in fruits:
+    print("Found apple!")
+
+# Check if list is empty
+if fruits:
+    print("List has items")
+else:
+    print("List is empty")
+```
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Index out of range">
+    ```python
+    # Wrong
+    fruits = ["apple", "banana"]
+    print(fruits[2])  # IndexError!
+    
+    # Right - check length first
+    if len(fruits) > 2:
+        print(fruits[2])
+    ```
+  </Accordion>
+
+  <Accordion title="Modifying while looping">
+    ```python
+    # Wrong - changes list size during loop
+    numbers = [1, 2, 3, 4]
+    for num in numbers:
+        if num == 2:
+            numbers.remove(num)  # Dangerous!
+    
+    # Right - use list comprehension
+    numbers = [num for num in numbers if num != 2]
+    ```
+  </Accordion>
+
+  <Accordion title="Shallow copy issues">
+    ```python
+    # Wrong - both variables point to same list
+    list1 = [1, 2, 3]
+    list2 = list1
+    list2.append(4)
+    print(list1)  # [1, 2, 3, 4] - changed!
+    
+    # Right - make a copy
+    list1 = [1, 2, 3]
+    list2 = list1.copy()
+    list2.append(4)
+    print(list1)  # [1, 2, 3] - unchanged
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Now let's learn about dictionaries - perfect for storing related information!
 
 <Card
-  title="Next: Dictionaries"
-  icon="arrow-right"
+  title="Dictionaries"
+  icon="book"
   href="/data-structures/dictionaries"
-  color="#3455ee"
 >
-  Learn about dictionaries
+  Key-value pairs
 </Card>

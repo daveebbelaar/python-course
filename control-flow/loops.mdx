@@ -1,27 +1,57 @@
 ---
 title: Loops
-description: Repeat code without copy-pasting
+description: Repeat code multiple times
 icon: "repeat"
 ---
 
 ## What are loops?
 
-Loops let you repeat code multiple times. Instead of writing the same thing over and over, you write it once and let Python repeat it.
+Loops let you repeat code multiple times. Instead of writing the same code over and over, you write it once in a loop.
 
-Real-life loops:
-- Washing dishes (repeat until all clean)
-- Counting steps (repeat 10,000 times)
-- Reading emails (repeat for each message)
+Without loops:
+```python
+print("Hello 1")
+print("Hello 2")
+print("Hello 3")
+print("Hello 4")
+print("Hello 5")
+```
+
+With loops:
+```python
+for i in range(5):
+    print(f"Hello {i + 1}")
+```
 
 ## For loops
 
-Use `for` loops when you know how many times to repeat:
+The most common loop in Python. Perfect for iterating through lists, strings, and other sequences.
 
+### Loop through lists
 ```python
-# Repeat 5 times
-for i in range(5):
-    print("Hello")
+fruits = ["apple", "banana", "orange"]
 
+for fruit in fruits:
+    print(f"I like {fruit}")
+
+# Output:
+# I like apple
+# I like banana
+# I like orange
+```
+
+### Loop through strings
+```python
+word = "Python"
+
+for letter in word:
+    print(letter)
+
+# Output: P y t h o n (each on new line)
+```
+
+### Using range()
+```python
 # Count from 0 to 4
 for i in range(5):
     print(i)  # 0, 1, 2, 3, 4
@@ -29,132 +59,159 @@ for i in range(5):
 # Count from 1 to 5
 for i in range(1, 6):
     print(i)  # 1, 2, 3, 4, 5
+
+# Count by 2s
+for i in range(0, 10, 2):
+    print(i)  # 0, 2, 4, 6, 8
 ```
 
 <Note>
-  `range(5)` creates numbers 0,1,2,3,4 (stops BEFORE 5). This often confuses beginners!
+  `range(5)` creates numbers 0 through 4 (not including 5). This is a common source of confusion!
 </Note>
-
-## Looping through collections
-
-For loops work with lists, strings, and more:
-
-```python
-# Loop through a list
-fruits = ["apple", "banana", "orange"]
-for fruit in fruits:
-    print(f"I like {fruit}")
-
-# Loop through a string
-for letter in "Python":
-    print(letter)
-
-# Loop with index
-for i, fruit in enumerate(fruits):
-    print(f"{i}: {fruit}")  # 0: apple, 1: banana...
-```
 
 ## While loops
 
-Use `while` loops when you don't know how many times to repeat:
+Repeat code while a condition is true:
 
 ```python
-# Count down
-count = 5
-while count > 0:
-    print(f"Countdown: {count}")
-    count -= 1  # Same as count = count - 1
-print("Blast off! 🚀")
+count = 0
 
-# Keep asking until valid
-password = ""
-while password != "secret":
-    password = input("Enter password: ")
-print("Access granted!")
+while count < 5:
+    print(f"Count is {count}")
+    count += 1  # Don't forget this!
+
+# Output: Count is 0, 1, 2, 3, 4
 ```
 
 <Warning>
-  Always update the condition variable inside a while loop, or it will run forever!
+  Always ensure your while loop condition will eventually become False, or you'll create an infinite loop!
 </Warning>
+
+## Loop with index
+
+Sometimes you need both the item and its position:
+
+```python
+fruits = ["apple", "banana", "orange"]
+
+# Using enumerate()
+for index, fruit in enumerate(fruits):
+    print(f"{index}: {fruit}")
+
+# Output:
+# 0: apple
+# 1: banana
+# 2: orange
+```
+
+## Nested loops
+
+Loops inside loops:
+
+```python
+# Multiplication table
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(f"{i} x {j} = {i * j}")
+
+# Output:
+# 1 x 1 = 1
+# 1 x 2 = 2
+# ... and so on
+```
 
 ## Common patterns
 
-### Accumulation
+### Sum values
 ```python
-# Sum numbers
+numbers = [10, 20, 30, 40, 50]
 total = 0
-for num in [1, 2, 3, 4, 5]:
+
+for num in numbers:
     total += num
-print(f"Total: {total}")  # 15
+
+print(f"Total: {total}")  # Total: 150
 ```
 
-### Filtering
+### Find items
 ```python
-# Find even numbers
-numbers = [1, 2, 3, 4, 5, 6]
-evens = []
+names = ["Alice", "Bob", "Charlie"]
+search = "Bob"
+
+for name in names:
+    if name == search:
+        print(f"Found {search}!")
+        break  # Stop searching
+```
+
+### Build new lists
+```python
+numbers = [1, 2, 3, 4, 5]
+doubled = []
+
 for num in numbers:
-    if num % 2 == 0:
-        evens.append(num)
-print(evens)  # [2, 4, 6]
+    doubled.append(num * 2)
+
+print(doubled)  # [2, 4, 6, 8, 10]
 ```
 
 ## Common mistakes
 
 <AccordionGroup>
-  <Accordion title="Off-by-one errors">
+  <Accordion title="Modifying list while looping">
     ```python
-    # Wrong - prints 0 to 9
-    for i in range(10):
-        print(i)
+    # Wrong - modifying list during iteration
+    numbers = [1, 2, 3, 4, 5]
+    for num in numbers:
+        if num % 2 == 0:
+            numbers.remove(num)  # Don't do this!
     
-    # Right - prints 1 to 10
-    for i in range(1, 11):
-        print(i)
+    # Right - create new list
+    numbers = [1, 2, 3, 4, 5]
+    odd_numbers = []
+    for num in numbers:
+        if num % 2 != 0:
+            odd_numbers.append(num)
     ```
   </Accordion>
 
   <Accordion title="Infinite while loops">
     ```python
-    # Wrong - infinite loop!
-    count = 5
-    while count > 0:
+    # Wrong - forgot to update condition
+    count = 0
+    while count < 5:
         print(count)
-        # Forgot to decrease count!
+        # Forgot count += 1
     
-    # Right
-    count = 5
-    while count > 0:
+    # Right - always update the condition
+    count = 0
+    while count < 5:
         print(count)
-        count -= 1
+        count += 1
     ```
   </Accordion>
 
-  <Accordion title="Modifying list while looping">
+  <Accordion title="Off-by-one errors">
     ```python
-    # Wrong - causes problems
-    items = [1, 2, 3, 4, 5]
-    for item in items:
-        if item == 3:
-            items.remove(item)
+    # Wrong - misunderstanding range
+    for i in range(5):
+        print(f"Item {i + 1}")  # Trying to count 1-5
     
-    # Right - use a copy
-    items = [1, 2, 3, 4, 5]
-    for item in items[:]:  # [:] makes a copy
-        if item == 3:
-            items.remove(item)
+    # Right - adjust range directly
+    for i in range(1, 6):
+        print(f"Item {i}")
     ```
   </Accordion>
 </AccordionGroup>
 
 ## What's next?
 
-Learn how to control loops with break and continue!
+Learn to control loop execution with break and continue statements!
 
 <Card
-  title="Break & continue"
-  icon="stop"
+  title="Break and continue"
+  icon="arrow-right"
   href="/control-flow/break-continue"
 >
-  Control loop execution
+  Control loop flow
 </Card>

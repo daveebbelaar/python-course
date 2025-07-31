@@ -1,29 +1,146 @@
 ---
-title: Define functions
+title: Defining functions
 description: Create your own reusable functions
 icon: "pen-to-square"
 ---
 
-## Creating Functions
+## Your first function
 
-Learn to define and call your own functions.
+A function is a named block of code that performs a specific task. You define it once, then call it whenever you need that task done.
 
-<Note>
-  This section covers function syntax, naming, and basic usage.
-</Note>
+```python
+def greet():
+    print("Hello, world!")
+    print("Welcome to Python!")
 
-## Topics Covered
+# Call the function
+greet()
+```
 
-- Function syntax
-- The def keyword
-- Function names
-- Calling functions
+## Function syntax
+
+Every function follows this pattern:
+
+```python
+def function_name():
+    # Code goes here
+    # Must be indented
+    pass
+```
+
+Key parts:
+- `def` - keyword that creates a function
+- Function name followed by parentheses `()`
+- Colon `:` to start the function body
+- Indented code block (the function body)
+
+## Naming functions
+
+Follow these rules for function names:
+- Use lowercase letters
+- Separate words with underscores
+- Be descriptive about what it does
+
+```python
+# Good names
+def calculate_total():
+    pass
+
+def send_email():
+    pass
+
+def validate_password():
+    pass
+
+# Bad names
+def func1():  # Not descriptive
+    pass
+
+def Calculate():  # Should be lowercase
+    pass
+```
+
+## Calling functions
+
+To use a function, call it by name with parentheses:
+
+```python
+def say_goodbye():
+    print("Goodbye!")
+    print("See you later!")
+
+# Call it multiple times
+say_goodbye()
+say_goodbye()
+say_goodbye()
+```
+
+<Tip>
+  The power of functions: write once, use many times. The above code prints 6 lines with just 3 function calls!
+</Tip>
+
+## Functions with logic
+
+Functions can contain any Python code:
+
+```python
+def check_weather():
+    temperature = 25
+    if temperature > 30:
+        print("It's hot!")
+    else:
+        print("Nice weather!")
+
+# Use the function
+check_weather()
+```
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Forgetting parentheses when calling">
+    ```python
+    # Wrong - this doesn't call the function
+    greet
+    
+    # Right - parentheses are required
+    greet()
+    ```
+  </Accordion>
+
+  <Accordion title="Forgetting the colon">
+    ```python
+    # Wrong
+    def greet()
+        print("Hello")
+    
+    # Right
+    def greet():
+        print("Hello")
+    ```
+  </Accordion>
+
+  <Accordion title="Bad indentation">
+    ```python
+    # Wrong - not indented
+    def greet():
+    print("Hello")
+    
+    # Right - must indent function body
+    def greet():
+        print("Hello")
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Functions become powerful when they can accept input. Let's learn about parameters!
 
 <Card
-  title="Next: Parameters"
+  title="Parameters"
   icon="arrow-right"
   href="/functions/parameters"
-  color="#3455ee"
 >
-  Learn about parameters
+  Pass data to functions
 </Card>

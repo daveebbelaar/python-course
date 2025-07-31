@@ -1,39 +1,55 @@
 ---
-title: Data Structures
-description: Organize and manage collections of data
-icon: "database"
+title: Data structures
+description: Store multiple values together
+icon: "layer-group"
 ---
 
-## Python Data Structures
+## Beyond single values
 
-Master Python's powerful data containers.
+So far, you've stored one value per variable. But what if you need to store multiple values? That's where data structures come in.
 
-<Note>
-  This chapter covers lists, dictionaries, tuples, and sets for organizing data.
-</Note>
+Think of data structures as containers:
+- **Lists**: Like a shopping list (ordered items)
+- **Dictionaries**: Like a phone book (name > number)
+- **Tuples**: Like coordinates (fixed values)
+- **Sets**: Like a bag of unique items
 
-## What You'll Learn
+## The main structures
 
 <CardGroup cols={2}>
   <Card title="Lists" icon="list" href="/data-structures/lists">
-    Ordered collections
+    Ordered, changeable collections
   </Card>
   <Card title="Dictionaries" icon="book" href="/data-structures/dictionaries">
-    Key-value pairs
+    Key-value pairs for fast lookup
   </Card>
   <Card title="Tuples" icon="lock" href="/data-structures/tuples">
-    Immutable sequences
+    Ordered, unchangeable collections
   </Card>
   <Card title="Sets" icon="circle-nodes" href="/data-structures/sets">
-    Unique collections
+    Unique values only
   </Card>
 </CardGroup>
 
+## Which one to use?
+
+- **Lists**: When order matters and you need to change items
+- **Dictionaries**: When you need to look up values by name
+- **Tuples**: When data shouldn't change (like coordinates)
+- **Sets**: When you only care about unique values
+
+<Tip>
+  Python counts from 0, not 1! The first item in any collection is at position 0, the second at position 1, and so on. This is called "zero-based indexing" and you'll see it throughout Python.
+</Tip>
+
+## Start learning
+
+Lists are the most common data structure - let's start there!
+
 <Card
-  title="Start with Lists"
+  title="Learn about lists"
   icon="arrow-right"
   href="/data-structures/lists"
-  color="#3455ee"
 >
-  Learn about lists
+  Your first data structure
 </Card>

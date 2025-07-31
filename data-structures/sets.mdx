@@ -4,26 +4,104 @@ description: Work with unique collections
 icon: "circle-nodes"
 ---
 
-## Python Sets
+## What are sets?
 
-Store unique values without duplicates.
+Sets are collections that only store unique values. They automatically remove duplicates.
 
-<Note>
-  This section covers set creation, operations, and use cases.
-</Note>
+Think of sets like:
+- A bag of unique marbles
+- Guest list (each person once)
+- Unique tags or categories
 
-## Topics Covered
+## Creating sets
 
-- Creating sets
-- Set operations
-- Set methods
-- When to use sets
+You can create sets two ways: with `set()` or with curly braces `{}` (but only when it has values).
+
+```python
+# Empty set (careful!)
+empty_set = set()  # NOT {} - that's a dict!
+
+# Set with values - both ways work
+numbers = {1, 2, 3, 4, 5}
+fruits = set(["apple", "banana", "orange"])
+
+# From a list (removes duplicates)
+scores = [85, 90, 85, 92, 90]
+unique_scores = set(scores)  # {85, 90, 92}
+```
+
+<Warning>
+  Use `set()` for empty sets, not `{}`. Empty curly braces create a dictionary!
+</Warning>
+
+## Basic operations
+
+```python
+colors = {"red", "blue"}
+
+# Add items
+colors.add("green")
+print(colors)  # {'red', 'blue', 'green'}
+
+# Remove items
+colors.remove("blue")    # Error if not found
+colors.discard("yellow") # No error if not found
+
+# Check membership
+if "red" in colors:
+    print("Red is available")
+```
+
+## Common uses
+
+### Remove duplicates
+```python
+names = ["Alice", "Bob", "Alice", "Charlie", "Bob"]
+unique_names = list(set(names))
+print(unique_names)  # ['Alice', 'Bob', 'Charlie']
+```
+
+### Fast membership testing
+```python
+allowed_users = {"alice", "bob", "charlie"}
+
+if "alice" in allowed_users:  # Very fast!
+    print("Access granted")
+```
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Empty set syntax">
+    ```python
+    # Wrong - creates empty dict
+    empty = {}
+    
+    # Right - use set()
+    empty = set()
+    ```
+  </Accordion>
+
+  <Accordion title="Sets are unordered">
+    ```python
+    # Order is not guaranteed!
+    numbers = {3, 1, 4, 1, 5}
+    print(numbers)  # Could be any order
+    
+    # Use list if order matters
+    ordered = [3, 1, 4, 1, 5]
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Congratulations! You've completed Python Basics. Ready to start building programs?
 
 <Card
-  title="Continue to Libraries"
-  icon="arrow-right"
-  href="/libraries-apis"
-  color="#3455ee"
+  title="Building Programs"
+  icon="graduation-cap"
+  href="/functions"
 >
-  Explore external tools
+  Learn about functions
 </Card>

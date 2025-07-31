@@ -4,26 +4,137 @@ description: Pass data into your functions
 icon: "sliders"
 ---
 
-## Working with Parameters
+## What are parameters?
 
-Make functions flexible with parameters.
+Parameters let you pass data into functions. Instead of hardcoding values, you make functions flexible to work with different inputs.
+
+```python
+# Without parameters (inflexible)
+def greet_alice():
+    print("Hello, Alice!")
+
+# With parameters (flexible)
+def greet(name):
+    print(f"Hello, {name}!")
+
+# Now it works for anyone
+greet("Alice")
+greet("Bob")
+greet("Charlie")
+```
+
+## Basic parameters
+
+Add parameters inside the parentheses when defining a function:
+
+```python
+def introduce(name, age):
+    print(f"My name is {name}")
+    print(f"I am {age} years old")
+
+# Call with values
+introduce("Alice", 25)
+introduce("Bob", 30)
+```
 
 <Note>
-  This section covers positional arguments, keyword arguments, and default values.
+  The values you pass when calling a function are called "arguments". The variables in the function definition are "parameters". Many people use these terms interchangeably.
 </Note>
 
-## Topics Covered
+## Multiple parameters
 
-- Positional parameters
-- Keyword arguments
-- Default values
-- Variable arguments
+Functions can have multiple parameters:
+
+```python
+def calculate_total(price, tax_rate, discount):
+    tax = price * tax_rate
+    final_price = price + tax - discount
+    print(f"Total: ${final_price}")
+
+# Order matters!
+calculate_total(100, 0.08, 10)  # $98
+```
+
+## Default values
+
+Give parameters default values for optional arguments:
+
+```python
+def greet(name, greeting="Hello"):
+    print(f"{greeting}, {name}!")
+
+# Use default
+greet("Alice")           # Hello, Alice!
+
+# Override default
+greet("Bob", "Hi")       # Hi, Bob!
+greet("Charlie", "Hey")  # Hey, Charlie!
+```
+
+<Tip>
+  Put parameters with defaults at the end. Required parameters come first, optional ones last.
+</Tip>
+
+## Keyword arguments
+
+Call functions using parameter names for clarity:
+
+```python
+def create_profile(name, age, city):
+    print(f"{name}, {age}, from {city}")
+
+# Positional arguments (order matters)
+create_profile("Alice", 25, "NYC")
+
+# Keyword arguments (order doesn't matter)
+create_profile(city="NYC", age=25, name="Alice")
+create_profile(name="Bob", city="LA", age=30)
+```
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Wrong number of arguments">
+    ```python
+    def greet(name, age):
+        print(f"Hi {name}, you're {age}")
+    
+    # Wrong - too few arguments
+    greet("Alice")  # TypeError!
+    
+    # Wrong - too many arguments
+    greet("Alice", 25, "NYC")  # TypeError!
+    
+    # Right
+    greet("Alice", 25)
+    ```
+  </Accordion>
+
+  <Accordion title="Default values with mutable objects">
+    ```python
+    # Wrong - don't use lists as defaults
+    def add_item(item, list=[]):
+        list.append(item)
+        return list
+    
+    # Right - use None and create new list
+    def add_item(item, list=None):
+        if list is None:
+            list = []
+        list.append(item)
+        return list
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Functions become truly powerful when they can return values. Let's learn how!
 
 <Card
-  title="Next: Return Values"
+  title="Return values"
   icon="arrow-right"
   href="/functions/return-values"
-  color="#3455ee"
 >
-  Learn about return values
+  Get results from functions
 </Card>

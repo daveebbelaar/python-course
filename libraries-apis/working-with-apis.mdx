@@ -4,26 +4,252 @@ description: Connect to web services
 icon: "globe"
 ---
 
-## API Integration
+## What are APIs?
 
-Connect Python to external services.
+APIs (Application Programming Interfaces) let your Python code talk to online services. Think of them as:
+- Restaurant menus (you order, they deliver)
+- Vending machines (insert request, get response)
+- Information desks (ask questions, get answers)
+
+Common API uses:
+- Get weather data
+- Send messages
+- Fetch stock prices
+- Use AI models
+- Post to social media
+
+## Making requests
+
+Use the `requests` library to interact with APIs:
+
+```python
+import requests
+
+# GET request - fetch data
+response = requests.get("https://api.example.com/weather")
+data = response.json()
+print(data)
+```
 
 <Note>
-  This section covers making API requests and handling responses.
+  First install requests: `pip install requests`
 </Note>
 
-## Topics Covered
+## API responses
 
-- HTTP requests
-- JSON data
-- API authentication
-- Error handling
+Most APIs return JSON data:
+
+```python
+import requests
+
+# Make request
+response = requests.get("https://api.github.com/users/python")
+
+# Check if successful
+if response.status_code == 200:
+    data = response.json()
+    print(f"Name: {data['name']}")
+    print(f"Followers: {data['followers']}")
+else:
+    print(f"Error: {response.status_code}")
+```
+
+## Sending data
+
+Send data with POST requests:
+
+```python
+import requests
+
+# Data to send
+user_data = {
+    "name": "Alice",
+    "email": "alice@example.com"
+}
+
+# POST request
+response = requests.post(
+    "https://api.example.com/users",
+    json=user_data
+)
+
+print(response.json())
+```
+
+## API authentication
+
+Many APIs require authentication:
+
+```python
+import requests
+import os
+
+# API key from environment variable
+api_key = os.getenv("API_KEY")
+
+# In headers
+headers = {
+    "Authorization": f"Bearer {api_key}"
+}
+
+response = requests.get(
+    "https://api.example.com/data",
+    headers=headers
+)
+
+# Or in parameters
+params = {
+    "api_key": api_key,
+    "city": "New York"
+}
+
+response = requests.get(
+    "https://api.weather.com/forecast",
+    params=params
+)
+```
+
+<Warning>
+  Never hardcode API keys in your code! Use environment variables or .env files.
+</Warning>
+
+## Environment variables
+
+Keep secrets safe with python-dotenv:
+
+```python
+# Install: pip install python-dotenv
+
+from dotenv import load_dotenv
+import os
+
+# Load .env file
+load_dotenv()
+
+# Get variables
+api_key = os.getenv("OPENAI_API_KEY")
+database_url = os.getenv("DATABASE_URL")
+```
+
+Your `.env` file:
+```
+OPENAI_API_KEY=sk-abc123...
+DATABASE_URL=postgres://...
+```
+
+<Tip>
+  Add `.env` to `.gitignore` to keep secrets out of version control!
+</Tip>
+
+## Real example
+
+Weather API example:
+
+```python
+import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+def get_weather(city):
+    api_key = os.getenv("WEATHER_API_KEY")
+    url = "https://api.openweathermap.org/data/2.5/weather"
+    
+    params = {
+        "q": city,
+        "appid": api_key,
+        "units": "metric"
+    }
+    
+    response = requests.get(url, params=params)
+    
+    if response.status_code == 200:
+        data = response.json()
+        temp = data["main"]["temp"]
+        desc = data["weather"][0]["description"]
+        return f"{city}: {temp}°C, {desc}"
+    else:
+        return f"Error getting weather for {city}"
+
+# Use it
+print(get_weather("London"))
+```
+
+## Error handling
+
+Always handle API errors:
+
+```python
+import requests
+from requests.exceptions import RequestException
+
+try:
+    response = requests.get(
+        "https://api.example.com/data",
+        timeout=5  # 5 second timeout
+    )
+    response.raise_for_status()  # Raise error for bad status
+    data = response.json()
+    
+except requests.Timeout:
+    print("Request timed out")
+except requests.ConnectionError:
+    print("Connection error")
+except requests.HTTPError as e:
+    print(f"HTTP error: {e}")
+except RequestException as e:
+    print(f"Request failed: {e}")
+```
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Not checking status codes">
+    ```python
+    # Wrong - assuming success
+    response = requests.get(url)
+    data = response.json()  # Might fail!
+    
+    # Right - check status first
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+    else:
+        print(f"Error: {response.status_code}")
+    ```
+  </Accordion>
+
+  <Accordion title="Hardcoding API keys">
+    ```python
+    # Wrong - key in code
+    api_key = "sk-abc123xyz"
+    
+    # Right - use environment
+    import os
+    api_key = os.getenv("API_KEY")
+    ```
+  </Accordion>
+
+  <Accordion title="No timeout">
+    ```python
+    # Wrong - can hang forever
+    response = requests.get(url)
+    
+    # Right - set timeout
+    response = requests.get(url, timeout=10)
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Learn about powerful data processing libraries!
 
 <Card
-  title="Next: Data Libraries"
+  title="Data libraries"
   icon="arrow-right"
   href="/libraries-apis/data-libraries"
-  color="#3455ee"
 >
-  Explore data tools
+  Process data efficiently
 </Card>

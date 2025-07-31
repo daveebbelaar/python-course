@@ -96,16 +96,23 @@
             "group": "Control flow",
             "pages": [
               "control-flow/index",
-              "control-flow/if-statements",
-              "control-flow/loops",
-              "control-flow/break-continue",
-              "control-flow/match-case"
+              "control-flow/if-statements"
+            ]
+          },
+          {
+            "group": "Data structures",
+            "pages": [
+              "data-structures/index",
+              "data-structures/lists",
+              "data-structures/dictionaries",
+              "data-structures/tuples",
+              "data-structures/sets"
             ]
           }
         ]
       },
       {
-        "tab": "Advanced",
+        "tab": "Building Programs",
         "groups": [
           {
             "group": "Functions",
@@ -117,13 +124,10 @@
             ]
           },
           {
-            "group": "Data structures",
+            "group": "Loops",
             "pages": [
-              "data-structures/index",
-              "data-structures/lists",
-              "data-structures/dictionaries",
-              "data-structures/tuples",
-              "data-structures/sets"
+              "control-flow/loops",
+              "control-flow/break-continue"
             ]
           },
           {
@@ -182,18 +186,15 @@
   "navbar": {
     "links": [
       {
-        "label": "Community",
-        "href": "https://www.skool.com/data-alchemy"
-      },
-      {
-        "label": "Datalumina",
-        "href": "https://datalumina.com"
-      },
-      {
         "label": "YouTube",
         "href": "https://youtube.com/@daveebbelaar"
       }
-    ]
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Datalumina",
+      "href": "https://datalumina.com"
+    }
   },
   "footer": {
     "copyright": "© 2025 Datalumina. All rights reserved.",

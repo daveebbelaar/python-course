@@ -38,6 +38,8 @@ separator = "-" * 20  # "--------------------"
 
 ## String methods
 
+Python strings come with many built-in methods - functions you can call directly on any string. These methods let you transform text, search for patterns, and clean up data. The best part? You can often guess what they do from their names - `upper()` makes text uppercase, `replace()` replaces text, and so on.
+
 ### Changing case
 
 ```python
@@ -77,62 +79,9 @@ new_message = message.replace("Python", "JavaScript")
 print(new_message)  # "I love JavaScript programming with JavaScript"
 ```
 
-## String indexing and slicing
-
-Strings are sequences, so you can access individual characters:
-
-```python
-text = "Python"
-
-# Indexing (starts at 0)
-print(text[0])    # "P"
-print(text[1])    # "y"
-print(text[-1])   # "n" (last character)
-print(text[-2])   # "o" (second to last)
-
-# Slicing [start:end:step]
-print(text[0:3])  # "Pyt" (characters 0,1,2)
-print(text[2:5])  # "tho"
-print(text[:3])   # "Pyt" (start to 3)
-print(text[3:])   # "hon" (3 to end)
-print(text[::2])  # "Pto" (every 2nd character)
-print(text[::-1]) # "nohtyP" (reversed!)
-```
-
-## String formatting
-
-### f-strings (modern Python)
-
-```python
-name = "Alice"
-age = 30
-
-# Basic formatting
-print(f"Name: {name}, Age: {age}")
-
-# Expressions in f-strings
-print(f"In 10 years, {name} will be {age + 10}")
-
-# Formatting numbers
-price = 19.99
-print(f"Price: ${price:.2f}")  # "Price: $19.99"
-```
-
-## Special characters
-
-```python
-# Common escape characters
-print("Hello\nWorld")     # New line
-print("Hello\tWorld")     # Tab  
-print("She said \"Hi\"")  # Quote inside quotes
-
-# Raw strings (no escaping)
-path = r"C:\Users\Name\Documents"
-```
-
-<Tip>
-  f-strings are the modern way to format strings in Python. Always use `f"text {variable}"` instead of older methods like `"text {}".format(variable)`.
-</Tip>
+<Note>
+  Python has over 40 string methods! We've covered the most common ones here. For a complete list, check the [official Python documentation](https://docs.python.org/3/library/stdtypes.html#string-methods).
+</Note>
 
 ## Common mistakes
 
@@ -145,17 +94,6 @@ path = r"C:\Users\Name\Documents"
     
     # Right
     message = f"Hello {name}"  # Prints: "Hello Alice"
-    ```
-  </Accordion>
-
-  <Accordion title="Trying to change strings">
-    ```python
-    # Wrong - strings can't be changed
-    name = "Alice"
-    name[0] = "B"  # Error!
-    
-    # Right - create a new string
-    name = "B" + name[1:]  # "Blice"
     ```
   </Accordion>
 

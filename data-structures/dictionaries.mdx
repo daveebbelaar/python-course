@@ -1,29 +1,134 @@
 ---
 title: Dictionaries
-description: Store data in key-value pairs
+description: Store data with key-value pairs
 icon: "book"
 ---
 
-## Python Dictionaries
+## What are dictionaries?
 
-Organize data with keys and values.
+Dictionaries store data in key-value pairs. Think of them like a real dictionary where you look up a word (key) to find its definition (value).
+
+Real-world examples:
+- Phone book: name > phone number
+- Menu: dish > price
+- User profile: username > user info
+
+## Creating dictionaries
+
+```python
+# Empty dictionary
+my_dict = {}
+
+# Dictionary with data
+person = {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York"
+}
+
+# Different ways to create
+scores = dict(math=95, english=87, science=92)
+```
 
 <Note>
-  This section covers dictionary creation, access, and manipulation.
+  Dictionaries use curly braces `{}` with key-value pairs separated by colons. Keys must be unique!
 </Note>
 
-## Topics Covered
+## Accessing values
 
-- Creating dictionaries
-- Accessing values
-- Dictionary methods
-- Nested dictionaries
+```python
+person = {"name": "Alice", "age": 30, "city": "New York"}
+
+# Get values by key
+print(person["name"])       # "Alice"
+print(person["age"])        # 30
+
+# Safer with get()
+print(person.get("job"))    # None (no error)
+print(person.get("job", "Unknown"))  # "Unknown" (default)
+```
+
+## Changing dictionaries
+
+```python
+person = {"name": "Alice", "age": 30}
+
+# Add or update
+person["email"] = "alice@email.com"  # Add new
+person["age"] = 31                   # Update existing
+
+# Remove items
+del person["email"]              # Remove by key
+age = person.pop("age")          # Remove and return
+person.clear()                   # Remove all items
+```
+
+## Dictionary methods
+
+```python
+person = {"name": "Alice", "age": 30, "city": "New York"}
+
+# Get all keys, values, or items
+print(person.keys())    # dict_keys(['name', 'age', 'city'])
+print(person.values())  # dict_values(['Alice', 30, 'New York'])
+print(person.items())   # dict_items([('name', 'Alice'), ...])
+
+# Check if key exists
+if "name" in person:
+    print("Name found!")
+
+# Update multiple values
+person.update({"age": 31, "job": "Engineer"})
+```
+
+### Nested dictionaries
+```python
+# Dictionary of dictionaries
+students = {
+    "alice": {"age": 20, "grade": "A"},
+    "bob": {"age": 21, "grade": "B"},
+    "charlie": {"age": 19, "grade": "A"}
+}
+
+# Access nested data
+print(students["alice"]["grade"])  # "A"
+```
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="KeyError when key doesn't exist">
+    ```python
+    # Wrong
+    person = {"name": "Alice"}
+    print(person["age"])  # KeyError!
+    
+    # Right - use get()
+    print(person.get("age", 0))  # Returns 0 if missing
+    ```
+  </Accordion>
+
+  <Accordion title="Using mutable keys">
+    ```python
+    # Wrong - lists can't be keys
+    bad_dict = {[1, 2]: "value"}  # TypeError!
+    
+    # Right - use immutable types
+    good_dict = {(1, 2): "value"}  # Tuple is OK
+    good_dict = {"1,2": "value"}   # String is OK
+    ```
+  </Accordion>
+  
+</AccordionGroup>
+
+## What's next?
+
+Let's explore tuples - like lists but unchangeable!
 
 <Card
-  title="Next: Tuples"
-  icon="arrow-right"
+  title="Tuples"
+  icon="lock"
   href="/data-structures/tuples"
-  color="#3455ee"
 >
-  Learn about tuples
+  Immutable sequences
 </Card>
