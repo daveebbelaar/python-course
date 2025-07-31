@@ -1,0 +1,76 @@
+---
+title: Data types
+description: Different kinds of information in Python
+icon: "shapes"
+---
+
+## What are data types?
+
+Just like in real life, Python works with different kinds of information. You can't add someone's name to their age - they're different types of data.
+
+Python has four main data types you'll use constantly:
+- **Numbers** for counting and calculations
+- **Text** for words and messages  
+- **True/False** for decisions
+
+Each type has its own rules and abilities. Let's explore them.
+
+## The main types
+
+<CardGroup cols={2}>
+  <Card title="Numbers" icon="calculator" href="/data-types/numbers">
+    Integers and decimals for math
+  </Card>
+  <Card title="Strings" icon="font" href="/data-types/strings">
+    Text, words, and characters
+  </Card>
+  <Card title="Booleans" icon="toggle-on" href="/data-types/booleans">
+    True or False values
+  </Card>
+</CardGroup>
+
+## Why we need data types
+
+Python needs to know what type of data you're working with:
+
+```python
+# Numbers can do math
+total = 10 + 5  # 15
+
+# Strings combine differently  
+name = "Hello" + "World"  # "HelloWorld"
+
+# Can't mix without converting
+# age = "25" + 5  # Error!
+age = int("25") + 5  # 30 (converted string to number)
+```
+
+## Checking types
+
+You can always check what type something is with `type()`:
+
+```python
+# Check different types
+print(type(42))          # <class 'int'>
+print(type(3.14))        # <class 'float'>
+print(type("Hello"))     # <class 'str'>
+print(type(True))        # <class 'bool'>
+
+# Check variables
+age = 25
+name = "Alice"
+print(type(age))         # <class 'int'>
+print(type(name))        # <class 'str'>
+```
+
+## Start learning
+
+Pick a data type to explore - numbers are a great place to start!
+
+<Card
+  title="Learn about numbers"
+  icon="arrow-right"
+  href="/data-types/numbers"
+>
+  Integers and floats
+</Card>

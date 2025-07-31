@@ -8,14 +8,12 @@ icon: "code-branch"
 
 If statements let your program make decisions. They check if something is true or false, then act accordingly.
 
-Real-life example:
-- IF it's raining, THEN take an umbrella
-- IF battery < 20%, THEN charge phone
-- IF password is correct, THEN allow access
+Real-life logic:
+- IF it's raining → take umbrella
+- IF battery < 20% → charge phone  
+- IF password correct → allow access
 
 ## Basic if statement
-
-The simplest decision:
 
 ```python
 age = 18
@@ -31,7 +29,7 @@ How it works:
 3. If False, skip it
 
 <Note>
-  The colon `:` and indentation are required! This is Python's syntax.
+  The colon `:` and indentation are required! This is how Python knows what code belongs to the if statement.
 </Note>
 
 ## If-else statements
@@ -42,12 +40,10 @@ Handle both True and False cases:
 temperature = 25
 
 if temperature > 30:
-    print("It's hot! 🌞")
+    print("It's hot!")
 else:
-    print("Nice weather! 🌤️")
+    print("Nice weather!")
 ```
-
-Think of it as: "Do this OR that"
 
 ## If-elif-else chains
 
@@ -62,42 +58,15 @@ elif score >= 80:
     print("B - Good job!")
 elif score >= 70:
     print("C - Keep it up!")
-elif score >= 60:
-    print("D - Need improvement")
 else:
-    print("F - Please study more")
+    print("F - Need improvement")
 ```
 
 Python checks each condition in order and runs the first True one.
 
-## Comparison operators
-
-These create True/False conditions:
-
-```python
-x = 10
-
-# Equality
-x == 10    # True (equal to)
-x != 5     # True (not equal to)
-
-# Greater/Less than
-x > 5      # True
-x < 20     # True  
-x >= 10    # True (greater or equal)
-x <= 10    # True (less or equal)
-
-# Examples in if statements
-if x > 5:
-    print("x is greater than 5")
-
-if x != 0:
-    print("x is not zero")
-```
-
 ## Multiple conditions
 
-Use `and`, `or`, and `not`:
+Combine conditions with `and`, `or`, `not`:
 
 ```python
 age = 25
@@ -108,32 +77,12 @@ if age >= 18 and has_license:
     print("You can drive!")
 
 # At least one must be True
-weekend = False
-holiday = True
 if weekend or holiday:
     print("No work today!")
 
 # Reverse the condition
-raining = False
 if not raining:
     print("Let's go outside!")
-```
-
-### Complex conditions
-
-```python
-# Group with parentheses
-temperature = 35
-humidity = 80
-rain = False
-
-if (temperature > 30 or humidity > 70) and not rain:
-    print("Hot and uncomfortable, but at least it's dry!")
-
-# Multiple checks
-password = "secret123"
-if len(password) >= 8 and password.isalnum():
-    print("Password is valid")
 ```
 
 ## Nested if statements
@@ -143,258 +92,55 @@ Put if statements inside other if statements:
 ```python
 has_ticket = True
 age = 15
-has_guardian = True
 
 if has_ticket:
-    print("You have a ticket!")
-    
     if age >= 18:
         print("Enjoy the movie!")
     else:
-        if has_guardian:
-            print("Enjoy the movie with your guardian!")
-        else:
-            print("Sorry, you need an adult with you")
+        print("Need adult supervision")
 else:
-    print("Please buy a ticket first")
-```
-
-## Truthy and falsy values
-
-Python considers these False:
-- `False`
-- `None`
-- `0` (zero)
-- `""` (empty string)
-- `[]` (empty list)
-- `{}` (empty dict)
-
-Everything else is True:
-
-```python
-# Empty checks
-name = ""
-if name:
-    print(f"Hello, {name}")
-else:
-    print("Please enter a name")
-
-# List checks
-items = []
-if items:
-    print(f"You have {len(items)} items")
-else:
-    print("Your cart is empty")
-
-# Direct boolean check
-is_logged_in = True
-if is_logged_in:
-    print("Welcome back!")
-```
-
-## Try it yourself
-
-Create `grade_calculator.py`:
-
-```python
-# Grade Calculator with Feedback
-print("GRADE CALCULATOR")
-print("=" * 30)
-
-# Get scores
-exam = float(input("Exam score (0-100): "))
-homework = float(input("Homework average (0-100): "))
-participation = float(input("Participation (0-100): "))
-
-# Calculate weighted average
-# Exam: 50%, Homework: 30%, Participation: 20%
-total = (exam * 0.5) + (homework * 0.3) + (participation * 0.2)
-
-print(f"\nYour total score: {total:.1f}%")
-
-# Determine letter grade with feedback
-if total >= 90:
-    grade = "A"
-    feedback = "Outstanding work! Keep it up!"
-elif total >= 80:
-    grade = "B"
-    feedback = "Good job! You're doing well."
-elif total >= 70:
-    grade = "C"
-    feedback = "Satisfactory. Room for improvement."
-elif total >= 60:
-    grade = "D"
-    feedback = "Passing, but needs more effort."
-else:
-    grade = "F"
-    feedback = "Not passing. Please see instructor."
-
-print(f"Letter grade: {grade}")
-print(f"Feedback: {feedback}")
-
-# Special recognition
-if total == 100:
-    print("\n🌟 PERFECT SCORE! Amazing! 🌟")
-elif total >= 95:
-    print("\n⭐ Honor Roll! Excellent work!")
-
-# Advice based on weak areas
-print("\nRecommendations:")
-if exam < 70:
-    print("- Focus on exam preparation")
-if homework < 70:
-    print("- Complete all homework assignments")
-if participation < 70:
-    print("- Be more active in class")
-
-if exam >= 90 and homework >= 90 and participation >= 90:
-    print("- Excellent in all areas! Consider helping others.")
-```
-
-### Challenges
-
-1. Create a BMI calculator with health recommendations
-2. Build a password strength checker
-3. Make a simple adventure game with choices
-
-## Common patterns
-
-### Guard clauses
-Exit early to avoid deep nesting:
-
-```python
-def process_order(user, payment, items):
-    # Check problems first
-    if not user:
-        return "No user"
-    
-    if not payment:
-        return "No payment"
-        
-    if not items:
-        return "No items"
-    
-    # Main logic here
-    return "Order processed!"
-```
-
-### Ternary operator
-One-line if-else:
-
-```python
-# Long way
-if age >= 18:
-    status = "adult"
-else:
-    status = "minor"
-
-# Short way (ternary)
-status = "adult" if age >= 18 else "minor"
-
-# In print statements
-print("Access granted" if authenticated else "Access denied")
-```
-
-### Switch-like behavior
-Before Python 3.10's match-case:
-
-```python
-# Menu system
-choice = input("Enter choice (a/b/c): ").lower()
-
-if choice == 'a':
-    print("Option A selected")
-elif choice == 'b':
-    print("Option B selected")
-elif choice == 'c':
-    print("Option C selected")
-else:
-    print("Invalid choice")
+    print("Buy a ticket first")
 ```
 
 ## Common mistakes
 
-### Forgetting the colon
-```python
-# Wrong
-if x > 5
-    print("Big")
+<AccordionGroup>
+  <Accordion title="Forgetting the colon">
+    ```python
+    # Wrong
+    if x > 5
+        print("Big")
+    
+    # Right
+    if x > 5:
+        print("Big")
+    ```
+  </Accordion>
 
-# Right
-if x > 5:
-    print("Big")
-```
+  <Accordion title="Using = instead of ==">
+    ```python
+    # Wrong (assignment)
+    if x = 5:
+        print("Five")
+    
+    # Right (comparison)
+    if x == 5:
+        print("Five")
+    ```
+  </Accordion>
 
-### Using = instead of ==
-```python
-# Wrong (assignment, not comparison)
-if x = 5:
-    print("Five")
-
-# Right
-if x == 5:
-    print("Five")
-```
-
-### Wrong indentation
-```python
-# Wrong
-if True:
-print("Hello")  # IndentationError
-
-# Right
-if True:
-    print("Hello")
-```
-
-### Empty if blocks
-```python
-# Wrong - can't have empty if
-if condition:
-
-# Right - use pass
-if condition:
-    pass  # TODO: add code later
-```
-
-## Best practices
-
-1. **Keep conditions simple**
-   ```python
-   # Hard to read
-   if x > 5 and y < 10 and z == 0 and not flag:
-   
-   # Better
-   is_valid_range = x > 5 and y < 10
-   is_ready = z == 0 and not flag
-   if is_valid_range and is_ready:
-   ```
-
-2. **Use meaningful names**
-   ```python
-   # Bad
-   if u.a >= 18:
-   
-   # Good
-   if user.age >= 18:
-   ```
-
-3. **Avoid deep nesting**
-   ```python
-   # Too nested
-   if a:
-       if b:
-           if c:
-               if d:
-                   do_something()
-   
-   # Better
-   if not a:
-       return
-   if not b:
-       return
-   # etc.
-   ```
+  <Accordion title="Wrong indentation">
+    ```python
+    # Wrong
+    if True:
+    print("Hello")  # IndentationError
+    
+    # Right
+    if True:
+        print("Hello")
+    ```
+  </Accordion>
+</AccordionGroup>
 
 ## What's next?
 
@@ -405,5 +151,5 @@ Learn how to repeat actions with loops!
   icon="repeat"
   href="/control-flow/loops"
 >
-  Repeat code without copy-pasting
+  Repeat code efficiently
 </Card>

@@ -1,0 +1,185 @@
+---
+title: String manipulation  
+description: Advanced text operations
+icon: "font"
+---
+
+## Working with text
+
+Now that you know what strings are, let's learn how to manipulate them. Python gives you powerful tools to work with text.
+
+## String operations
+
+### Concatenation (joining)
+
+```python
+first_name = "Jane"
+last_name = "Doe"
+
+# Using +
+full_name = first_name + " " + last_name  # "Jane Doe"
+
+# Using f-strings (modern Python way!)
+greeting = f"Hello, {first_name}!"  # "Hello, Jane!"
+
+# Multiple variables
+age = 25
+intro = f"I'm {first_name} and I'm {age} years old"
+```
+
+### Repetition
+
+```python
+star = "*"
+stars = star * 10  # "**********"
+
+separator = "-" * 20  # "--------------------"
+```
+
+## String methods
+
+### Changing case
+
+```python
+text = "Python Programming"
+
+print(text.lower())      # "python programming"
+print(text.upper())      # "PYTHON PROGRAMMING"
+print(text.title())      # "Python Programming"
+```
+
+### Cleaning strings
+
+```python
+messy = "  hello world  "
+print(messy.strip())     # "hello world" (removes whitespace)
+
+price = "$19.99"
+print(price.strip("$"))  # "19.99"
+```
+
+### Finding and replacing
+
+```python
+message = "I love Python programming with Python"
+
+# Check if something exists
+print("Python" in message)        # True
+print(message.startswith("I"))   # True
+print(message.endswith("Python")) # True
+
+# Find position
+print(message.find("Python"))     # 7 (first occurrence)
+print(message.count("Python"))    # 2 (number of times)
+
+# Replace
+new_message = message.replace("Python", "JavaScript")
+print(new_message)  # "I love JavaScript programming with JavaScript"
+```
+
+## String indexing and slicing
+
+Strings are sequences, so you can access individual characters:
+
+```python
+text = "Python"
+
+# Indexing (starts at 0)
+print(text[0])    # "P"
+print(text[1])    # "y"
+print(text[-1])   # "n" (last character)
+print(text[-2])   # "o" (second to last)
+
+# Slicing [start:end:step]
+print(text[0:3])  # "Pyt" (characters 0,1,2)
+print(text[2:5])  # "tho"
+print(text[:3])   # "Pyt" (start to 3)
+print(text[3:])   # "hon" (3 to end)
+print(text[::2])  # "Pto" (every 2nd character)
+print(text[::-1]) # "nohtyP" (reversed!)
+```
+
+## String formatting
+
+### f-strings (modern Python)
+
+```python
+name = "Alice"
+age = 30
+
+# Basic formatting
+print(f"Name: {name}, Age: {age}")
+
+# Expressions in f-strings
+print(f"In 10 years, {name} will be {age + 10}")
+
+# Formatting numbers
+price = 19.99
+print(f"Price: ${price:.2f}")  # "Price: $19.99"
+```
+
+## Special characters
+
+```python
+# Common escape characters
+print("Hello\nWorld")     # New line
+print("Hello\tWorld")     # Tab  
+print("She said \"Hi\"")  # Quote inside quotes
+
+# Raw strings (no escaping)
+path = r"C:\Users\Name\Documents"
+```
+
+<Tip>
+  f-strings are the modern way to format strings in Python. Always use `f"text {variable}"` instead of older methods like `"text {}".format(variable)`.
+</Tip>
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Forgetting the f in f-strings">
+    ```python
+    # Wrong
+    name = "Alice"
+    message = "Hello {name}"  # Prints: "Hello {name}"
+    
+    # Right
+    message = f"Hello {name}"  # Prints: "Hello Alice"
+    ```
+  </Accordion>
+
+  <Accordion title="Trying to change strings">
+    ```python
+    # Wrong - strings can't be changed
+    name = "Alice"
+    name[0] = "B"  # Error!
+    
+    # Right - create a new string
+    name = "B" + name[1:]  # "Blice"
+    ```
+  </Accordion>
+
+  <Accordion title="Wrong quotes in strings">
+    ```python
+    # Wrong - mismatched quotes
+    text = "It's Python"
+    
+    # Right - escape or use different quotes
+    text = "It's Python"  # Double quotes outside
+    text = 'It\'s Python'  # Escape the apostrophe
+    ```
+  </Accordion>
+</AccordionGroup>
+
+
+## What's next?
+
+You've mastered working with data! Ready to make your programs smart with decision-making?
+
+<Card
+  title="Control flow"
+  icon="code-branch"
+  href="/control-flow"
+>
+  Learn if statements and loops
+</Card>

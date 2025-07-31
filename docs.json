@@ -66,18 +66,30 @@
         "tab": "Python Basics",
         "groups": [
           {
-            "group": "Core concepts",
+            "group": "Getting started",
             "pages": [
               "basics/index",
               "basics/intro-to-programming",
               "basics/python-syntax",
               "basics/python-errors",
               "basics/variables",
-              "basics/data-types",
-              "basics/operators",
-              "basics/strings",
-              "basics/input-output",
               "basics/comments"
+            ]
+          },
+          {
+            "group": "Data types",
+            "pages": [
+              "data-types/index",
+              "data-types/numbers",
+              "data-types/strings",
+              "data-types/booleans"
+            ]
+          },
+          {
+            "group": "Working with data",
+            "pages": [
+              "basics/operators",
+              "basics/string-manipulation"
             ]
           },
           {

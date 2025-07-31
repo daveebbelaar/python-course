@@ -1,0 +1,124 @@
+---
+title: Strings  
+description: Working with text in Python
+icon: "font"
+---
+
+## What are strings?
+
+Strings are text - any characters inside quotes. Python doesn't care if you use single or double quotes, just be consistent.
+
+```python
+name = "Alice"
+message = 'Hello, World!'
+```
+
+## Creating strings
+
+Three ways to make strings:
+
+```python
+# Single quotes
+first = 'Python'
+
+# Double quotes  
+second = "Python"
+
+# Triple quotes for multiple lines
+paragraph = """This is
+a multi-line
+string"""
+```
+
+<Tip>
+  Use double quotes when your text contains apostrophes: `"It's Python!"`
+</Tip>
+
+## Combining strings
+
+Join strings together with `+`:
+
+```python
+first_name = "John"
+last_name = "Doe"
+
+# Concatenation
+full_name = first_name + " " + last_name
+print(full_name)  # John Doe
+
+# Repetition
+stars = "*" * 5
+print(stars)  # *****
+```
+
+## String length
+
+Use `len()` to count characters:
+
+```python
+message = "Hello"
+print(len(message))  # 5
+
+empty = ""
+print(len(empty))    # 0
+```
+
+## Converting to string
+
+Turn other types into strings with `str()`:
+
+```python
+age = 25
+message = "I am " + str(age) + " years old"
+print(message)  # I am 25 years old
+
+# Or use f-strings (we'll learn more later)
+message = f"I am {age} years old"
+```
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Mixing quotes">
+    ```python
+    # Wrong - mismatched quotes
+    text = "Hello'
+    
+    # Right - matching quotes
+    text = "Hello"
+    text = 'Hello'
+    ```
+  </Accordion>
+
+  <Accordion title="Can't add strings and numbers">
+    ```python
+    # Wrong
+    result = "Age: " + 25  # TypeError!
+    
+    # Right - convert number first
+    result = "Age: " + str(25)
+    ```
+  </Accordion>
+
+  <Accordion title="Forgetting quotes entirely">
+    ```python
+    # Wrong
+    name = Alice  # Python looks for variable Alice
+    
+    # Right  
+    name = "Alice"  # String literal
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Let's explore True/False values - essential for making decisions in your code!
+
+<Card
+  title="Booleans"
+  icon="toggle-on"
+  href="/data-types/booleans"
+>
+  True and False values
+</Card>

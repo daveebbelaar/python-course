@@ -10,16 +10,15 @@ Loops let you repeat code multiple times. Instead of writing the same thing over
 
 Real-life loops:
 - Washing dishes (repeat until all clean)
-- Counting to 10 (repeat 10 times)
-- Reading pages in a book (repeat for each page)
-- Checking messages (repeat while new messages exist)
+- Counting steps (repeat 10,000 times)
+- Reading emails (repeat for each message)
 
 ## For loops
 
 Use `for` loops when you know how many times to repeat:
 
 ```python
-# Print "Hello" 5 times
+# Repeat 5 times
 for i in range(5):
     print("Hello")
 
@@ -33,12 +32,12 @@ for i in range(1, 6):
 ```
 
 <Note>
-  `range(5)` creates numbers 0,1,2,3,4 (stops BEFORE 5)
+  `range(5)` creates numbers 0,1,2,3,4 (stops BEFORE 5). This often confuses beginners!
 </Note>
 
 ## Looping through collections
 
-For loops work great with lists, strings, and more:
+For loops work with lists, strings, and more:
 
 ```python
 # Loop through a list
@@ -50,9 +49,9 @@ for fruit in fruits:
 for letter in "Python":
     print(letter)
 
-# Loop through with index
+# Loop with index
 for i, fruit in enumerate(fruits):
-    print(f"{i}: {fruit}")  # 0: apple, 1: banana, etc.
+    print(f"{i}: {fruit}")  # 0: apple, 1: banana...
 ```
 
 ## While loops
@@ -67,7 +66,7 @@ while count > 0:
     count -= 1  # Same as count = count - 1
 print("Blast off! 🚀")
 
-# Keep asking until valid input
+# Keep asking until valid
 password = ""
 while password != "secret":
     password = input("Enter password: ")
@@ -75,77 +74,10 @@ print("Access granted!")
 ```
 
 <Warning>
-  Be careful! Forgetting to update the condition creates an infinite loop.
+  Always update the condition variable inside a while loop, or it will run forever!
 </Warning>
 
-## Range in detail
-
-The `range()` function is powerful:
-
-```python
-# range(stop) - from 0 to stop-1
-for i in range(3):
-    print(i)  # 0, 1, 2
-
-# range(start, stop) - from start to stop-1
-for i in range(2, 5):
-    print(i)  # 2, 3, 4
-
-# range(start, stop, step) - with custom step
-for i in range(0, 10, 2):
-    print(i)  # 0, 2, 4, 6, 8
-
-# Count backwards
-for i in range(10, 0, -1):
-    print(i)  # 10, 9, 8, ..., 1
-```
-
-## Nested loops
-
-Loops inside loops:
-
-```python
-# Multiplication table
-for i in range(1, 4):
-    for j in range(1, 4):
-        result = i * j
-        print(f"{i} × {j} = {result}")
-    print()  # Empty line between tables
-
-# Pattern printing
-for i in range(5):
-    for j in range(i + 1):
-        print("*", end="")
-    print()  # New line
-# Output:
-# *
-# **
-# ***
-# ****
-# *****
-```
-
-## Loop with else
-
-Python's unique feature - else with loops:
-
-```python
-# Runs if loop completes normally
-for i in range(5):
-    print(i)
-else:
-    print("Loop finished normally")
-
-# Doesn't run if break is used
-for i in range(5):
-    if i == 3:
-        break
-    print(i)
-else:
-    print("This won't print")  # Because we used break
-```
-
-## Common loop patterns
+## Common patterns
 
 ### Accumulation
 ```python
@@ -154,230 +86,75 @@ total = 0
 for num in [1, 2, 3, 4, 5]:
     total += num
 print(f"Total: {total}")  # 15
-
-# Build a string
-result = ""
-for letter in "hello":
-    result += letter.upper()
-print(result)  # HELLO
 ```
 
 ### Filtering
 ```python
 # Find even numbers
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numbers = [1, 2, 3, 4, 5, 6]
 evens = []
 for num in numbers:
     if num % 2 == 0:
         evens.append(num)
-print(evens)  # [2, 4, 6, 8, 10]
-```
-
-### Finding
-```python
-# Find first negative
-numbers = [5, 3, -2, 8, -1, 4]
-for num in numbers:
-    if num < 0:
-        print(f"First negative: {num}")
-        break
-```
-
-## Try it yourself
-
-Create `number_game.py`:
-
-```python
-import random
-
-# Number Guessing Game
-print("NUMBER GUESSING GAME")
-print("=" * 30)
-print("I'm thinking of a number between 1 and 100")
-print("You have 7 tries to guess it!\n")
-
-# Generate random number
-secret = random.randint(1, 100)
-max_tries = 7
-
-# Game loop
-for attempt in range(1, max_tries + 1):
-    # Get guess
-    while True:
-        try:
-            guess = int(input(f"Attempt {attempt}/{max_tries} - Your guess: "))
-            if 1 <= guess <= 100:
-                break
-            else:
-                print("Please guess between 1 and 100")
-        except ValueError:
-            print("Please enter a number")
-    
-    # Check guess
-    if guess == secret:
-        print(f"\n🎉 CORRECT! You got it in {attempt} tries!")
-        break
-    elif guess < secret:
-        print("Too low! Try higher.")
-    else:
-        print("Too high! Try lower.")
-    
-    # Give hints
-    if attempt == 3:
-        if secret % 2 == 0:
-            print("Hint: It's an even number")
-        else:
-            print("Hint: It's an odd number")
-    
-    if attempt == 5:
-        print(f"Hint: It's between {secret - 10} and {secret + 10}")
-    
-else:
-    # Only runs if loop completes (no break)
-    print(f"\n😢 Sorry! The number was {secret}")
-
-# Play again?
-print("\nGame Statistics:")
-print(f"Secret number: {secret}")
-print(f"Your guesses: {attempt}")
-```
-
-### Challenges
-
-1. Create a multiplication practice program
-2. Build a todo list that loops until user quits
-3. Make a pattern printer (triangles, squares, diamonds)
-
-## Infinite loops
-
-Sometimes you want loops that run forever:
-
-```python
-# Menu system
-while True:
-    print("\n--- MENU ---")
-    print("1. Play")
-    print("2. Settings") 
-    print("3. Quit")
-    
-    choice = input("Select: ")
-    
-    if choice == "1":
-        print("Playing game...")
-    elif choice == "2":
-        print("Opening settings...")
-    elif choice == "3":
-        print("Goodbye!")
-        break  # Exit the infinite loop
-    else:
-        print("Invalid choice")
-```
-
-## List comprehensions (preview)
-
-A Pythonic way to create lists with loops:
-
-```python
-# Traditional way
-squares = []
-for i in range(10):
-    squares.append(i ** 2)
-
-# List comprehension (same result)
-squares = [i ** 2 for i in range(10)]
-
-# With condition
-evens = [i for i in range(20) if i % 2 == 0]
+print(evens)  # [2, 4, 6]
 ```
 
 ## Common mistakes
 
-### Infinite while loops
-```python
-# Wrong - count never changes
-count = 5
-while count > 0:
-    print(count)  # Prints 5 forever!
+<AccordionGroup>
+  <Accordion title="Off-by-one errors">
+    ```python
+    # Wrong - prints 0 to 9
+    for i in range(10):
+        print(i)
+    
+    # Right - prints 1 to 10
+    for i in range(1, 11):
+        print(i)
+    ```
+  </Accordion>
 
-# Right
-count = 5
-while count > 0:
-    print(count)
-    count -= 1  # Update the condition
-```
+  <Accordion title="Infinite while loops">
+    ```python
+    # Wrong - infinite loop!
+    count = 5
+    while count > 0:
+        print(count)
+        # Forgot to decrease count!
+    
+    # Right
+    count = 5
+    while count > 0:
+        print(count)
+        count -= 1
+    ```
+  </Accordion>
 
-### Off-by-one errors
-```python
-# Wrong - misses last item
-items = ["a", "b", "c"]
-for i in range(len(items) - 1):  # Only 0, 1
-    print(items[i])  # Misses "c"
-
-# Right
-for i in range(len(items)):  # 0, 1, 2
-    print(items[i])
-
-# Even better
-for item in items:
-    print(item)
-```
-
-### Modifying list while looping
-```python
-# Dangerous
-numbers = [1, 2, 3, 4, 5]
-for num in numbers:
-    if num % 2 == 0:
-        numbers.remove(num)  # Can skip items!
-
-# Safe - loop over copy
-for num in numbers.copy():
-    if num % 2 == 0:
-        numbers.remove(num)
-```
-
-## Performance tips
-
-1. **Use the right loop**
-   ```python
-   # For known iterations
-   for i in range(100):
-       process(i)
-   
-   # For conditions
-   while not done:
-       work()
-   ```
-
-2. **Avoid unnecessary work**
-   ```python
-   # Bad - len() called every time
-   for i in range(len(big_list)):
-   
-   # Good - calculated once
-   list_length = len(big_list)
-   for i in range(list_length):
-   ```
-
-3. **Use enumerate for indices**
-   ```python
-   # Instead of
-   for i in range(len(items)):
-       print(i, items[i])
-   
-   # Use
-   for i, item in enumerate(items):
-       print(i, item)
-   ```
+  <Accordion title="Modifying list while looping">
+    ```python
+    # Wrong - causes problems
+    items = [1, 2, 3, 4, 5]
+    for item in items:
+        if item == 3:
+            items.remove(item)
+    
+    # Right - use a copy
+    items = [1, 2, 3, 4, 5]
+    for item in items[:]:  # [:] makes a copy
+        if item == 3:
+            items.remove(item)
+    ```
+  </Accordion>
+</AccordionGroup>
 
 ## What's next?
 
-Learn to control your loops with break and continue!
+Learn how to control loops with break and continue!
 
 <Card
   title="Break & continue"
-  icon="hand"
+  icon="stop"
   href="/control-flow/break-continue"
 >
-  Fine-tune loop control
+  Control loop execution
 </Card>

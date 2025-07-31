@@ -6,12 +6,12 @@ icon: "calculator"
 
 ## What are operators?
 
-Operators are symbols that perform operations on values. Just like in math class, you use operators to:
-- Calculate numbers (+ - × ÷)
-- Compare values (greater than, equal to)
-- Make logical decisions (and, or, not)
+Operators are symbols that perform operations on values. Think of them as the "verbs" of programming - they make things happen!
 
-Think of operators as the "verbs" of programming - they make things happen!
+You already know most operators from math class:
+- Calculate: `+`, `-`, `*`, `/`
+- Compare: `>`, `<`, `==`
+- Combine: `and`, `or`, `not`
 
 ## Arithmetic operators
 
@@ -32,34 +32,11 @@ print(10 ** 3)  # 1000 - Exponent (power)
 
 ### Order of operations
 
-Python follows PEMDAS (Parentheses, Exponents, Multiplication/Division, Addition/Subtraction):
+Python follows math rules (PEMDAS):
 
 ```python
 result = 2 + 3 * 4      # 14 (not 20!)
 result = (2 + 3) * 4    # 20 (parentheses first)
-result = 2 ** 3 * 4     # 32 (exponent first, then multiply)
-```
-
-## Assignment operators
-
-These shortcuts make updating variables easier:
-
-```python
-# Long way
-score = score + 10
-
-# Shortcut
-score += 10
-
-# All assignment operators
-x = 10
-x += 5    # x = x + 5  (now 15)
-x -= 3    # x = x - 3  (now 12)
-x *= 2    # x = x * 2  (now 24)
-x /= 4    # x = x / 4  (now 6.0)
-x //= 2   # x = x // 2 (now 3.0)
-x %= 2    # x = x % 2  (now 1.0)
-x **= 3   # x = x ** 3 (now 1.0)
 ```
 
 ## Comparison operators
@@ -83,30 +60,9 @@ print(age <= 18)    # True  - Less than or equal
   - `age == 18` checks if age equals 18
 </Warning>
 
-## String operators
-
-Strings have special operators:
-
-```python
-# Concatenation (joining)
-first = "Python"
-last = "Programming"
-full = first + " " + last  # "Python Programming"
-
-# Repetition
-laugh = "Ha" * 3  # "HaHaHa"
-line = "-" * 20   # "--------------------"
-
-# Membership
-message = "Hello World"
-print("Hello" in message)     # True
-print("Goodbye" in message)   # False
-print("hello" in message)     # False (case sensitive!)
-```
-
 ## Logical operators
 
-These combine conditions:
+These combine boolean values and conditions:
 
 ```python
 age = 25
@@ -117,128 +73,95 @@ can_drive = age >= 16 and has_license
 print(can_drive)  # True
 
 # OR - at least one must be true
+day = "Saturday"
 is_weekend = day == "Saturday" or day == "Sunday"
+print(is_weekend)  # True
 
 # NOT - reverses the value
-is_child = not age >= 18
+is_adult = age >= 18
+is_child = not is_adult
+print(is_child)  # False
 ```
 
-### Truth table
-```python
-# AND
-True and True   # True
-True and False  # False
-False and True  # False
-False and False # False
+### Truth tables
 
-# OR
-True or True    # True
-True or False   # True
-False or True   # True
-False or False  # False
-
-# NOT
-not True        # False
-not False       # True
-```
-
-## Try it yourself
-
-Create `operators_practice.py`:
+Understanding how `and`, `or`, and `not` work:
 
 ```python
-# Calculator program
-num1 = 10
-num2 = 3
+# AND: Both must be True
+print(True and True)    # True
+print(True and False)   # False
+print(False and False)  # False
 
-print("Calculator Results:")
-print(f"{num1} + {num2} = {num1 + num2}")
-print(f"{num1} - {num2} = {num1 - num2}")
-print(f"{num1} * {num2} = {num1 * num2}")
-print(f"{num1} / {num2} = {num1 / num2:.2f}")
-print(f"{num1} // {num2} = {num1 // num2}")
-print(f"{num1} % {num2} = {num1 % num2}")
-print(f"{num1} ** {num2} = {num1 ** num2}")
+# OR: At least one must be True  
+print(True or False)    # True
+print(False or False)   # False
 
-# Comparison practice
-my_age = 25
-print("\nAge checks:")
-print(f"Can vote (>= 18): {my_age >= 18}")
-print(f"Can rent car (>= 25): {my_age >= 25}")
-print(f"Is teenager: {my_age >= 13 and my_age <= 19}")
-
-# String operations
-first_name = "Python"
-last_name = "Coder"
-full_name = first_name + " " + last_name
-print(f"\nHello, {full_name}!")
-print("*" * len(full_name))  # Underline with stars
+# NOT: Flips the value
+print(not True)         # False
+print(not False)        # True
 ```
 
-### Challenges
+## Assignment shortcuts
 
-1. Create a tip calculator that calculates 15%, 18%, and 20% tips
-2. Check if a number is even (hint: use modulo)
-3. Create a program that checks if someone can vote AND drink (different ages)
+These shortcuts update variables in place:
+
+```python
+# Instead of:
+score = score + 10
+
+# Write:
+score += 10
+
+# Works with all operators
+x = 10
+x += 5    # x is now 15
+x *= 2    # x is now 30
+```
 
 ## Common mistakes
 
-### Integer division surprise
-```python
-# Careful with division
-result = 5 / 2    # 2.5 (float)
-result = 5 // 2   # 2 (integer)
-```
+<AccordionGroup>
+  <Accordion title="Division always returns float">
+    ```python
+    # Regular division
+    result = 10 / 2    # 5.0 (not 5)
+    
+    # Integer division
+    result = 10 // 2   # 5
+    ```
+  </Accordion>
 
-### Order of operations
-```python
-# Wrong
-average = 10 + 20 + 30 / 3  # 40.0 (not 20!)
+  <Accordion title="Order of operations">
+    ```python
+    # Wrong
+    average = 10 + 20 + 30 / 3  # 40.0
+    
+    # Right
+    average = (10 + 20 + 30) / 3  # 20.0
+    ```
+  </Accordion>
 
-# Right
-average = (10 + 20 + 30) / 3  # 20.0
-```
-
-### Chaining comparisons
-```python
-# Python allows this!
-age = 25
-is_twenties = 20 <= age <= 29  # True
-
-# Same as
-is_twenties = age >= 20 and age <= 29
-```
-
-## Pro tips
-
-1. **Use parentheses for clarity**
-   ```python
-   # Hard to read
-   result = x + y * z - a / b
-   
-   # Clear
-   result = x + (y * z) - (a / b)
-   ```
-
-2. **Modulo for cycles**
-   ```python
-   # Check even/odd
-   if number % 2 == 0:
-       print("Even")
-   
-   # Cycle through 0-4
-   for i in range(20):
-       position = i % 5
-   ```
+  <Accordion title="Confusing = and ==">
+    ```python
+    # = assigns a value
+    age = 18
+    
+    # == compares values
+    if age == 18:
+        print("Just turned adult!")
+    ```
+  </Accordion>
+</AccordionGroup>
 
 ## What's next?
 
 You know operators! Let's dive deeper into working with text strings.
 
 <Card
-  title="Working with strings"
+  title="String manipulation"
   icon="font"
-  href="/basics/strings"
+  href="/basics/string-manipulation"
 >
-  Master text manipulation
+  Advanced text operations
 </Card>

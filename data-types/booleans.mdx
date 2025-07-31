@@ -1,0 +1,101 @@
+---
+title: Booleans
+description: True and False values for decisions
+icon: "toggle-on"
+---
+
+## What are booleans?
+
+Booleans are the simplest data type - they can only be `True` or `False`. Think of them as yes/no answers.
+
+```python
+is_logged_in = True
+is_admin = False
+has_permission = True
+```
+
+<Warning>
+  Boolean values are `True` and `False` with capital letters. Using `true` or `false` will cause an error!
+</Warning>
+
+## Creating booleans
+
+Booleans often come from comparisons:
+
+```python
+# Direct assignment
+is_ready = True
+
+# From comparisons
+age = 18
+can_vote = age >= 18  # True
+
+score = 75
+passed = score > 60   # True
+```
+
+## Comparison operators
+
+These operators compare values and return `True` or `False`:
+
+```python
+age = 25
+
+# Equality
+print(age == 25)     # True - equals
+print(age != 30)     # True - not equals
+
+# Greater/Less than
+print(age > 20)      # True - greater than
+print(age < 30)      # True - less than
+print(age >= 25)     # True - greater or equal
+print(age <= 25)     # True - less or equal
+```
+
+<Note>
+  Remember: `=` assigns a value, while `==` compares values. This is a common source of bugs!
+</Note>
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Wrong capitalization">
+    ```python
+    # Wrong
+    is_ready = true   # NameError!
+    is_done = TRUE    # NameError!
+    
+    # Right
+    is_ready = True
+    is_done = False
+    ```
+  </Accordion>
+
+  <Accordion title="Using = instead of ==">
+    ```python
+    # Wrong - this assigns, not compares!
+    if is_logged_in = True:
+        print("Welcome")
+    
+    # Right - but redundant
+    if is_logged_in == True:
+        print("Welcome")
+        
+    # Best - booleans are already True/False
+    if is_logged_in:
+        print("Welcome")
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Now that you understand data types, let's learn how to work with them using operators!
+
+<Card
+  title="Operators"
+  icon="calculator"
+  href="/basics/operators"
+>
+  Math, comparisons, and more
+</Card>
