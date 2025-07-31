@@ -1,0 +1,72 @@
+---
+title: Python errors
+description: Understanding when code doesn't run
+icon: "triangle-exclamation"
+---
+
+## What happens when code breaks?
+
+You've learned Python syntax rules. But what happens when you break them? Your code won't run, and Python will show you an error message.
+
+This might feel frustrating at first, but errors are actually helpful - they tell you exactly what went wrong and where.
+
+## Your first error
+
+Let's create an error on purpose. Try running this code:
+
+```python
+print("Hello World)
+```
+
+When you run this, Python shows:
+
+```
+  File "hello.py", line 1
+    print("Hello World)
+          ^
+SyntaxError: unterminated string literal (detected at line 1)
+```
+
+Don't panic! This is Python trying to help you.
+
+## How to read errors
+
+Python errors have three parts:
+
+1. **Where it happened**: `File "hello.py", line 1`
+2. **What went wrong**: `SyntaxError: unterminated string literal`
+3. **The arrow**: Points to the exact spot
+
+In our example, we forgot the closing quote mark. Python noticed and told us exactly where.
+
+## Errors are normal
+
+Every programmer sees errors daily. The difference between beginners and experts? Experts have seen more errors and learned from them.
+
+Reading errors gets easier with practice. At first they look scary, but soon you'll read them like road signs.
+
+## AI helps with errors
+
+When you're stuck on an error:
+
+1. Copy the entire error message
+2. Paste it into Claude, ChatGPT, or your favorite AI tool
+3. Add your code for context
+
+AI tools are excellent at explaining errors and suggesting fixes. They've seen millions of errors and can quickly spot what's wrong.
+
+<Tip>
+  Don't feel bad about using AI for errors! Even experienced developers use AI to debug tricky problems. It's a tool, just like Python itself.
+</Tip>
+
+## What's next?
+
+Now that you understand syntax and errors, let's start writing real Python code with variables!
+
+<Card
+  title="Variables"
+  icon="box"
+  href="/basics/variables"
+>
+  Store and use data in Python
+</Card>

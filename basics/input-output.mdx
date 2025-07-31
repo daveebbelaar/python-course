@@ -1,0 +1,274 @@
+---
+title: Input & output
+description: Interact with your program users
+icon: "terminal"
+---
+
+## What is input and output?
+
+Programs need to communicate:
+- **Input**: Getting information FROM the user (keyboard, mouse, files)
+- **Output**: Showing information TO the user (screen, files, sounds)
+
+Think of it like a conversation - you ask questions (output), get answers (input), and respond (output again).
+
+## Output with print()
+
+You've already been using `print()` - let's master it:
+
+### Basic printing
+
+```python
+# Simple output
+print("Hello, World!")
+print(42)
+print(True)
+
+# Multiple items
+print("The answer is", 42)  # The answer is 42
+
+# Empty line
+print()
+
+# Custom separator
+print("A", "B", "C", sep="-")  # A-B-C
+print("A", "B", "C", sep="")   # ABC
+```
+
+### Advanced printing
+
+```python
+# No new line at end
+print("Loading", end="")
+print("...", end="")
+print("Done!")  # Loading...Done!
+
+# Custom end character
+print("Item 1", end=" | ")
+print("Item 2", end=" | ")
+print("Item 3")  # Item 1 | Item 2 | Item 3
+
+# Print to file
+with open("output.txt", "w") as file:
+    print("This goes to a file", file=file)
+```
+
+## Getting input
+
+The `input()` function gets text from the user:
+
+```python
+# Basic input
+name = input("What's your name? ")
+print(f"Hello, {name}!")
+
+# Input is ALWAYS a string
+age = input("How old are you? ")
+print(type(age))  # <class 'str'> even if they type 25!
+
+# Convert input to other types
+age = int(input("How old are you? "))
+next_year = age + 1
+print(f"Next year you'll be {next_year}")
+```
+
+<Warning>
+  `input()` always returns a string! Convert it if you need numbers.
+</Warning>
+
+## Building interactive programs
+
+Here's a complete interactive program:
+
+```python
+# Greeting program
+print("=" * 50)
+print("WELCOME TO THE GREETING PROGRAM".center(50))
+print("=" * 50)
+
+# Get user info
+name = input("\nWhat's your name? ")
+age = int(input("How old are you? "))
+city = input("Where do you live? ")
+
+# Process and display
+print(f"\nNice to meet you, {name}!")
+print(f"Wow, {age} years old and living in {city}!")
+
+if age >= 18:
+    print("You're an adult!")
+else:
+    years_left = 18 - age
+    print(f"You'll be an adult in {years_left} years!")
+```
+
+## Formatting output
+
+### Using f-strings for nice output
+
+```python
+# Product display
+product = "Python Course"
+price = 49.99
+discount = 0.20
+
+print(f"Product: {product}")
+print(f"Price: ${price:.2f}")
+print(f"Discount: {discount:.0%}")
+print(f"Final: ${price * (1 - discount):.2f}")
+```
+
+### Creating tables
+
+```python
+# Student grades table
+print(f"{'Name':<10} {'Grade':>6} {'Status':>10}")
+print("-" * 28)
+print(f"{'Alice':<10} {85:>6} {'Pass':>10}")
+print(f"{'Bob':<10} {92:>6} {'Pass':>10}")
+print(f"{'Charlie':<10} {78:>6} {'Pass':>10}")
+```
+
+## Input validation
+
+Always validate user input:
+
+```python
+# Safe integer input
+while True:
+    try:
+        age = int(input("Enter your age: "))
+        if age < 0 or age > 150:
+            print("Please enter a realistic age!")
+        else:
+            break
+    except ValueError:
+        print("That's not a number! Try again.")
+
+print(f"Thanks! You're {age} years old.")
+
+# Yes/No questions
+while True:
+    answer = input("Continue? (yes/no): ").lower()
+    if answer in ["yes", "y", "no", "n"]:
+        break
+    print("Please answer yes or no.")
+```
+
+## Try it yourself
+
+Create `calculator.py`:
+
+```python
+# Simple calculator
+print("PYTHON CALCULATOR")
+print("=" * 30)
+
+# Get input
+num1 = float(input("Enter first number: "))
+operation = input("Enter operation (+, -, *, /): ")
+num2 = float(input("Enter second number: "))
+
+# Calculate
+if operation == "+":
+    result = num1 + num2
+elif operation == "-":
+    result = num1 - num2
+elif operation == "*":
+    result = num1 * num2
+elif operation == "/":
+    if num2 != 0:
+        result = num1 / num2
+    else:
+        result = "Error: Division by zero!"
+else:
+    result = "Error: Invalid operation!"
+
+# Display result
+print(f"\n{num1} {operation} {num2} = {result}")
+```
+
+### Challenges
+
+1. Create a mad libs game that asks for nouns, verbs, and adjectives
+2. Build a temperature converter (Celsius/Fahrenheit)
+3. Make a simple quiz with score tracking
+
+## Common mistakes
+
+### Forgetting to convert input
+```python
+# Wrong
+age = input("Age: ")
+if age > 18:  # Error! Comparing string with int
+
+# Right
+age = int(input("Age: "))
+if age > 18:  # Now it works
+```
+
+### Not handling errors
+```python
+# Dangerous
+number = int(input("Enter number: "))  # Crashes if not a number
+
+# Safe
+try:
+    number = int(input("Enter number: "))
+except ValueError:
+    print("That's not a valid number!")
+    number = 0
+```
+
+## Pro tips
+
+1. **Clear prompts**
+   ```python
+   # Bad
+   input()  # User doesn't know what to do
+   
+   # Good
+   input("Enter your choice (1-5): ")
+   ```
+
+2. **Strip whitespace**
+   ```python
+   name = input("Name: ").strip()  # Removes extra spaces
+   ```
+
+3. **Provide examples**
+   ```python
+   date = input("Enter date (MM/DD/YYYY): ")
+   phone = input("Phone (555-1234): ")
+   ```
+
+## Fun with output
+
+```python
+import time
+
+# Progress bar
+print("Downloading: [", end="")
+for i in range(20):
+    print("=", end="", flush=True)
+    time.sleep(0.1)
+print("] Complete!")
+
+# Animated loading
+for i in range(10):
+    print(f"\rLoading {'.' * (i % 4)}", end="")
+    time.sleep(0.5)
+print("\rDone!      ")
+```
+
+## What's next?
+
+Learn how to document your code with comments!
+
+<Card
+  title="Comments"
+  icon="comment"
+  href="/basics/comments"
+>
+  Write code that explains itself
+</Card>

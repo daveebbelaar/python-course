@@ -1,29 +1,454 @@
 ---
-title: Match case
-description: Pattern matching with Python's match statement
+title: Match-case
+description: Modern pattern matching in Python
 icon: "list"
 ---
 
-## Pattern Matching
+## What is match-case?
 
-Use match-case for elegant decision making.
+Match-case is Python's pattern matching feature (added in Python 3.10). It's like a super-powered if-elif-else that can match patterns, not just values.
+
+Think of it as a smart switchboard that routes your code based on patterns.
 
 <Note>
-  This section introduces Python's match-case statement for pattern matching.
+  Match-case requires Python 3.10 or newer. If you have an older version, use if-elif-else instead.
 </Note>
 
-## Topics Covered
+## Basic match statement
 
-- Match statement basics
-- Pattern types
-- When to use match
-- Real-world examples
+Start with simple value matching:
+
+```python
+# Menu system
+command = input("Enter command: ").lower()
+
+match command:
+    case "start":
+        print("Starting game...")
+    case "help":
+        print("Available commands: start, help, quit")
+    case "quit":
+        print("Goodbye!")
+    case _:  # Default case (underscore)
+        print("Unknown command")
+```
+
+The `_` is the "catch-all" pattern - it matches anything.
+
+## Matching multiple values
+
+Use the `|` (or) operator:
+
+```python
+# Day type checker
+day = input("Enter day: ").lower()
+
+match day:
+    case "saturday" | "sunday":
+        print("It's the weekend!")
+    case "monday" | "tuesday" | "wednesday" | "thursday" | "friday":
+        print("It's a weekday")
+    case _:
+        print("That's not a day")
+```
+
+## Pattern matching with values
+
+Extract values while matching:
+
+```python
+# Parse commands with arguments
+command = input("Enter command: ").split()
+
+match command:
+    case ["move", direction]:
+        print(f"Moving {direction}")
+    case ["attack", target]:
+        print(f"Attacking {target}")
+    case ["use", item, "on", target]:
+        print(f"Using {item} on {target}")
+    case ["help"]:
+        print("Commands: move <dir>, attack <target>, use <item> on <target>")
+    case _:
+        print("Invalid command")
+```
+
+## Matching data types
+
+Match based on structure and type:
+
+```python
+def process_data(data):
+    match data:
+        case int(n) if n > 0:
+            return f"Positive integer: {n}"
+        case int(n) if n < 0:
+            return f"Negative integer: {n}"
+        case int(0):
+            return "Zero"
+        case float(f):
+            return f"Float: {f}"
+        case str(s):
+            return f"String: '{s}'"
+        case list(items):
+            return f"List with {len(items)} items"
+        case _:
+            return "Unknown type"
+
+# Test it
+print(process_data(42))        # Positive integer: 42
+print(process_data(-5))        # Negative integer: -5
+print(process_data(3.14))      # Float: 3.14
+print(process_data("hello"))   # String: 'hello'
+print(process_data([1, 2, 3])) # List with 3 items
+```
+
+## Guards (if conditions)
+
+Add conditions to patterns:
+
+```python
+def categorize_age(age):
+    match age:
+        case n if n < 0:
+            return "Invalid age"
+        case n if n < 13:
+            return "Child"
+        case n if n < 20:
+            return "Teenager"
+        case n if n < 65:
+            return "Adult"
+        case _:
+            return "Senior"
+
+print(categorize_age(8))   # Child
+print(categorize_age(16))  # Teenager
+print(categorize_age(30))  # Adult
+print(categorize_age(70))  # Senior
+```
+
+## Matching dictionaries
+
+Pattern match with dictionaries:
+
+```python
+def process_user(user):
+    match user:
+        case {"name": name, "age": age, "admin": True}:
+            return f"Admin {name}, age {age}"
+        case {"name": name, "age": age}:
+            return f"User {name}, age {age}"
+        case {"name": name}:
+            return f"User {name}, age unknown"
+        case _:
+            return "Invalid user data"
+
+# Test different user formats
+print(process_user({"name": "Alice", "age": 30, "admin": True}))
+print(process_user({"name": "Bob", "age": 25}))
+print(process_user({"name": "Charlie"}))
+```
+
+## Sequence patterns
+
+Match lists and tuples:
+
+```python
+def analyze_point(point):
+    match point:
+        case (0, 0):
+            return "Origin"
+        case (0, y):
+            return f"On Y-axis at {y}"
+        case (x, 0):
+            return f"On X-axis at {x}"
+        case (x, y):
+            return f"Point at ({x}, {y})"
+        case [x, y, z]:
+            return f"3D point at ({x}, {y}, {z})"
+        case _:
+            return "Not a valid point"
+
+print(analyze_point((0, 0)))      # Origin
+print(analyze_point((5, 0)))      # On X-axis at 5
+print(analyze_point((3, 4)))      # Point at (3, 4)
+print(analyze_point([1, 2, 3]))   # 3D point at (1, 2, 3)
+```
+
+## As patterns (capturing)
+
+Capture matched values:
+
+```python
+def process_command(cmd):
+    match cmd.split():
+        case ["quit"]:
+            return "Exiting..."
+        case ["load", filename]:
+            return f"Loading {filename}"
+        case ["save", filename] as full_cmd:
+            print(f"Full command: {full_cmd}")
+            return f"Saving to {filename}"
+        case ["move", *directions]:  # Capture rest
+            return f"Moving through: {directions}"
+        case _:
+            return "Unknown command"
+
+print(process_command("load game.dat"))
+print(process_command("move north east south"))
+```
+
+## Try it yourself
+
+Create `text_adventure.py`:
+
+```python
+# Simple Text Adventure with Match-Case
+print("WELCOME TO THE DUNGEON")
+print("=" * 30)
+print("Commands: look, go <direction>, take <item>, use <item>, inventory, quit\n")
+
+# Game state
+location = "entrance"
+inventory = []
+game_map = {
+    "entrance": {
+        "description": "You're at the dungeon entrance. Paths lead north and east.",
+        "items": ["torch"],
+        "exits": {"north": "hall", "east": "armory"}
+    },
+    "hall": {
+        "description": "A long dark hall. You can go south or west.",
+        "items": ["key"],
+        "exits": {"south": "entrance", "west": "treasure"}
+    },
+    "armory": {
+        "description": "An old armory. Only exit is west.",
+        "items": ["sword"],
+        "exits": {"west": "entrance"}
+    },
+    "treasure": {
+        "description": "The treasure room! But the door is locked.",
+        "items": ["gold"],
+        "exits": {"east": "hall"},
+        "locked": True
+    }
+}
+
+# Game loop
+while True:
+    current = game_map[location]
+    
+    # Get command
+    command = input("\n> ").lower().split()
+    
+    # Process command with match-case
+    match command:
+        case ["quit"]:
+            print("Thanks for playing!")
+            break
+            
+        case ["look"]:
+            print(f"\n{current['description']}")
+            if current.get("items"):
+                print(f"You see: {', '.join(current['items'])}")
+                
+        case ["go", direction]:
+            if direction in current["exits"]:
+                next_room = current["exits"][direction]
+                if game_map[next_room].get("locked"):
+                    print("The door is locked!")
+                else:
+                    location = next_room
+                    print(f"You go {direction}.")
+                    print(game_map[location]["description"])
+            else:
+                print("You can't go that way!")
+                
+        case ["take", item]:
+            if item in current.get("items", []):
+                current["items"].remove(item)
+                inventory.append(item)
+                print(f"You took the {item}.")
+            else:
+                print(f"There's no {item} here.")
+                
+        case ["use", item]:
+            match (location, item):
+                case ("treasure", "key") if "key" in inventory:
+                    game_map["treasure"]["locked"] = False
+                    print("You unlock the door!")
+                case (_, "torch") if "torch" in inventory:
+                    print("The torch lights up the area.")
+                case _:
+                    print(f"You can't use {item} here.")
+                    
+        case ["inventory"]:
+            if inventory:
+                print(f"You have: {', '.join(inventory)}")
+            else:
+                print("Your inventory is empty.")
+                
+        case ["help"]:
+            print("Commands: look, go <dir>, take <item>, use <item>, inventory, quit")
+            
+        case _:
+            print("I don't understand that command. Type 'help' for commands.")
+```
+
+### Challenges
+
+1. Add more rooms and items to the adventure
+2. Create a calculator using match-case for operators
+3. Build a simple state machine with match-case
+
+## When to use match-case
+
+### Good for:
+- Command parsing
+- State machines
+- Type checking with different behaviors
+- Complex conditional logic
+- Pattern-based data extraction
+
+### Use if-elif when:
+- Simple value comparisons
+- Python version < 3.10
+- Conditions don't follow patterns
+
+## Common patterns
+
+### Command parser
+```python
+def parse_command(cmd):
+    parts = cmd.strip().split()
+    match parts:
+        case []:
+            return "No command"
+        case [action]:
+            return f"Action: {action}"
+        case [action, target]:
+            return f"Action: {action}, Target: {target}"
+        case [action, target, *args]:
+            return f"Action: {action}, Target: {target}, Args: {args}"
+```
+
+### Type dispatcher
+```python
+def handle_value(value):
+    match value:
+        case bool(b):
+            return f"Boolean: {b}"
+        case int(n) | float(n):
+            return f"Number: {n}"
+        case str(s) if s.isdigit():
+            return f"Numeric string: {s}"
+        case str(s):
+            return f"String: {s}"
+        case list() | tuple():
+            return f"Sequence with {len(value)} items"
+        case dict():
+            return f"Dictionary with {len(value)} keys"
+        case _:
+            return f"Unknown type: {type(value).__name__}"
+```
+
+### State machine
+```python
+def next_state(current_state, event):
+    match (current_state, event):
+        case ("idle", "start"):
+            return "running"
+        case ("running", "pause"):
+            return "paused"
+        case ("paused", "resume"):
+            return "running"
+        case ("running" | "paused", "stop"):
+            return "idle"
+        case _:
+            return current_state  # No change
+```
+
+## Common mistakes
+
+### Forgetting the underscore default
+```python
+# Wrong - no default case
+match value:
+    case 1:
+        print("One")
+    case 2:
+        print("Two")
+# If value is 3, nothing happens!
+
+# Right
+match value:
+    case 1:
+        print("One")
+    case 2:
+        print("Two")
+    case _:
+        print("Other")
+```
+
+### Pattern order matters
+```python
+# Wrong - specific pattern after general
+match value:
+    case int():
+        print("Any integer")
+    case 0:  # Never reached!
+        print("Zero")
+
+# Right - specific first
+match value:
+    case 0:
+        print("Zero")
+    case int():
+        print("Other integer")
+```
+
+## Best practices
+
+1. **Use meaningful patterns**
+   ```python
+   # Clear pattern names
+   match response:
+       case {"status": "ok", "data": data}:
+           process_data(data)
+       case {"status": "error", "message": msg}:
+           handle_error(msg)
+   ```
+
+2. **Always include default case**
+   ```python
+   match option:
+       case 1 | 2 | 3:
+           valid_choice(option)
+       case _:
+           print("Invalid option")
+   ```
+
+3. **Keep patterns simple**
+   ```python
+   # Too complex
+   case [x, y, z] if x > 0 and y > 0 and z > 0 and x + y > z:
+   
+   # Better - extract logic
+   def is_valid_triangle(a, b, c):
+       return a > 0 and b > 0 and c > 0 and a + b > c
+   
+   case [x, y, z] if is_valid_triangle(x, y, z):
+   ```
+
+## What's next?
+
+You've mastered control flow! Time to learn about organizing code with functions.
 
 <Card
-  title="Continue to Functions"
-  icon="arrow-right"
+  title="Functions"
+  icon="cube"
   href="/functions"
-  color="#3455ee"
 >
-  Learn about functions
+  Create reusable blocks of code
 </Card>

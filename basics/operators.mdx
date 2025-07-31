@@ -1,0 +1,244 @@
+---
+title: Operators
+description: Math, comparisons, and logic in Python
+icon: "calculator"
+---
+
+## What are operators?
+
+Operators are symbols that perform operations on values. Just like in math class, you use operators to:
+- Calculate numbers (+ - × ÷)
+- Compare values (greater than, equal to)
+- Make logical decisions (and, or, not)
+
+Think of operators as the "verbs" of programming - they make things happen!
+
+## Arithmetic operators
+
+These work just like your calculator:
+
+```python
+# Basic math
+print(10 + 3)   # 13 - Addition
+print(10 - 3)   # 7  - Subtraction
+print(10 * 3)   # 30 - Multiplication
+print(10 / 3)   # 3.333... - Division (always gives float)
+
+# Special operators
+print(10 // 3)  # 3  - Floor division (rounds down)
+print(10 % 3)   # 1  - Modulo (remainder)
+print(10 ** 3)  # 1000 - Exponent (power)
+```
+
+### Order of operations
+
+Python follows PEMDAS (Parentheses, Exponents, Multiplication/Division, Addition/Subtraction):
+
+```python
+result = 2 + 3 * 4      # 14 (not 20!)
+result = (2 + 3) * 4    # 20 (parentheses first)
+result = 2 ** 3 * 4     # 32 (exponent first, then multiply)
+```
+
+## Assignment operators
+
+These shortcuts make updating variables easier:
+
+```python
+# Long way
+score = score + 10
+
+# Shortcut
+score += 10
+
+# All assignment operators
+x = 10
+x += 5    # x = x + 5  (now 15)
+x -= 3    # x = x - 3  (now 12)
+x *= 2    # x = x * 2  (now 24)
+x /= 4    # x = x / 4  (now 6.0)
+x //= 2   # x = x // 2 (now 3.0)
+x %= 2    # x = x % 2  (now 1.0)
+x **= 3   # x = x ** 3 (now 1.0)
+```
+
+## Comparison operators
+
+These compare values and return True or False:
+
+```python
+age = 18
+
+print(age == 18)    # True  - Equal to
+print(age != 21)    # True  - Not equal to
+print(age > 17)     # True  - Greater than
+print(age < 20)     # True  - Less than
+print(age >= 18)    # True  - Greater than or equal
+print(age <= 18)    # True  - Less than or equal
+```
+
+<Warning>
+  Don't confuse `=` (assignment) with `==` (comparison)!
+  - `age = 18` stores 18 in age
+  - `age == 18` checks if age equals 18
+</Warning>
+
+## String operators
+
+Strings have special operators:
+
+```python
+# Concatenation (joining)
+first = "Python"
+last = "Programming"
+full = first + " " + last  # "Python Programming"
+
+# Repetition
+laugh = "Ha" * 3  # "HaHaHa"
+line = "-" * 20   # "--------------------"
+
+# Membership
+message = "Hello World"
+print("Hello" in message)     # True
+print("Goodbye" in message)   # False
+print("hello" in message)     # False (case sensitive!)
+```
+
+## Logical operators
+
+These combine conditions:
+
+```python
+age = 25
+has_license = True
+
+# AND - both must be true
+can_drive = age >= 16 and has_license
+print(can_drive)  # True
+
+# OR - at least one must be true
+is_weekend = day == "Saturday" or day == "Sunday"
+
+# NOT - reverses the value
+is_child = not age >= 18
+```
+
+### Truth table
+```python
+# AND
+True and True   # True
+True and False  # False
+False and True  # False
+False and False # False
+
+# OR
+True or True    # True
+True or False   # True
+False or True   # True
+False or False  # False
+
+# NOT
+not True        # False
+not False       # True
+```
+
+## Try it yourself
+
+Create `operators_practice.py`:
+
+```python
+# Calculator program
+num1 = 10
+num2 = 3
+
+print("Calculator Results:")
+print(f"{num1} + {num2} = {num1 + num2}")
+print(f"{num1} - {num2} = {num1 - num2}")
+print(f"{num1} * {num2} = {num1 * num2}")
+print(f"{num1} / {num2} = {num1 / num2:.2f}")
+print(f"{num1} // {num2} = {num1 // num2}")
+print(f"{num1} % {num2} = {num1 % num2}")
+print(f"{num1} ** {num2} = {num1 ** num2}")
+
+# Comparison practice
+my_age = 25
+print("\nAge checks:")
+print(f"Can vote (>= 18): {my_age >= 18}")
+print(f"Can rent car (>= 25): {my_age >= 25}")
+print(f"Is teenager: {my_age >= 13 and my_age <= 19}")
+
+# String operations
+first_name = "Python"
+last_name = "Coder"
+full_name = first_name + " " + last_name
+print(f"\nHello, {full_name}!")
+print("*" * len(full_name))  # Underline with stars
+```
+
+### Challenges
+
+1. Create a tip calculator that calculates 15%, 18%, and 20% tips
+2. Check if a number is even (hint: use modulo)
+3. Create a program that checks if someone can vote AND drink (different ages)
+
+## Common mistakes
+
+### Integer division surprise
+```python
+# Careful with division
+result = 5 / 2    # 2.5 (float)
+result = 5 // 2   # 2 (integer)
+```
+
+### Order of operations
+```python
+# Wrong
+average = 10 + 20 + 30 / 3  # 40.0 (not 20!)
+
+# Right
+average = (10 + 20 + 30) / 3  # 20.0
+```
+
+### Chaining comparisons
+```python
+# Python allows this!
+age = 25
+is_twenties = 20 <= age <= 29  # True
+
+# Same as
+is_twenties = age >= 20 and age <= 29
+```
+
+## Pro tips
+
+1. **Use parentheses for clarity**
+   ```python
+   # Hard to read
+   result = x + y * z - a / b
+   
+   # Clear
+   result = x + (y * z) - (a / b)
+   ```
+
+2. **Modulo for cycles**
+   ```python
+   # Check even/odd
+   if number % 2 == 0:
+       print("Even")
+   
+   # Cycle through 0-4
+   for i in range(20):
+       position = i % 5
+   ```
+
+## What's next?
+
+You know operators! Let's dive deeper into working with text strings.
+
+<Card
+  title="Working with strings"
+  icon="font"
+  href="/basics/strings"
+>
+  Master text manipulation
+</Card>

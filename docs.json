@@ -63,25 +63,30 @@
         ]
       },
       {
-        "tab": "Python Fundamentals",
+        "tab": "Python Basics",
         "groups": [
           {
-            "group": "First steps",
+            "group": "Core concepts",
             "pages": [
-              "fundamentals/index",
-              "fundamentals/variables",
-              "fundamentals/data-types",
-              "fundamentals/strings"
+              "basics/index",
+              "basics/intro-to-programming",
+              "basics/python-syntax",
+              "basics/python-errors",
+              "basics/variables",
+              "basics/data-types",
+              "basics/operators",
+              "basics/strings",
+              "basics/input-output",
+              "basics/comments"
             ]
           },
           {
-            "group": "Program logic",
+            "group": "Control flow",
             "pages": [
-              "fundamentals/operators",
-              "fundamentals/error-messages",
               "control-flow/index",
               "control-flow/if-statements",
               "control-flow/loops",
+              "control-flow/break-continue",
               "control-flow/match-case"
             ]
           }

@@ -1,0 +1,312 @@
+---
+title: Break & continue
+description: Fine-tune your loop control
+icon: "hand"
+---
+
+## What are break and continue?
+
+Sometimes you need more control over your loops:
+- **break**: Exit the loop completely ("I'm done!")
+- **continue**: Skip to the next iteration ("Skip this one!")
+
+Think of it like watching TV:
+- **break**: Turn off the TV and do something else
+- **continue**: Skip this commercial, keep watching
+
+## Break statement
+
+`break` immediately exits the loop:
+
+```python
+# Find the first even number
+numbers = [1, 3, 5, 2, 7, 9, 4]
+
+for num in numbers:
+    if num % 2 == 0:
+        print(f"Found even number: {num}")
+        break  # Stop looking
+    print(f"Checking {num}...")
+
+print("Done searching")
+```
+
+Output:
+```
+Checking 1...
+Checking 3...
+Checking 5...
+Found even number: 2
+Done searching
+```
+
+### Common uses for break
+
+```python
+# 1. Search and stop
+users = ["alice", "bob", "admin", "charlie"]
+for user in users:
+    if user == "admin":
+        print("Admin found!")
+        break
+
+# 2. User wants to quit
+while True:
+    command = input("Enter command (quit to exit): ")
+    if command == "quit":
+        break
+    print(f"Processing: {command}")
+
+# 3. Limit iterations
+count = 0
+while True:
+    count += 1
+    print(count)
+    if count >= 5:
+        break  # Prevent infinite loop
+```
+
+## Continue statement
+
+`continue` skips the rest of the current iteration:
+
+```python
+# Print only positive numbers
+numbers = [1, -2, 3, -4, 5]
+
+for num in numbers:
+    if num < 0:
+        continue  # Skip negative numbers
+    print(num)
+```
+
+Output:
+```
+1
+3
+5
+```
+
+### Common uses for continue
+
+```python
+# 1. Skip invalid data
+ages = [25, -5, 30, 999, 18]
+for age in ages:
+    if age < 0 or age > 120:
+        continue  # Skip unrealistic ages
+    print(f"Processing age: {age}")
+
+# 2. Skip empty items
+names = ["Alice", "", "Bob", "  ", "Charlie"]
+for name in names:
+    if not name.strip():  # Skip empty/whitespace
+        continue
+    print(f"Hello, {name}!")
+
+# 3. Filter during processing
+for i in range(1, 11):
+    if i % 2 == 0:  # Skip even numbers
+        continue
+    print(f"{i} squared is {i**2}")
+```
+
+## Break and continue in nested loops
+
+In nested loops, break and continue only affect the innermost loop:
+
+```python
+# Multiplication table with limits
+for i in range(1, 6):
+    print(f"\nTable of {i}:")
+    for j in range(1, 11):
+        result = i * j
+        if result > 20:
+            break  # Only breaks inner loop
+        print(f"{i} × {j} = {result}")
+```
+
+## Break with else
+
+Python has a unique feature - `else` with loops:
+
+```python
+# Search with else
+search_for = 7
+numbers = [1, 3, 5, 9, 11]
+
+for num in numbers:
+    if num == search_for:
+        print(f"Found {search_for}!")
+        break
+else:
+    # Runs only if loop completes without break
+    print(f"{search_for} not found")
+```
+
+## Try it yourself
+
+Create `password_checker.py`:
+
+```python
+# Password validation system
+max_attempts = 3
+correct_password = "python123"
+
+print("SECURE SYSTEM LOGIN")
+print("=" * 20)
+
+for attempt in range(1, max_attempts + 1):
+    password = input(f"Enter password (attempt {attempt}/{max_attempts}): ")
+    
+    # Check for quit command
+    if password.lower() == "quit":
+        print("Exiting system...")
+        break
+    
+    # Skip empty passwords
+    if not password:
+        print("Password cannot be empty!")
+        continue
+    
+    # Check password
+    if password == correct_password:
+        print("Access granted!")
+        break
+    else:
+        print("Incorrect password!")
+        
+        # Check if last attempt
+        if attempt == max_attempts:
+            print("Maximum attempts reached. Access denied.")
+else:
+    # This runs if they quit or succeed
+    # (break was used)
+    pass
+
+print("\nThank you for using our system.")
+```
+
+### Challenges
+
+1. Create a number guessing game that uses break when correct
+2. Process a list of scores, skip negative ones with continue
+3. Build a menu system that breaks when user selects "exit"
+
+## Common patterns
+
+### Infinite loop with break
+```python
+# Menu system
+while True:
+    print("\n1. Play")
+    print("2. Settings")
+    print("3. Quit")
+    
+    choice = input("Select: ")
+    
+    if choice == "1":
+        print("Playing...")
+    elif choice == "2":
+        print("Settings...")
+    elif choice == "3":
+        print("Goodbye!")
+        break
+    else:
+        print("Invalid choice!")
+```
+
+### Skip processing with continue
+```python
+# Process only valid files
+files = ["data.txt", "image.jpg", "script.py", ".hidden", ""]
+
+for file in files:
+    # Skip hidden files and empty names
+    if not file or file.startswith("."):
+        continue
+    
+    print(f"Processing: {file}")
+```
+
+### Early exit optimization
+```python
+# Stop when condition met
+def has_negative(numbers):
+    for num in numbers:
+        if num < 0:
+            return True  # Found one, stop looking
+    return False
+
+# Alternative with break
+found_negative = False
+for num in numbers:
+    if num < 0:
+        found_negative = True
+        break
+```
+
+## Common mistakes
+
+### Break in wrong place
+```python
+# Wrong: break outside loop
+if condition:
+    break  # Error! No loop to break from
+
+# Right: break inside loop
+for item in items:
+    if condition:
+        break
+```
+
+### Forgetting continue skips code
+```python
+# Unexpected behavior
+for i in range(5):
+    if i == 2:
+        continue
+    print(i)
+    # This never runs when i == 2
+    print(f"{i} squared is {i**2}")
+```
+
+## Best practices
+
+1. **Use break to prevent unnecessary work**
+   ```python
+   # Stop searching once found
+   for item in huge_list:
+       if item == target:
+           process(item)
+           break  # Don't check rest
+   ```
+
+2. **Use continue to keep code clean**
+   ```python
+   # Instead of deep nesting
+   for item in items:
+       if not is_valid(item):
+           continue
+       # Process valid items
+       process(item)
+   ```
+
+3. **Document why you're breaking**
+   ```python
+   for attempt in attempts:
+       if success:
+           break  # Found solution, stop trying
+   ```
+
+## What's next?
+
+Learn about Python's powerful pattern matching feature!
+
+<Card
+  title="Match-case"
+  icon="list"
+  href="/control-flow/match-case"
+>
+  Modern pattern matching in Python
+</Card>

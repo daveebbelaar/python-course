@@ -1,0 +1,98 @@
+---
+title: Python syntax
+description: How to write Python code properly
+icon: "code"
+---
+
+## What is syntax?
+
+Every programming language has its own rules - its syntax. It's like grammar in human languages. You can't just write words in any order and expect people to understand. The same goes for programming.
+
+Python's syntax is known for being clean and readable. But it still has rules you must follow, or your code won't run.
+
+## The importance of syntax
+
+Think about these two sentences:
+- "The cat sat on the mat" ✓ (correct English)
+- "Cat the on mat sat the" ✗ (same words, wrong order)
+
+Programming is the same:
+```python
+# Correct Python
+if age > 18:
+    print("Adult")
+
+# Wrong - Python won't understand
+age > 18 print("Adult")
+```
+
+## Python's unique feature: Indentation
+
+Most languages use `{}` brackets. Python uses indentation (spaces):
+
+```python
+# Python - clean and readable
+if temperature > 30:
+    print("It's hot!")
+    print("Turn on AC")
+
+# Other languages (like JavaScript)
+if (temperature > 30) {
+    console.log("It's hot!");
+    console.log("Turn on AC");
+}
+```
+
+### Indentation rules
+
+```python
+# CORRECT - consistent 4 spaces
+if score > 90:
+    print("A grade")
+    if score == 100:
+        print("Perfect!")
+
+# WRONG - mixing spaces
+if score > 90:
+  print("A grade")    # 2 spaces
+    if score == 100:  # 4 spaces
+      print("Perfect!")  # 6 spaces
+```
+
+<Warning>
+  Python won't run if your indentation is wrong. This is the #1 beginner mistake!
+</Warning>
+
+## Python style guide (PEP8)
+
+Beyond just syntax rules that make code run, Python has style guidelines that make code readable. These are called PEP8 (Python Enhancement Proposal 8) - the official style guide for Python code.
+
+PEP8 covers things like:
+- Using 4 spaces for indentation (not tabs)
+- Limiting lines to 79 characters
+- Naming conventions (like `user_name` instead of `userName`)
+- Where to put spaces around operators
+
+Throughout this course, when there are multiple ways to write something, we'll follow PEP8. This means you don't have to think about style choices - just follow the standard and your code will be readable by other Python developers.
+
+<Tip>
+  Following PEP8 isn't required for code to run, but it makes your code look professional and easier for others to read.
+</Tip>
+
+You can read the full PEP8 guide at [https://peps.python.org/pep-0008/](https://peps.python.org/pep-0008/).
+
+## That's all for now
+
+Syntax is just how you write Python code - the rules you follow. Right now, remember these basics: Python cares about spelling, order, and especially indentation. As we move through the course, you'll naturally pick up the specific syntax rules for each concept.
+
+## What's next?
+
+Now that you understand Python's rules, let's see what happens when we break them!
+
+<Card
+  title="Python errors"
+  icon="triangle-exclamation"
+  href="/basics/python-errors"
+>
+  Understanding when code doesn't run
+</Card>

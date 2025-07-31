@@ -1,0 +1,298 @@
+---
+title: Comments
+description: Document your code for humans
+icon: "comment"
+---
+
+## What are comments?
+
+Comments are notes for humans that Python ignores. They're like sticky notes in your code that explain what's happening.
+
+Why write comments?
+- Help others understand your code
+- Help future you remember what you did
+- Disable code temporarily
+- Document complex logic
+
+## Single-line comments
+
+Use `#` to start a comment:
+
+```python
+# This is a comment
+print("Hello")  # This is also a comment
+
+# You can have multiple lines
+# of comments by starting
+# each line with a hash
+
+age = 25  # Store user's age
+```
+
+## Multi-line comments
+
+For longer explanations, use triple quotes:
+
+```python
+"""
+This is a multi-line comment.
+It can span several lines.
+Great for longer explanations.
+"""
+
+def calculate_tip(bill):
+    """
+    Calculate 20% tip for a restaurant bill.
+    Takes the bill amount and returns the tip.
+    """
+    return bill * 0.20
+```
+
+<Note>
+  Technically, triple quotes create a string that Python doesn't use. Real multi-line comments don't exist in Python, but this works the same way!
+</Note>
+
+## When to use comments
+
+### Good comments explain WHY
+
+```python
+# Good: Explains why
+# Using 1.0625 because sales tax in CA is 6.25%
+total = subtotal * 1.0625
+
+# Bad: Explains what (obvious from code)
+# Multiply subtotal by 1.0625
+total = subtotal * 1.0625
+```
+
+### Document complex logic
+
+```python
+# Check if year is leap year
+# Leap years are divisible by 4, except centuries
+# unless they're divisible by 400
+if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+    print(f"{year} is a leap year")
+```
+
+### TODO comments
+
+```python
+def process_payment(amount):
+    # TODO: Add payment validation
+    # TODO: Connect to payment gateway
+    # FIXME: Handle negative amounts
+    return True  # Temporary
+```
+
+## Comment best practices
+
+### Keep comments updated
+
+```python
+# Bad: Outdated comment
+# Calculate 15% tip (but code does 20%)
+tip = bill * 0.20
+
+# Good: Accurate comment
+# Calculate 20% tip (standard for good service)
+tip = bill * 0.20
+```
+
+### Don't over-comment
+
+```python
+# Bad: Too many obvious comments
+x = 5  # Set x to 5
+y = 10  # Set y to 10
+z = x + y  # Add x and y
+print(z)  # Print z
+
+# Good: Comment only what needs explanation
+# Calculate coordinates for game grid
+x = 5
+y = 10
+position = x + y  # Linear index from 2D coordinates
+print(position)
+```
+
+### Use descriptive names instead
+
+```python
+# Instead of this:
+d = 7  # days in a week
+
+# Write this:
+days_in_week = 7
+```
+
+## Commenting techniques
+
+### Header comments
+
+```python
+# ========================================
+# Student Grade Calculator
+# Author: Your Name
+# Date: 2024-01-01
+# Description: Calculates final grades
+# ========================================
+
+def calculate_grade(scores):
+    """Calculate average grade from list of scores."""
+    return sum(scores) / len(scores)
+```
+
+### Inline explanations
+
+```python
+# Process user data
+users = get_all_users()
+active_users = [u for u in users if u.active]  # Filter inactive
+vip_users = [u for u in active_users if u.vip]  # Further filter
+```
+
+### Commenting out code
+
+```python
+print("Starting process...")
+# print("Debug: Checking values")  # Uncomment for debugging
+# old_method()  # Deprecated, keeping for reference
+new_method()
+```
+
+## Documentation strings (docstrings)
+
+Special comments for functions and classes:
+
+```python
+def convert_temperature(celsius):
+    """
+    Convert Celsius to Fahrenheit.
+    
+    Args:
+        celsius (float): Temperature in Celsius
+    
+    Returns:
+        float: Temperature in Fahrenheit
+    
+    Example:
+        >>> convert_temperature(0)
+        32.0
+    """
+    return (celsius * 9/5) + 32
+
+# Access docstring
+print(convert_temperature.__doc__)
+```
+
+## Try it yourself
+
+Create `commenting_practice.py`:
+
+```python
+"""
+Temperature Converter Program
+Converts between Celsius and Fahrenheit
+Author: [Your name]
+Date: [Today's date]
+"""
+
+def celsius_to_fahrenheit(celsius):
+    """Convert Celsius to Fahrenheit."""
+    # Formula: (C × 9/5) + 32
+    return (celsius * 9/5) + 32
+
+def fahrenheit_to_celsius(fahrenheit):
+    """Convert Fahrenheit to Celsius."""
+    # Formula: (F - 32) × 5/9
+    return (fahrenheit - 32) * 5/9
+
+# Main program
+print("TEMPERATURE CONVERTER")
+print("=" * 20)
+
+# Get user choice
+# TODO: Add input validation
+choice = input("Convert from (C)elsius or (F)ahrenheit? ").upper()
+
+if choice == "C":
+    # Converting from Celsius
+    temp = float(input("Enter temperature in Celsius: "))
+    result = celsius_to_fahrenheit(temp)
+    print(f"{temp}°C = {result:.1f}°F")
+else:
+    # Converting from Fahrenheit
+    temp = float(input("Enter temperature in Fahrenheit: "))
+    result = fahrenheit_to_celsius(temp)
+    print(f"{temp}°F = {result:.1f}°C")
+
+# TODO: Add option to convert multiple temperatures
+# TODO: Add Kelvin conversion
+```
+
+### Challenges
+
+1. Take an uncommented program and add helpful comments
+2. Write a function with a complete docstring
+3. Use comments to plan a program before writing code
+
+## Common mistakes
+
+### Contradicting code
+```python
+# Bad: Comment says one thing, code does another
+# Check if user is adult (21+)
+if age >= 18:  # This checks for 18!
+    print("Adult")
+```
+
+### Commenting out instead of deleting
+```python
+# Bad: Leaving lots of old code
+# result = old_calculation()
+# result2 = another_old_way()
+# final = outdated_method()
+result = new_calculation()  # Just keep this
+```
+
+### Using comments instead of better code
+```python
+# Bad: Comment explains confusing code
+# Check if x is 1, 3, 5, 7, or 9
+if x == 1 or x == 3 or x == 5 or x == 7 or x == 9:
+
+# Good: Clear code needs no comment
+if x in [1, 3, 5, 7, 9]:
+```
+
+## Advanced commenting
+
+### Type hints (modern Python)
+```python
+def greet(name: str, age: int) -> str:
+    """Create a greeting message."""
+    return f"Hello {name}, you are {age} years old"
+```
+
+### Disable warnings
+```python
+# pylint: disable=line-too-long
+really_long_line_that_would_normally_trigger_a_warning = "This is OK here"
+
+# type: ignore
+result = complex_function()  # Ignore type checker here
+```
+
+## What's next?
+
+You've mastered the basics! Ready to make your programs smart with decision-making?
+
+<Card
+  title="Control flow"
+  icon="code-branch"
+  href="/control-flow"
+>
+  Learn if statements and loops
+</Card>
