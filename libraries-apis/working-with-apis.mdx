@@ -1,33 +1,39 @@
 ---
 title: Working with APIs
-description: Connect to web services
+description: Pull data from web services
 icon: "globe"
 ---
 
-## What are APIs?
+## What is an API?
 
-APIs (Application Programming Interfaces) let your Python code talk to online services. Think of them as:
-- Restaurant menus (you order, they deliver)
-- Vending machines (insert request, get response)
-- Information desks (ask questions, get answers)
+An API (Application Programming Interface) is like a waiter at a restaurant. You tell it what you want, and it brings you the data.
 
-Common API uses:
-- Get weather data
-- Send messages
-- Fetch stock prices
-- Use AI models
-- Post to social media
+But APIs do more than just fetch information. They're the bridges that connect your code to other systems. With APIs, you can:
+- Pull customer data from your CRM (Salesforce, HubSpot)
+- Get order information from Shopify or WooCommerce
+- Send messages through Slack or email services
+- Use AI models from OpenAI or Anthropic
 
-## Making requests
+In the context of AI, APIs are essential. They let you connect AI capabilities to real business data and systems.
 
-Use the `requests` library to interact with APIs:
+## Your first API call
+
+Let's get real weather data using a free weather API:
 
 ```python
 import requests
 
-# GET request - fetch data
-response = requests.get("https://api.example.com/weather")
+# We need coordinates to get weather data
+latitude = 48.85   # Paris latitude
+longitude = 2.35   # Paris longitude
+
+# Build the API URL with our parameters
+url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m"
+
+# Make the request
+response = requests.get(url)
 data = response.json()
+
 print(data)
 ```
 
@@ -35,221 +41,72 @@ print(data)
   First install requests: `pip install requests`
 </Note>
 
-## API responses
+## Understanding the response
 
-Most APIs return JSON data:
-
-```python
-import requests
-
-# Make request
-response = requests.get("https://api.github.com/users/python")
-
-# Check if successful
-if response.status_code == 200:
-    data = response.json()
-    print(f"Name: {data['name']}")
-    print(f"Followers: {data['followers']}")
-else:
-    print(f"Error: {response.status_code}")
-```
-
-## Sending data
-
-Send data with POST requests:
+The API sends back data in JSON format (like a Python dictionary):
 
 ```python
-import requests
-
-# Data to send
-user_data = {
-    "name": "Alice",
-    "email": "alice@example.com"
+{
+    'latitude': 48.84,
+    'longitude': 2.36,
+    'timezone': 'GMT',
+    'elevation': 46.0,
+    'current_units': {
+        'temperature_2m': '°C'
+    },
+    'current': {
+        'time': '2025-08-01T08:30',
+        'temperature_2m': 20.0
+    }
 }
-
-# POST request
-response = requests.post(
-    "https://api.example.com/users",
-    json=user_data
-)
-
-print(response.json())
 ```
 
-## API authentication
-
-Many APIs require authentication:
-
+The temperature is nested inside `current`, so to get it:
 ```python
-import requests
-import os
-
-# API key from environment variable
-api_key = os.getenv("API_KEY")
-
-# In headers
-headers = {
-    "Authorization": f"Bearer {api_key}"
-}
-
-response = requests.get(
-    "https://api.example.com/data",
-    headers=headers
-)
-
-# Or in parameters
-params = {
-    "api_key": api_key,
-    "city": "New York"
-}
-
-response = requests.get(
-    "https://api.weather.com/forecast",
-    params=params
-)
-```
-
-<Warning>
-  Never hardcode API keys in your code! Use environment variables or .env files.
-</Warning>
-
-## Environment variables
-
-Keep secrets safe with python-dotenv:
-
-```python
-# Install: pip install python-dotenv
-
-from dotenv import load_dotenv
-import os
-
-# Load .env file
-load_dotenv()
-
-# Get variables
-api_key = os.getenv("OPENAI_API_KEY")
-database_url = os.getenv("DATABASE_URL")
-```
-
-Your `.env` file:
-```
-OPENAI_API_KEY=sk-abc123...
-DATABASE_URL=postgres://...
+temperature = data['current']['temperature_2m']
+print(f"Temperature in Paris: {temperature}°C")
+# Output: Temperature in Paris: 20.0°C
 ```
 
 <Tip>
-  Add `.env` to `.gitignore` to keep secrets out of version control!
+  **What is JSON?** JSON (JavaScript Object Notation) is just a way to structure data, similar to CSV or Excel files. While CSV stores data in rows and columns, JSON uses key-value pairs like Python dictionaries.
 </Tip>
 
-## Real example
+## Extract what you need
 
-Weather API example:
-
-```python
-import requests
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-def get_weather(city):
-    api_key = os.getenv("WEATHER_API_KEY")
-    url = "https://api.openweathermap.org/data/2.5/weather"
-    
-    params = {
-        "q": city,
-        "appid": api_key,
-        "units": "metric"
-    }
-    
-    response = requests.get(url, params=params)
-    
-    if response.status_code == 200:
-        data = response.json()
-        temp = data["main"]["temp"]
-        desc = data["weather"][0]["description"]
-        return f"{city}: {temp}°C, {desc}"
-    else:
-        return f"Error getting weather for {city}"
-
-# Use it
-print(get_weather("London"))
-```
-
-## Error handling
-
-Always handle API errors:
+Now you can pull out specific information:
 
 ```python
 import requests
-from requests.exceptions import RequestException
 
-try:
-    response = requests.get(
-        "https://api.example.com/data",
-        timeout=5  # 5 second timeout
-    )
-    response.raise_for_status()  # Raise error for bad status
+def get_weather(latitude, longitude):
+    response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,wind_speed_10m")
     data = response.json()
-    
-except requests.Timeout:
-    print("Request timed out")
-except requests.ConnectionError:
-    print("Connection error")
-except requests.HTTPError as e:
-    print(f"HTTP error: {e}")
-except RequestException as e:
-    print(f"Request failed: {e}")
+    return data['current']['temperature_2m']
+
+# Get temperature for different cities
+paris_temp = get_weather(48.85, 2.35)
+london_temp = get_weather(51.50, -0.12)
+tokyo_temp = get_weather(35.68, 139.69)
+
+print(f"Paris: {paris_temp}°C")
+print(f"London: {london_temp}°C")
+print(f"Tokyo: {tokyo_temp}°C")
 ```
 
-## Common mistakes
+## How it works
 
-<AccordionGroup>
-  <Accordion title="Not checking status codes">
-    ```python
-    # Wrong - assuming success
-    response = requests.get(url)
-    data = response.json()  # Might fail!
-    
-    # Right - check status first
-    response = requests.get(url)
-    if response.status_code == 200:
-        data = response.json()
-    else:
-        print(f"Error: {response.status_code}")
-    ```
-  </Accordion>
+1. **You send a request** to the API's URL with parameters (like coordinates)
+2. **The API processes** your request and finds the data
+3. **You receive JSON data** back with the information
+4. **You extract** the specific parts you need
 
-  <Accordion title="Hardcoding API keys">
-    ```python
-    # Wrong - key in code
-    api_key = "sk-abc123xyz"
-    
-    # Right - use environment
-    import os
-    api_key = os.getenv("API_KEY")
-    ```
-  </Accordion>
-
-  <Accordion title="No timeout">
-    ```python
-    # Wrong - can hang forever
-    response = requests.get(url)
-    
-    # Right - set timeout
-    response = requests.get(url, timeout=10)
-    ```
-  </Accordion>
-</AccordionGroup>
-
-## What's next?
-
-Learn about powerful data processing libraries!
+The pattern is always the same: connect to an API, send requests, get data back, use it in your code. APIs are how modern software talks to each other.
 
 <Card
   title="Data libraries"
   icon="arrow-right"
   href="/libraries-apis/data-libraries"
 >
-  Process data efficiently
+  Process data efficiently with pandas
 </Card>

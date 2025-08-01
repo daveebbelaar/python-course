@@ -72,6 +72,7 @@
               "basics/intro-to-programming",
               "basics/python-syntax",
               "basics/python-errors",
+              "basics/formatting",
               "basics/variables",
               "basics/comments"
             ]
@@ -96,7 +97,8 @@
             "group": "Control flow",
             "pages": [
               "control-flow/index",
-              "control-flow/if-statements"
+              "control-flow/if-statements",
+              "basics/loops"
             ]
           },
           {
@@ -124,19 +126,12 @@
             ]
           },
           {
-            "group": "Loops",
-            "pages": [
-              "control-flow/loops",
-              "control-flow/break-continue"
-            ]
-          },
-          {
             "group": "External tools",
             "pages": [
               "libraries-apis/index",
               "libraries-apis/importing-modules",
               "libraries-apis/working-with-apis",
-              "libraries-apis/data-libraries"
+              "libraries-apis/working-with-data"
             ]
           }
         ]

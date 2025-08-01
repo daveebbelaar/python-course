@@ -23,7 +23,7 @@ This is the most important part - pay close attention to step 2!
 2. **Important**: Check ✓ "Add python.exe to PATH" at the bottom 
 
 <Warning>
-  If you miss the "Add to PATH" checkbox, Python won't work from Command Prompt. This is the #1 installation mistake.
+  If you miss the "Add to PATH" checkbox, Python won't work from Terminal. This is the #1 installation mistake.
 </Warning>
 
 3. Click "Install Now" (not "Customize installation" unless you know what you're doing)
@@ -35,10 +35,14 @@ This is the most important part - pay close attention to step 2!
 
 Let's make sure Python installed correctly:
 
-1. Open Command Prompt:
+1. Open Terminal:
    - Press `Windows + R`
-   - Type `cmd` and press `Enter`
-   - Or search "Command Prompt" in Start menu
+   - Type `wt` and press `Enter`
+   - Or search "Terminal" in Start menu
+
+<Note>
+  Windows Terminal is the modern app that can run Command Prompt (cmd), PowerShell, or other shells. It's the recommended way to use Python on Windows.
+</Note>
 
 2. Type this command:
 ```bash
@@ -55,7 +59,7 @@ python --version
 
 Let's run Python for the first time:
 
-1. In Command Prompt, type:
+1. In Terminal, type:
 ```bash
 python
 ```
@@ -111,7 +115,7 @@ Hello from Python!
     5. Replace `[YourName]` with your Windows username
     6. Replace `Python313` with your actual Python version folder
     7. Click OK on all windows
-    8. **Close and reopen** Command Prompt
+    8. **Close and reopen** Terminal
   </Accordion>
   
   <Accordion title="Permission denied" icon="lock">
@@ -122,8 +126,8 @@ Hello from Python!
     
     **When running Python**:
     
-    - Open Command Prompt as administrator
-    - Right-click Command Prompt > Run as administrator
+    - Open Terminal as administrator
+    - Right-click Terminal > Run as administrator
   </Accordion>
   
   <Accordion title="Windows Defender blocking Python" icon="ban">

@@ -10,6 +10,37 @@ Python packages add new functionality to your programs. There are two types:
 - **Built-in**: Come with Python (no installation needed)
 - **External**: Need to install first with pip
 
+## Understanding the terminology
+
+Let's clarify what these terms mean:
+
+- **Module**: A single Python file (like `math.py`)
+- **Package**: A folder containing multiple modules
+- **Function**: A reusable block of code (like `print()` or `sqrt()`)
+- **Class**: A blueprint for creating objects (we'll cover this later)
+
+Think of it like this:
+- A **module** is like a toolbox
+- A **package** is like a garage with multiple toolboxes
+- A **function** is like a specific tool (hammer, screwdriver)
+- A **class** is like a blueprint for building tools
+
+## Import patterns explained
+
+```python
+# Pattern 1: Import the whole module
+import math
+# Now use: math.sqrt(16)
+
+# Pattern 2: Import specific items from a module
+from math import sqrt, pi
+# Now use: sqrt(16)
+```
+
+What's happening:
+- `import math` - brings in the entire math toolbox
+- `from math import sqrt` - takes just the sqrt tool from the math toolbox
+
 ## Built-in modules
 
 Python includes many useful modules:
@@ -83,6 +114,10 @@ pip install requests==2.28.0
 pip install pandas numpy matplotlib
 ```
 
+<Tip>
+  Always ensure your virtual environment is activated before installing! This is the #1 source of import errors. If you get "ModuleNotFoundError" after installing, you probably installed to the wrong environment. [Learn more about virtual environments](/getting-started/virtual-environments).
+</Tip>
+
 ## Using external packages
 
 After installation, import and use:
@@ -97,24 +132,14 @@ data = response.json()
 # Data analysis
 import pandas as pd
 
-df = pd.read_csv("data.csv")
-print(df.head())
-```
-
-## Virtual environments
-
-Keep project dependencies separate:
-
-```bash
-# Create virtual environment
-python -m venv myenv
-
-# Activate it
-# Windows: myenv\Scripts\activate
-# Mac/Linux: source myenv/bin/activate
-
-# Install packages in environment
-pip install requests pandas
+# Create a simple DataFrame
+data = {
+    'name': ['Alice', 'Bob', 'Charlie'],
+    'age': [25, 30, 35],
+    'city': ['NYC', 'LA', 'Chicago']
+}
+df = pd.DataFrame(data)
+print(df)
 ```
 
 <Note>
@@ -128,50 +153,17 @@ Where to find packages:
 - [Awesome Python](https://github.com/vinta/awesome-python) - Curated list
 - Google "Python package for [task]"
 
-## Common packages
-
-Packages you'll use often:
-
-```python
-# Web scraping
-import requests
-from bs4 import BeautifulSoup
-
-# Data science
-import pandas as pd
-import numpy as np
-
-# Environment variables
-from dotenv import load_dotenv
-import os
-
-# AI/ML
-import openai
-```
-
 ## Common mistakes
 
 <AccordionGroup>
   <Accordion title="Import errors">
     ```python
-    # Wrong - package not installed
+    # Wrong - package not installed or venv not activated
     import pandas  # ModuleNotFoundError
     
     # Right - install first
     # Run: pip install pandas
     import pandas
-    ```
-  </Accordion>
-
-  <Accordion title="Circular imports">
-    ```python
-    # file1.py
-    from file2 import function2
-    
-    # file2.py
-    from file1 import function1  # Circular!
-    
-    # Better - restructure code to avoid circles
     ```
   </Accordion>
 

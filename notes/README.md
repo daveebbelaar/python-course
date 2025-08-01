@@ -32,7 +32,7 @@
 
 #### Command Line Essentials
 5. **Basic Command Line Navigation**
-   - Opening terminal/command prompt
+   - Opening terminal
    - Navigating directories (cd, ls/dir)
    - Understanding file paths
 
