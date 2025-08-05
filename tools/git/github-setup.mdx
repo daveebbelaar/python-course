@@ -1,0 +1,188 @@
+---
+title: GitHub setup
+description: Create your account
+icon: "github"
+---
+
+## Create your GitHub account
+
+GitHub is free and takes 5 minutes to set up. You'll need it to:
+- Back up your code
+- Share your projects
+- Download AI tools and examples
+
+## Step 1: Sign up
+
+1. Go to [github.com](https://github.com)
+2. Click "Sign up"
+3. Enter:
+   - **Username**: Pick something professional (employers will see this)
+   - **Email**: Use one you check regularly
+   - **Password**: Make it strong
+
+## Step 2: Verify your account
+
+GitHub will send you an email. Click the link to verify.
+
+## Step 3: Set up your profile
+
+Once logged in:
+1. Click your profile picture (top right) > "Your profile"
+2. Click "Edit profile"
+3. Add:
+   - **Name**: Your real name
+   - **Image**: Add a profile picture
+   - **Bio**: "Learning Python for AI development" (or similar)
+
+## Step 4: Configure Git locally
+
+Tell Git who you are (one-time setup):
+
+```bash
+# Open terminal in VS Code (Terminal > New Terminal)
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
+Use the same email you used for GitHub.
+
+## Step 5: Choose your authentication method
+
+There are three ways to authenticate with GitHub. Choose one:
+
+<Note>
+  **Recommended**: We suggest using HTTPS with a Personal Access Token for beginners. It's the simplest to set up.
+</Note>
+
+<Tabs>
+  <Tab title="HTTPS with Token (Recommended)">
+    ### Personal Access Token
+    
+    Traditional method using tokens:
+    
+    1. Go to GitHub Settings (click profile > Settings)
+    2. Scroll down to "Developer settings" (left sidebar)
+    3. Click "Personal access tokens" > "Tokens (classic)"
+    4. Click "Generate new token" > "Generate new token (classic)"
+    5. Give it a name like "My Laptop" or "VS Code"
+    6. Select scopes: check `repo` (full control of repositories)
+    7. Set expiration (or no expiration for convenience)
+    8. Click "Generate token"
+    9. **Copy the token immediately** (you won't see it again!)
+    
+    <Warning>
+      Save your token somewhere safe! You'll need it when pushing code.
+    </Warning>
+    
+    ### Using your token
+    
+    When you push code for the first time:
+    ```bash
+    git push
+    
+    # GitHub will ask for:
+    Username: your-github-username
+    Password: paste-your-token-here (NOT your GitHub password!)
+    ```
+  </Tab>
+  
+  <Tab title="SSH Keys">
+    ### SSH Keys
+    
+    The most secure method - no passwords needed:
+    
+    1. Generate SSH key:
+    ```bash
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+    # Just press Enter for all prompts (accept defaults)
+    ```
+    
+    2. Add to ssh-agent:
+    
+    <Tabs>
+      <Tab title="macOS/Linux">
+        ```bash
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_ed25519
+        ```
+      </Tab>
+      <Tab title="Windows">
+        ```bash
+        # In Git Bash (not Command Prompt):
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_ed25519
+        ```
+      </Tab>
+    </Tabs>
+    
+    3. Copy your public key:
+    ```bash
+    # macOS
+    pbcopy < ~/.ssh/id_ed25519.pub
+    
+    # Windows (Git Bash)
+    cat ~/.ssh/id_ed25519.pub | clip
+    
+    # Linux
+    cat ~/.ssh/id_ed25519.pub
+    # Then manually copy the output
+    ```
+    
+    4. Add to GitHub:
+       - Go to [GitHub Settings > SSH Keys](https://github.com/settings/keys)
+       - Click "New SSH key"
+       - Give it a title (e.g., "My Laptop")
+       - Paste your key
+       - Click "Add SSH key"
+    
+    5. Test the connection:
+    ```bash
+    ssh -T git@github.com
+    # You should see: "Hi username! You've successfully authenticated..."
+    ```
+    
+    **Important**: When cloning, use SSH URLs:
+    ```bash
+    # SSH URL (what you want)
+    git clone git@github.com:username/repo.git
+    
+    # Not HTTPS URL
+    git clone https://github.com/username/repo.git
+    ```
+  </Tab>
+  
+  <Tab title="GitHub CLI">
+    ### GitHub CLI (gh)
+    
+    Modern approach using GitHub's official tool:
+    
+    1. Install GitHub CLI:
+       - **Windows**: Download from [cli.github.com](https://cli.github.com)
+       - **macOS**: `brew install gh`
+       - **Linux**: See [installation guide](https://github.com/cli/cli#installation)
+    
+    2. Authenticate:
+    ```bash
+    gh auth login
+    ```
+    
+    3. Follow the prompts:
+       - Choose GitHub.com
+       - Choose SSH (recommended) or HTTPS
+       - Authenticate with browser
+    
+    That's it! Git will automatically use your gh credentials.
+  </Tab>
+</Tabs>
+
+## What's next?
+
+Now let's learn how to create your first repository and clone existing projects.
+
+<Card
+  title="Clone and create"
+  icon="code-fork"
+  href="/tools/git/clone-create"
+>
+  Start using GitHub
+</Card>

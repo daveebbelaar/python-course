@@ -133,6 +133,73 @@
               "libraries-apis/working-with-apis",
               "libraries-apis/working-with-data"
             ]
+          },
+          {
+            "group": "Practical Python",
+            "pages": [
+              "practical-python/index",
+              "practical-python/project-structure",
+              "practical-python/python-paths",
+              "practical-python/working-with-files",
+              "practical-python/organizing-code"
+            ]
+          },
+          {
+            "group": "Error handling",
+            "pages": [
+              "advanced/error-handling/index",
+              "advanced/error-handling/try-except",
+              "advanced/error-handling/common-errors"
+            ]
+          },
+          {
+            "group": "Classes",
+            "pages": [
+              "advanced/classes/index",
+              "advanced/classes/first-class",
+              "advanced/classes/methods-attributes",
+              "advanced/classes/inheritance",
+              "advanced/classes/when-to-use"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Tools",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "tools/index"
+            ]
+          },
+          {
+            "group": "Git & GitHub",
+            "pages": [
+              "tools/git/index",
+              "tools/git/version-control",
+              "tools/git/github-setup",
+              "tools/git/clone-create",
+              "tools/git/vscode-git"
+            ]
+          },
+          {
+            "group": "Environment & secrets",
+            "pages": [
+              "tools/environment/index",
+              "tools/environment/variables",
+              "tools/environment/dotenv"
+            ]
+          },
+          {
+            "group": "Modern Python",
+            "pages": [
+              "tools/dependencies/index",
+              "tools/dependencies/requirements",
+              "tools/dependencies/uv-intro",
+              "tools/dependencies/virtual-env",
+              "tools/dependencies/complete-setup"
+            ]
           }
         ]
       },
@@ -140,12 +207,13 @@
         "tab": "Build",
         "groups": [
           {
-            "group": "AI projects",
+            "group": "AI text analyzer",
             "pages": [
-              "projects/index",
-              "projects/web-scraper",
-              "projects/pdf-processor",
-              "projects/ai-chatbot"
+              "projects/text-analyzer/index",
+              "projects/text-analyzer/setup",
+              "projects/text-analyzer/features",
+              "projects/text-analyzer/cli",
+              "projects/text-analyzer/share"
             ]
           }
         ]

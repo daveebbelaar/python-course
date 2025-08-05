@@ -1,0 +1,208 @@
+---
+title: Environment variables
+description: Understanding environment config
+icon: "gear"
+---
+
+## What are environment variables?
+
+Environment variables are settings stored outside your code. They're perfect for:
+- API keys and passwords
+- Database URLs
+- Configuration that changes between development and production
+
+## The problem they solve
+
+```python
+# BAD: Never hardcode sensitive data!
+import sqlite3
+
+db_path = "/Users/john/mydata.db"  # Exposed in your code!
+conn = sqlite3.connect(db_path)
+```
+
+This is bad because:
+- Anyone can see your paths/passwords
+- Others can't run your code without changing it
+- You might accidentally commit secrets to Git
+
+## Quick example with SQLite
+
+Let's fix this using environment variables:
+
+```python
+import sqlite3
+import os
+
+# Read database path from environment (or use default)
+db_path = os.environ.get('DB_PATH', 'local.db')
+
+# Connect to database
+conn = sqlite3.connect(db_path)
+print(f"Connected to: {db_path}")
+
+# Do some work...
+conn.close()
+```
+
+## The export command (terminal)
+
+You can set environment variables in your terminal:
+
+```bash
+# Mac/Linux
+export DB_PATH=/path/to/database.db
+python your_script.py
+
+# Windows (Command Prompt)
+set DB_PATH=C:\path\to\database.db
+python your_script.py
+```
+
+But this is temporary - they disappear when you close the terminal.
+
+## Better way: .env files
+
+Instead of typing export commands, use a `.env` file:
+
+### Step 1: Install python-dotenv
+
+```bash
+pip install python-dotenv
+```
+
+### Step 2: Create .env file
+
+Create a file named `.env` in your project:
+
+```
+# .env
+DB_PATH=production.db
+API_KEY=sk-1234567890abcdef
+DEBUG=True
+```
+
+### Step 3: Load in Python
+
+```python
+from dotenv import load_dotenv
+import os
+
+# Load variables from .env file
+load_dotenv()
+
+# Now use them
+db_path = os.environ.get('DB_PATH')
+api_key = os.environ.get('API_KEY')
+debug = os.environ.get('DEBUG', 'False').lower() == 'true'
+
+print(f"Database: {db_path}")
+print(f"Debug mode: {debug}")
+```
+
+<Warning>
+  **Never commit .env files to Git!** Add `.env` to your `.gitignore` file immediately:
+  
+  ```
+  # .gitignore
+  .env
+  .venv/
+  __pycache__/
+  ```
+</Warning>
+
+## Complete example
+
+Here's a real-world example connecting to different databases:
+
+```python
+# database.py
+from dotenv import load_dotenv
+import sqlite3
+import os
+
+# Load environment variables
+load_dotenv()
+
+def get_connection():
+    """Get database connection using environment variables"""
+    db_path = os.environ.get('DB_PATH', 'development.db')
+    return sqlite3.connect(db_path)
+
+def init_database():
+    """Create tables if they don't exist"""
+    conn = get_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL
+        )
+    ''')
+    
+    conn.commit()
+    conn.close()
+    print(f"Database initialized: {os.environ.get('DB_PATH', 'development.db')}")
+
+# Run the script
+if __name__ == "__main__":
+    init_database()
+```
+
+Your `.env` file:
+```
+# Development settings
+DB_PATH=dev.db
+
+# For production, change to:
+# DB_PATH=/var/data/production.db
+```
+
+## Best practices
+
+1. **Create .env.example**: Show others what variables they need
+   ```
+   # .env.example (commit this)
+   DB_PATH=your_database.db
+   API_KEY=your_api_key_here
+   ```
+
+2. **Always use defaults**: Your code should work without .env
+   ```python
+   db = os.environ.get('DB_PATH', 'local.db')  # Falls back to local.db
+   ```
+
+3. **Load early**: Put `load_dotenv()` at the top of your main file
+
+4. **Never commit secrets**: Always add `.env` to `.gitignore`
+
+## Reading environment variables
+
+```python
+import os
+
+# Method 1: Direct access (crashes if not found)
+api_key = os.environ['API_KEY']  # KeyError if missing!
+
+# Method 2: Safe access with default
+api_key = os.environ.get('API_KEY', 'default-key')
+
+# Method 3: Check if exists
+if 'API_KEY' in os.environ:
+    api_key = os.environ['API_KEY']
+else:
+    print("Warning: No API key found")
+```
+
+## What's next?
+
+Now let's dive deeper into .env files and see more examples.
+
+<Card
+  title="Using .env files"
+  icon="file-shield"
+  href="/tools/environment/dotenv"
+>
+  Best practices for .env files
+</Card>

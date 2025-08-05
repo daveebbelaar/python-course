@@ -1,0 +1,194 @@
+---
+title: Your first class
+description: Create a simple class
+icon: "hammer"
+---
+
+## How classes work
+
+Working with classes follows a simple pattern:
+
+1. **Define the class** - Create a blueprint with the `class` keyword
+2. **Add an `__init__` method** - Set up initial data when objects are created
+3. **Create instances** - Make actual objects from your class
+4. **Access the data** - Use the attributes you defined
+
+Let's go through each step to build your first class.
+
+## Basic class structure
+
+Every class starts with the `class` keyword:
+
+```python
+class Dog:  # Note: class names use PascalCase
+    pass  # Empty class
+```
+
+## Adding an initializer
+
+The `__init__` method runs when you create a new object:
+
+```python
+class Dog:
+    def __init__(self, name, breed):
+        self.name = name
+        self.breed = breed
+
+# Create dog objects - using positional arguments
+dog1 = Dog("Buddy", "Golden Retriever")
+dog2 = Dog("Max", "Beagle")
+
+# Or with named arguments (clearer)
+dog3 = Dog(name="Charlie", breed="Poodle")
+
+print(dog1.name)   # Buddy
+print(dog2.breed)  # Beagle
+```
+
+<Note>
+  Yes, `__init__` looks weird with those double underscores! This is called a "dunder" method (double underscore). It's just how Python works - you'll need to type it exactly like this. Don't worry, after writing it a few times it becomes second nature. Think of it as Python's special way of saying "this is the setup method".
+</Note>
+
+## Understanding self
+
+`self` refers to the current object. It's how an object keeps track of its own data:
+
+<Note>
+  When defining methods in a class, you always include `self` as the first parameter. But when calling the method, you don't pass it - Python does that automatically!
+</Note>
+
+```python
+class Dog:
+    def __init__(self, name):
+        self.name = name  # self.name belongs to this specific dog
+
+# Using positional argument
+dog1 = Dog("Buddy")
+
+# Using named argument (same result)
+dog2 = Dog(name="Max")
+
+# Each dog has its own name
+print(dog1.name)  # Buddy
+print(dog2.name)  # Max
+```
+
+## Real-world example: configuration
+
+Here's a practical class for AI engineering:
+
+```python
+class APIConfig:
+    def __init__(self, api_key, model="gpt-3.5-turbo", max_tokens=100):
+        self.api_key = api_key
+        self.model = model
+        self.max_tokens = max_tokens
+        self.base_url = "https://api.openai.com/v1"
+
+# Create different configurations
+# Using positional for required arg, named for optional
+dev_config = APIConfig("sk-dev-key", max_tokens=50)
+
+# Using all named arguments (clearest)
+prod_config = APIConfig(api_key="sk-prod-key", model="gpt-4", max_tokens=1000)
+
+# Access the configuration
+print(dev_config.model)        # gpt-3.5-turbo
+print(prod_config.model)       # gpt-4
+print(prod_config.max_tokens)  # 1000
+```
+
+## Class vs instance
+
+- **Class**: The blueprint (like a recipe)
+- **Instance/Object**: What you create from the class (like a cake from the recipe)
+
+```python
+# APIConfig is the class
+# config1 and config2 are instances
+config1 = APIConfig(api_key="key1", max_tokens=50)
+config2 = APIConfig(api_key="key2", max_tokens=200)
+
+# Each instance has its own data
+print(config1.max_tokens)  # 50
+print(config2.max_tokens)  # 200
+
+# Changing one doesn't affect the other
+config1.max_tokens = 75
+print(config1.max_tokens)  # 75
+print(config2.max_tokens)  # 200 (unchanged)
+```
+
+<Tip>
+  Always use clear, descriptive names for your classes. In Python, class names use PascalCase (like `TextProcessor` or `DataLoader`), while variable names use snake_case (like `text_processor` or `data_loader`).
+</Tip>
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Forgetting self in __init__">
+    ```python
+    # Wrong - forgot self parameter
+    class Dog:
+        def __init__(name):  # Missing self!
+            name = name
+    
+    # Right - include self
+    class Dog:
+        def __init__(self, name):
+            self.name = name
+    ```
+  </Accordion>
+
+  <Accordion title="Not using self for attributes">
+    ```python
+    # Wrong - creates local variable
+    class Dog:
+        def __init__(self, name):
+            name = name  # Just a local variable!
+    
+    # Right - use self
+    class Dog:
+        def __init__(self, name):
+            self.name = name  # Instance attribute
+    ```
+  </Accordion>
+
+  <Accordion title="Forgetting parentheses when creating instance">
+    ```python
+    # Wrong - assigns the class itself
+    my_config = APIConfig  # Not an instance!
+    
+    # Right - call with parentheses
+    my_config = APIConfig(api_key="api-key")  # Creates instance
+    ```
+  </Accordion>
+
+  <Accordion title="Modifying class instead of instance">
+    ```python
+    # Wrong - modifies the class
+    class Counter:
+        count = 0
+    
+    c1 = Counter()
+    c1.count += 1  # This affects the class!
+    
+    # Right - instance attribute
+    class Counter:
+        def __init__(self):
+            self.count = 0  # Each instance gets its own
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Now that you understand how to create classes and store data in them, let's learn how to add behavior with methods.
+
+<Card
+  title="Methods and attributes"
+  icon="wrench"
+  href="/advanced/classes/methods-attributes"
+>
+  Add behavior to your classes
+</Card>

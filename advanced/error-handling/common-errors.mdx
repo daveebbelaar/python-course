@@ -1,0 +1,236 @@
+---
+title: Common errors
+description: Understand Python's error types
+icon: "bug"
+---
+
+## Errors you'll encounter
+
+Here are the most common Python errors and how to fix them. Understanding these will save you hours of debugging.
+
+## FileNotFoundError
+
+Happens when a file doesn't exist:
+
+```python
+# This fails if file doesn't exist
+with open('missing.txt', 'r') as f:
+    content = f.read()
+```
+
+**Fix:**
+```python
+import os
+
+# Check first
+if os.path.exists('data.txt'):
+    with open('data.txt', 'r') as f:
+        content = f.read()
+else:
+    print("File not found")
+
+# Or use try-except
+try:
+    with open('data.txt', 'r') as f:
+        content = f.read()
+except FileNotFoundError:
+    content = ""  # Default value
+```
+
+## ValueError
+
+Happens when a value is wrong type or format:
+
+```python
+# These cause ValueError
+int("hello")        # Can't convert to number
+int("12.5")         # int() doesn't accept decimals
+list.remove("x")    # Item not in list
+```
+
+**Fix:**
+```python
+# Validate user input
+try:
+    age = int(input("Age: "))
+except ValueError:
+    print("Please enter a number")
+
+# Convert carefully
+float_str = "12.5"
+number = int(float(float_str))  # Convert to float first
+```
+
+## KeyError
+
+Happens when a dictionary key doesn't exist:
+
+```python
+user = {"name": "Alice", "age": 25}
+print(user["email"])  # KeyError - no email key
+```
+
+**Fix:**
+```python
+# Check if key exists
+if "email" in user:
+    print(user["email"])
+
+# Use get() with default
+email = user.get("email", "no-email@example.com")
+
+# Or handle the error
+try:
+    print(user["email"])
+except KeyError:
+    print("Email not found")
+```
+
+## IndexError
+
+Happens when accessing invalid list position:
+
+```python
+numbers = [1, 2, 3]
+print(numbers[5])  # IndexError - only 3 items
+```
+
+**Fix:**
+```python
+# Check length first
+if len(numbers) > 5:
+    print(numbers[5])
+
+# Use negative indexing carefully
+last_item = numbers[-1] if numbers else None
+
+# Handle the error
+try:
+    print(numbers[5])
+except IndexError:
+    print("List too short")
+```
+
+## TypeError
+
+Happens when operations use wrong types:
+
+```python
+# These cause TypeError
+"hello" + 5            # Can't add string and number
+len(42)                # Numbers don't have length
+int([1, 2, 3])         # Can't convert list to int
+```
+
+**Fix:**
+```python
+# Convert types explicitly
+"hello" + str(5)       # "hello5"
+str(42)                # "42"
+
+# Check type first
+if isinstance(value, str):
+    print(len(value))
+```
+
+## AttributeError
+
+Happens when accessing non-existent attributes:
+
+```python
+text = "hello"
+text.append("!")  # AttributeError - strings don't have append
+```
+
+**Fix:**
+```python
+# Use correct methods
+text = "hello"
+text = text + "!"  # Strings are immutable
+
+# Check if attribute exists
+if hasattr(obj, 'append'):
+    obj.append(item)
+```
+
+<Note>
+  Error messages are your friends! They tell you:
+  - What went wrong (error type)
+  - Where it happened (file and line number)
+  - Why it happened (error message)
+  
+  Always read the full error message before trying to fix it.
+</Note>
+
+## Reading error messages
+
+Python error messages show a "traceback":
+
+```
+Traceback (most recent call last):
+  File "script.py", line 5, in <module>
+    result = 10 / 0
+ZeroDivisionError: division by zero
+```
+
+Read from bottom to top:
+1. **Error type**: `ZeroDivisionError`
+2. **Error message**: `division by zero`
+3. **Location**: `script.py`, line 5
+4. **Code that failed**: `result = 10 / 0`
+
+## Common mistake patterns
+
+<AccordionGroup>
+  <Accordion title="Off-by-one errors">
+    ```python
+    # Wrong - lists start at 0
+    items = ["a", "b", "c"]
+    third_item = items[3]  # IndexError
+    
+    # Right
+    third_item = items[2]  # "c"
+    ```
+  </Accordion>
+
+  <Accordion title="Modifying while iterating">
+    ```python
+    # Wrong - changes list size during iteration
+    numbers = [1, 2, 3, 4, 5]
+    for num in numbers:
+        if num % 2 == 0:
+            numbers.remove(num)  # Dangerous!
+    
+    # Right - create new list
+    odd_numbers = [n for n in numbers if n % 2 != 0]
+    ```
+  </Accordion>
+
+  <Accordion title="Mutable default arguments">
+    ```python
+    # Wrong - same list for all calls!
+    def add_item(item, items=[]):
+        items.append(item)
+        return items
+    
+    # Right - create new list each time
+    def add_item(item, items=None):
+        if items is None:
+            items = []
+        items.append(item)
+        return items
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Now that you understand error handling, let's learn about classes - Python's way of organizing code and data together.
+
+<Card
+  title="Classes"
+  icon="shapes"
+  href="/advanced/classes/index"
+>
+  Object-oriented programming
+</Card>

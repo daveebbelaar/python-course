@@ -1,0 +1,142 @@
+---
+title: Working with files
+description: Read, process, and write data files
+icon: "database"
+---
+
+## Files in AI projects
+
+When working with Python for AI, you'll constantly work with data files. Your data might come as:
+- **CSV files** - Spreadsheet data from Excel or databases
+- **JSON files** - API responses and configuration data
+- **XML files** - Structured data from various systems
+- **Text files** - Raw text for processing
+- **Parquet files** - Efficient data storage format
+
+The good news? Python has excellent libraries for all of these.
+
+## Common libraries for files
+
+Each file type has specialized libraries:
+
+**CSV files:**
+- `pandas` - Best for data analysis (recommended)
+- `csv` module - Built-in, for simple operations
+
+**JSON files:**
+- `json` module - Built-in, handles all JSON operations
+- `pandas` - Can read/write JSON with DataFrames
+
+**Other formats:**
+- `xml.etree` - Built-in XML parsing
+- `openpyxl` - Excel files (.xlsx)
+- `PyPDF2` - PDF files
+
+## Working with our sales data
+
+Let's work with our CSV file and convert it to different formats. First, install pandas:
+
+```bash
+pip install pandas
+```
+
+<Note>
+  If you get an error, try `pip3 install pandas` or install it through VS Code's terminal.
+</Note>
+
+Update your `analyzer.py`:
+
+```python
+import pandas as pd
+import json
+import os
+
+# Read the CSV file
+df = pd.read_csv('data/sales.csv')
+print("CSV Data:")
+print(df)
+print(f"\nShape: {df.shape[0]} rows, {df.shape[1]} columns")
+
+# Quick operation: calculate total for each row
+df['total'] = df['quantity'] * df['price']
+print("\nWith totals:")
+print(df)
+
+# Create output directory
+os.makedirs('output', exist_ok=True)
+
+# Save as different formats
+# 1. JSON format (good for web APIs)
+df.to_json('output/sales_data.json', orient='records', indent=2)
+
+# 2. Excel format (good for sharing)
+df.to_excel('output/sales_data.xlsx', index=False)
+
+# 3. Updated CSV (with our new total column)
+df.to_csv('output/sales_with_totals.csv', index=False)
+
+print("\nFiles saved:")
+print("- output/sales_data.json")
+print("- output/sales_data.xlsx") 
+print("- output/sales_with_totals.csv")
+```
+
+## File format comparison
+
+Different formats have different uses:
+
+```python
+# JSON - Great for APIs and web applications
+{
+  "date": "2024-01-01",
+  "product": "Laptop",
+  "quantity": 2,
+  "price": 999.99
+}
+
+# CSV - Simple, universal, good for data analysis
+date,product,quantity,price
+2024-01-01,Laptop,2,999.99
+
+# Excel - Feature-rich, good for business users
+# (Binary format with formatting, formulas, etc.)
+```
+
+## Loading different file types
+
+Here's how to load various formats:
+
+```python
+# CSV
+df = pd.read_csv('data/file.csv')
+
+# JSON
+df = pd.read_json('data/file.json')
+# or for simple JSON:
+with open('data/config.json', 'r') as f:
+    data = json.load(f)
+
+# Excel
+df = pd.read_excel('data/file.xlsx')
+
+# Text files
+with open('data/file.txt', 'r') as f:
+    text = f.read()
+```
+
+## Learn more
+
+To dive deeper into file handling:
+
+- [Pandas documentation](https://pandas.pydata.org/docs/) - Comprehensive data handling
+- [Python JSON module](https://docs.python.org/3/library/json.html) - Official JSON docs
+- [Real Python file I/O](https://realpython.com/working-with-files-in-python/) - Detailed tutorial
+- [CSV module docs](https://docs.python.org/3/library/csv.html) - Built-in CSV handling
+
+<Card
+  title="Organizing code"
+  icon="arrow-right"
+  href="/practical-python/organizing-code"
+>
+  Split your code into reusable functions
+</Card>

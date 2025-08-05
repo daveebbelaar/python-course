@@ -1,0 +1,86 @@
+---
+title: Error handling
+description: Handle errors gracefully
+icon: "triangle-exclamation"
+---
+
+## What is error handling?
+
+Errors happen. Files might not exist, APIs might be down, users might enter invalid data. Error handling lets your program deal with these problems gracefully instead of crashing.
+
+## Where do errors come from?
+
+**Errors you make** as a programmer:
+- Typos and syntax mistakes (VS Code shows yellow squiggly lines)
+- Logic errors like dividing by zero (only show up when code runs)
+- Using variables before defining them
+- Calling methods that don't exist
+
+**Errors beyond your control**:
+- User enters "abc" when you need a number
+- File gets deleted after your program starts
+- Internet connection drops during API call
+- External service returns unexpected data
+
+You might think "why not just write correct code?" But even perfect code needs error handling because the world is unpredictable. Users do unexpected things, networks fail, and files disappear.
+
+## Types of errors
+
+**Syntax errors** happen when Python can't understand your code:
+```python
+# Missing colon
+if x > 5  # SyntaxError
+    print("Big number")
+```
+
+**Runtime errors** happen when your code runs:
+```python
+# Division by zero
+result = 10 / 0  # ZeroDivisionError
+
+# Variable doesn't exist
+print(score)  # NameError
+
+# Wrong type
+"hello" + 5  # TypeError
+```
+
+## Why handle errors?
+
+Here's a program that crashes:
+```python
+# This will crash if the file doesn't exist
+with open('data.txt', 'r') as f:
+    content = f.read()
+print("Done!")  # Never reaches here if file missing
+```
+
+Here's a program that handles the error:
+```python
+# This keeps running even if file doesn't exist
+try:
+    with open('data.txt', 'r') as f:
+        content = f.read()
+except FileNotFoundError:
+    print("Could not find data.txt")
+    content = "default data"
+print("Done!")  # Always reaches here
+```
+
+<CardGroup cols={2}>
+  <Card
+    title="Try and except"
+    icon="shield"
+    href="/advanced/error-handling/try-except"
+  >
+    Basic error handling syntax
+  </Card>
+  
+  <Card
+    title="Common errors"
+    icon="bug"
+    href="/advanced/error-handling/common-errors"
+  >
+    Errors you'll encounter often
+  </Card>
+</CardGroup>

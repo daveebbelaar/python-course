@@ -1,0 +1,98 @@
+---
+title: Organizing code
+description: Split code into reusable functions
+icon: "puzzle-piece"
+---
+
+## Why organize your code?
+
+As your scripts grow, they become harder to read and maintain. The solution? Split your code into functions and separate files.
+
+Benefits:
+- **Reusable** - Write once, use many times
+- **Readable** - Main script stays simple and clear
+- **Testable** - Easy to test individual functions
+
+## Creating helper functions
+
+Let's create simple helper functions for our sales analysis. In your `sales-analysis` folder, create a new file called `helpers.py`:
+
+```python
+# helpers.py
+
+def calculate_total(quantity, price):
+    """Calculate total for a single item"""
+    return quantity * price
+
+def format_currency(amount):
+    """Format number as currency"""
+    return f"${amount:,.2f}"
+```
+
+<Tip>
+  The `:.2f` in the format string rounds floating point numbers to 2 decimal places - perfect for displaying money!
+</Tip>
+
+That's it! Two simple functions that do one thing each.
+
+## Using your functions
+
+Now update `analyzer.py` to use these helpers:
+
+```python
+# analyzer.py
+import pandas as pd
+from helpers import calculate_total, format_currency
+
+# Read data
+df = pd.read_csv('data/sales.csv')
+
+# Calculate total for each row
+totals = []
+for index, row in df.iterrows():
+    total = calculate_total(row['quantity'], row['price'])
+    totals.append(total)
+
+# Add totals to our data
+df['total'] = totals
+
+# Display with formatted totals
+print("Sales Data:")
+for index, row in df.iterrows():
+    formatted_total = format_currency(row['total'])
+    print(f"{row['product']}: {formatted_total}")
+
+# Show grand total
+grand_total = df['total'].sum()
+formatted_grand_total = format_currency(grand_total)
+print(f"\nGrand Total: {formatted_grand_total}")
+```
+
+## How imports work
+
+When you write `from helpers import calculate_total`:
+1. Python looks for `helpers.py` in the same folder
+2. It runs that file and makes the functions available
+3. You can now use `calculate_total()` directly
+
+<Note>
+  The file must be in the same folder for this simple import to work. We covered more complex imports in the Python paths section.
+</Note>
+
+## What you've accomplished
+
+Look at what you've built! You started with a single Python file and now have:
+- An organized project structure
+- Understanding of how Python finds files
+- Code that reads real data and saves results
+- Reusable functions in separate files
+
+This is how real Python projects work. You're ready to build bigger things!
+
+<Card
+  title="Build AI projects"
+  icon="rocket"
+  href="/projects"
+>
+  Apply your skills to real AI projects
+</Card>

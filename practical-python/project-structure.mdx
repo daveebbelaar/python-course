@@ -1,0 +1,125 @@
+---
+title: Project structure
+description: Organize your Python projects
+icon: "folder-tree"
+---
+
+## Working with multiple files
+
+So far, you've been writing single Python files. But real projects have multiple files, folders, and resources. Good organization makes your code easier to understand and maintain.
+
+Let's organize your existing `python-for-ai` workspace with a proper structure.
+
+## Organize your workspace
+
+You already have a `python-for-ai` workspace from the beginning of the course. Let's create a folder for this project:
+
+1. Open your `python-for-ai` workspace in VS Code
+2. Create a `sales-analysis` folder
+3. Inside `sales-analysis`, create these subfolders:
+
+```
+python-for-ai/
+├── hello.py              # Your existing practice file
+└── sales-analysis/       # New project folder
+    ├── data/             # CSV files and data
+    └── output/           # Generated files
+```
+
+<Tip>
+  Create folders in VS Code by right-clicking in the Explorer panel and selecting "New Folder", or click the new folder icon at the top of the Explorer.
+</Tip>
+
+## Create the data file
+
+Inside your `sales-analysis/data` folder, create a file called `sales.csv`:
+
+```csv
+date,product,quantity,price
+2024-01-01,Laptop,2,999.99
+2024-01-01,Mouse,5,29.99
+2024-01-02,Keyboard,3,79.99
+2024-01-02,Monitor,1,299.99
+2024-01-03,Laptop,1,999.99
+2024-01-03,Mouse,10,29.99
+2024-01-04,Keyboard,2,79.99
+2024-01-05,Monitor,2,299.99
+```
+
+<Note>
+  Copy and paste this data into a new file called `sales.csv` in your `data` folder. Make sure the file extension is `.csv`, not `.txt`.
+</Note>
+
+## Understanding file paths
+
+When your code needs to find files, you need to understand paths:
+
+```python
+# When your script runs from sales-analysis folder
+"data/sales.csv"           # Look in the data subfolder
+"output/report.json"       # Save to the output subfolder
+
+# Your project structure
+# python-for-ai/
+#   └── sales-analysis/
+#       ├── analyzer.py      <- Your script is here
+#       ├── data/sales.csv   <- Your data is here
+#       └── output/          <- Results go here
+```
+
+## Create your first script
+
+In the `sales-analysis` folder (not in a subfolder), create `analyzer.py`:
+
+```python
+import os
+
+# Check if we're in the right place
+print("Current directory:", os.getcwd())
+
+# Check if our data file exists
+data_path = "data/sales.csv"
+if os.path.exists(data_path):
+    print(f"✅ Found {data_path}")
+else:
+    print(f"❌ Cannot find {data_path}")
+    print("Make sure you're running from the sales-analysis folder!")
+```
+
+## Running your code
+
+In VS Code, you have two simple ways to run Python code:
+
+### Option 1: The play button
+1. Open `analyzer.py` in VS Code
+2. Click the ▶️ (play) button in the top right
+3. The code runs and shows output in the terminal below
+
+### Option 2: Interactive mode (recommended)
+1. Open `analyzer.py` in VS Code
+2. Select the code you want to run (or place cursor on a line)
+3. Press **Shift+Enter**
+4. Code runs in the interactive window with instant feedback
+
+<Tip>
+  Interactive mode (Shift+Enter) is great for testing code step by step. You can run one line at a time and see results immediately!
+</Tip>
+
+<Note>
+  By keeping `analyzer.py` in the same folder as `data` and `output`, the file paths stay simple and work with both the play button and interactive mode.
+</Note>
+
+## Best practices
+
+1. **Keep data separate** - Don't mix code and data files
+2. **Use clear names** - `data` for input files, `output` for results
+3. **Simple structure** - Keep your main script at the project level
+4. **Test as you go** - Use Shift+Enter to run code step by step
+
+<Card
+  title="Python paths"
+  icon="arrow-right"
+  href="/practical-python/python-paths"
+>
+  Understand how Python finds files
+</Card>

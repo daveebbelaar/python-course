@@ -1,0 +1,151 @@
+---
+title: Try and except
+description: Catch errors before they crash
+icon: "shield-check"
+---
+
+## Basic try-except structure
+
+The `try` block contains code that might fail. The `except` block runs if an error happens:
+
+```python
+try:
+    # Code that might cause an error
+    risky_operation()
+except:
+    # Code that runs if there's an error
+    print("Something went wrong")
+```
+
+## Catching specific errors
+
+Different errors need different handling. Catch specific error types:
+
+```python
+try:
+    age = int(input("Enter your age: "))
+    print(f"In 10 years, you'll be {age + 10}")
+except ValueError:
+    print("Please enter a number")
+```
+
+## Multiple error types
+
+Handle different errors differently:
+
+```python
+try:
+    # Read a number from a file
+    with open('number.txt', 'r') as f:
+        text = f.read()
+    number = int(text)
+    result = 100 / number
+    print(f"Result: {result}")
+except FileNotFoundError:
+    print("Could not find number.txt")
+except ValueError:
+    print("File doesn't contain a valid number")
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+```
+
+## The else clause
+
+Code in `else` runs only if no error happened:
+
+```python
+try:
+    with open('data.txt', 'r') as f:
+        data = f.read()
+except FileNotFoundError:
+    print("File not found")
+else:
+    # This only runs if the file was opened successfully
+    print(f"File has {len(data)} characters")
+```
+
+## The finally clause
+
+Code in `finally` always runs, error or not:
+
+```python
+try:
+    file = open('data.txt', 'r')
+    data = file.read()
+except FileNotFoundError:
+    print("File not found")
+finally:
+    # This always runs to clean up
+    if 'file' in locals() and not file.closed:
+        file.close()
+    print("Cleanup complete")
+```
+
+<Tip>
+  Don't catch all errors with a bare `except:`. It hides problems and makes debugging harder. Always catch specific error types when possible.
+</Tip>
+
+## Common mistakes
+
+<AccordionGroup>
+  <Accordion title="Catching too broad exceptions">
+    ```python
+    # Bad - catches everything
+    try:
+        process_data()
+    except:
+        pass  # Silent failure!
+    
+    # Good - specific error
+    try:
+        process_data()
+    except ValueError:
+        print("Invalid data format")
+    ```
+  </Accordion>
+
+  <Accordion title="Empty except blocks">
+    ```python
+    # Bad - ignores the error
+    try:
+        risky_operation()
+    except ValueError:
+        pass
+    
+    # Good - at least log it
+    try:
+        risky_operation()
+    except ValueError:
+        print("Warning: Invalid value encountered")
+    ```
+  </Accordion>
+
+  <Accordion title="Not re-raising critical errors">
+    ```python
+    # Bad - hides all errors
+    try:
+        critical_operation()
+    except Exception as e:
+        print(f"Error: {e}")
+    
+    # Good - log and re-raise
+    try:
+        critical_operation()
+    except Exception as e:
+        print(f"Critical error: {e}")
+        raise  # Let the error propagate
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## What's next?
+
+Now let's look at the most common errors you'll encounter in Python.
+
+<Card
+  title="Common errors"
+  icon="bug"
+  href="/advanced/error-handling/common-errors"
+>
+  Errors you'll see often
+</Card>
