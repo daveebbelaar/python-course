@@ -203,29 +203,12 @@
         ]
       },
       {
-        "tab": "Build",
+        "tab": "Resources",
         "groups": [
           {
-            "group": "AI text analyzer",
+            "group": "Next steps",
             "pages": [
-              "projects/text-analyzer/index",
-              "projects/text-analyzer/setup",
-              "projects/text-analyzer/features",
-              "projects/text-analyzer/cli",
-              "projects/text-analyzer/share"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Next",
-        "groups": [
-          {
-            "group": "Keep learning",
-            "pages": [
-              "resources/next-steps",
-              "resources/essential-tools",
-              "resources/community"
+              "resources/index"
             ]
           }
         ]

@@ -17,12 +17,16 @@ cd ai-assistant
 This creates:
 ```
 ai-assistant/
-├── .venv/          # Virtual environment (automatic!)
 ├── .gitignore      # Git ignore file
+├── .python-version # Python version for the project
 ├── pyproject.toml  # Project configuration
 ├── README.md       # Project readme
-└── hello.py        # Example script
+└── main.py         # Example script
 ```
+
+<Note>
+  The `.venv` folder and `uv.lock` file are created automatically when you first run `uv add` to install packages.
+</Note>
 
 ## Understanding pyproject.toml
 
@@ -111,7 +115,7 @@ Three ways to run Python with uv:
 
 ```bash
 # Method 1: uv run (recommended)
-uv run python hello.py
+uv run python main.py
 
 # Method 2: Activate venv (traditional)
 source .venv/bin/activate  # Mac/Linux
@@ -119,7 +123,7 @@ source .venv/bin/activate  # Mac/Linux
 .venv\Scripts\activate     # Windows
 
 # Method 3: Direct path
-.venv/bin/python hello.py
+.venv/bin/python main.py
 ```
 
 <Tip>
@@ -165,11 +169,12 @@ uv pip install -r requirements.txt
 
 ## Virtual environment details
 
-uv creates `.venv` automatically:
+uv creates `.venv` automatically when you add packages:
+- Created on first `uv add` command
 - No activation needed with `uv run`
 - Always in project directory
 - Works with VS Code automatically
-- Add `.venv/` to `.gitignore`
+- Already in `.gitignore` (uv adds it)
 
 ## Tips and tricks
 

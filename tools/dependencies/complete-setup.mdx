@@ -36,23 +36,25 @@ uv init my-awesome-project
 
 **What happens:**
 - Creates a new folder `my-awesome-project`
-- Sets up virtual environment (`.venv`)
 - Creates `.gitignore` (Git will ignore `.venv`, `.env`, etc.)
+- Creates `.python-version` (specifies Python version)
 - Creates `pyproject.toml` (project configuration)
 - Creates `README.md` (project description)
-- Creates `hello.py` (example file)
+- Creates `main.py` (example file)
 
-**Project structure:**
+**Initial structure:**
 ```
 my-awesome-project/
-├── .venv/          # Virtual environment
 ├── .gitignore      # Git ignore rules
+├── .python-version # Python version
 ├── pyproject.toml  # Project config
-├── uv.lock         # Locked dependencies
 ├── README.md       # Project description
-├── .env            # Secret variables (you create this)
-└── hello.py        # Example file
+└── main.py         # Example file
 ```
+
+<Note>
+  The `.venv` folder is created automatically when you run `uv add` to install your first package. Same with `uv.lock`.
+</Note>
 
 ## Step 4: Open in VS Code
 
@@ -94,7 +96,7 @@ uv add ipykernel
 
 ## Step 6: Test your setup
 
-Edit `hello.py`:
+Edit `main.py`:
 
 ```python
 import requests
@@ -118,7 +120,7 @@ print(f"✅ GitHub API status: {response.status_code}")
 
 Run it:
 ```bash
-uv run python hello.py
+uv run python main.py
 ```
 
 ## Step 7: Set up environment variables
@@ -315,12 +317,12 @@ git push                   # Push to GitHub
 
 ## What's next?
 
-You now have a complete Python development workflow. Time to build something amazing!
+You now have a complete Python development workflow. Time to choose your learning path!
 
 <Card
-  title="Build your first project"
-  icon="hammer"
-  href="/projects/text-analyzer/index"
+  title="Continue learning"
+  icon="compass"
+  href="/resources/index"
 >
-  Apply everything you've learned
+  Choose your next adventure
 </Card>
