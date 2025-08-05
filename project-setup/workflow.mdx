@@ -1,0 +1,326 @@
+---
+title: Complete workflow
+description: Start to finish setup
+icon: "circle-check"
+---
+
+## New project checklist
+
+Follow these steps every time you start a new Python project.
+
+## Step 1: Open terminal
+
+Open your terminal:
+- **Mac**: Terminal app or iTerm
+- **Windows**: Command Prompt or PowerShell
+
+## Step 2: Navigate to your projects folder
+
+```bash
+# Go to your projects directory
+cd ~/Documents/Projects  # Mac
+cd C:\Users\YourName\Documents\Projects  # Windows
+```
+
+<Tip>
+  Create a dedicated folder for all your Python projects. This keeps things organized!
+</Tip>
+
+## Step 3: Create the project
+
+Use uv to create your project:
+
+```bash
+uv init my-awesome-project
+```
+
+**What happens:**
+- Creates a new folder `my-awesome-project`
+- Sets up virtual environment (`.venv`)
+- Creates `.gitignore` (Git will ignore `.venv`, `.env`, etc.)
+- Creates `pyproject.toml` (project configuration)
+- Creates `README.md` (project description)
+- Creates `hello.py` (example file)
+
+**Project structure:**
+```
+my-awesome-project/
+├── .venv/          # Virtual environment
+├── .gitignore      # Git ignore rules
+├── pyproject.toml  # Project config
+├── uv.lock         # Locked dependencies
+├── README.md       # Project description
+├── .env            # Secret variables (you create this)
+└── hello.py        # Example file
+```
+
+## Step 4: Open in VS Code
+
+```bash
+# Enter the project folder
+cd my-awesome-project
+
+# Open in VS Code
+code .
+```
+
+**What happens:**
+- VS Code opens with your project
+- Python extension activates automatically
+- Virtual environment is detected
+
+<Note>
+  If `code .` doesn't work, see the Git section for setup instructions.
+</Note>
+
+## Step 5: Add packages
+
+Open terminal in VS Code (`` Ctrl+` ``):
+
+```bash
+# Add packages you need
+uv add requests
+uv add pandas numpy
+uv add python-dotenv
+
+# For interactive Python (optional)
+uv add ipykernel
+```
+
+**What happens:**
+- Packages download and install
+- `pyproject.toml` updates with dependencies
+- `uv.lock` locks exact versions
+
+## Step 6: Test your setup
+
+Edit `hello.py`:
+
+```python
+import requests
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
+
+# Test the setup
+print("✅ Packages imported successfully!")
+
+# Test environment variable
+api_key = os.environ.get("API_KEY", "not-set")
+print(f"✅ API_KEY: {api_key}")
+
+# Test requests
+response = requests.get("https://api.github.com")
+print(f"✅ GitHub API status: {response.status_code}")
+```
+
+Run it:
+```bash
+uv run python hello.py
+```
+
+## Step 7: Set up environment variables
+
+Create `.env` for secrets:
+
+```bash
+# .env
+API_KEY=your-secret-key-here
+DATABASE_URL=postgresql://localhost/mydb
+DEBUG=True
+```
+
+Create `.env.example` for others:
+
+```bash
+# .env.example
+API_KEY=your-api-key-here
+DATABASE_URL=your-database-url
+DEBUG=True
+```
+
+**Important**: `.env` is already in `.gitignore` - your secrets are safe!
+
+## Step 8: Initialize Git
+
+```bash
+# Initialize Git repository
+git init
+
+# Add all files
+git add .
+
+# First commit
+git commit -m "Initial commit"
+```
+
+**What happens:**
+- Git starts tracking your files
+- All files except those in `.gitignore` are staged
+- Your first snapshot is saved
+
+## Step 9: Create GitHub repository
+
+Create the repository directly from your terminal:
+
+<Tabs>
+  <Tab title="Using GitHub CLI (Recommended)">
+    ```bash
+    # Create private repository
+    gh repo create my-awesome-project --private --source=. --remote=origin --push
+    
+    # Or create public repository
+    gh repo create my-awesome-project --public --source=. --remote=origin --push
+    ```
+    
+    **What happens:**
+    - Creates repository on GitHub
+    - Sets up remote connection
+    - Pushes your code automatically
+    
+    <Note>
+      If you don't have GitHub CLI, install it:
+      
+      **Mac:**
+      ```bash
+      brew install gh
+      ```
+      
+      **Windows:**
+      ```bash
+      winget install --id GitHub.cli
+      # Or download from cli.github.com
+      ```
+      
+      **Linux:**
+      ```bash
+      # Debian/Ubuntu
+      curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+      sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+      echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+      sudo apt update
+      sudo apt install gh
+      ```
+      
+      After installing, authenticate with:
+      ```bash
+      gh auth login
+      ```
+    </Note>
+  </Tab>
+  
+  <Tab title="Using Git (Traditional)">
+    If you prefer the traditional way:
+    
+    1. Go to [github.com](https://github.com)
+    2. Click **+** > **New repository**
+    3. Name it `my-awesome-project`
+    4. Choose Private or Public
+    5. **Don't** add any files
+    6. Click **Create repository**
+    
+    Then run:
+    ```bash
+    git remote add origin https://github.com/YOUR-USERNAME/my-awesome-project.git
+    git push -u origin main
+    ```
+  </Tab>
+</Tabs>
+
+**You're done!** Your project is now:
+- Set up locally with uv
+- Tracked by Git
+- Backed up on GitHub
+
+## The daily workflow
+
+From here, your routine is:
+
+```bash
+# Make changes to your code...
+
+# Add packages as needed
+uv add some-package
+
+# Commit changes
+git add .
+git commit -m "Add new feature"
+
+# Push to GitHub
+git push
+```
+
+<Tip>
+  **Prefer clicking?** You can do all Git operations using VS Code's UI:
+  - **Source Control panel** (Ctrl+Shift+G): Stage, commit, and push with clicks
+  - **Status bar**: Shows branch and sync button
+  - **Command Palette** (Ctrl+Shift+P): Type "Git" to see all commands
+  
+  See the Git & GitHub section for details!
+</Tip>
+
+## Quick reference
+
+```bash
+# Project setup (one time)
+uv init project-name
+cd project-name
+code .
+git init
+git add .
+git commit -m "Initial commit"
+gh repo create project-name --private --source=. --remote=origin --push
+
+# Daily development
+uv add package-name        # Add packages
+uv run python script.py    # Run code
+git add .                  # Stage changes
+git commit -m "message"    # Commit
+git push                   # Push to GitHub
+```
+
+## Pro tips
+
+1. **Commit often** - Small commits are better than huge ones
+2. **Write clear messages** - "Fix login bug" not "updates"
+3. **Use .env** - Never hardcode secrets
+4. **Keep it simple** - Don't over-engineer
+
+## Commands summary
+
+Here's everything in one place:
+
+```bash
+# Setup (one time)
+uv init my-project
+cd my-project
+code .
+uv add requests pandas python-dotenv
+uv add --dev ipykernel
+echo "API_KEY=your-key" > .env
+git init
+git add .
+git commit -m "Initial commit"
+gh repo create my-project --private --source=. --remote=origin --push
+
+# Daily workflow
+uv add package-name        # Add packages
+uv run python script.py    # Run code
+git add .                  # Stage changes
+git commit -m "message"    # Commit
+git push                   # Push to GitHub
+```
+
+## What's next?
+
+You now have a complete Python development workflow. Time to build something amazing!
+
+<Card
+  title="Build your first project"
+  icon="hammer"
+  href="/projects/text-analyzer/index"
+>
+  Apply everything you've learned
+</Card>

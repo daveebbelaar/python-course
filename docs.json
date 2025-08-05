@@ -196,8 +196,19 @@
             "pages": [
               "tools/dependencies/index",
               "tools/dependencies/uv-intro",
-              "tools/dependencies/virtual-env",
-              "tools/dependencies/complete-setup"
+              "tools/dependencies/virtual-env"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Project Setup",
+        "groups": [
+          {
+            "group": "Complete workflow",
+            "pages": [
+              "project-setup/index",
+              "project-setup/workflow"
             ]
           }
         ]
