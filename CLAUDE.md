@@ -156,3 +156,4 @@ docs/
 
 ## Project Memories
 - I replaced 'all arrows with this > , should be standard for arrow icon in project
+- NEVER use text pattern like "why environment variables matter" as it's a clear Claude giveaway and should be adjusted
