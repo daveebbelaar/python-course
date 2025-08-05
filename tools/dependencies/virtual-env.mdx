@@ -1,9 +1,205 @@
 ---
-title: Virtual environments
-description: Isolate your projects
-icon: "box"
+title: Using uv
+description: Create projects the modern way
+icon: "code"
 ---
 
-## Why virtual environments?
+## Creating a new project
 
-Placeholder for virtual environments.
+Let's create a real project with uv:
+
+```bash
+# Create and enter project
+uv init ai-assistant
+cd ai-assistant
+```
+
+This creates:
+```
+ai-assistant/
+├── .venv/          # Virtual environment (automatic!)
+├── .gitignore      # Git ignore file
+├── pyproject.toml  # Project configuration
+├── README.md       # Project readme
+└── hello.py        # Example script
+```
+
+## Understanding pyproject.toml
+
+This is your project's configuration file:
+
+```toml
+[project]
+name = "ai-assistant"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+```
+
+It replaces:
+- `requirements.txt`
+- `setup.py`
+- `setup.cfg`
+- Multiple config files
+
+One file to rule them all!
+
+## Adding packages
+
+Add packages with `uv add`:
+
+```bash
+# Add a package
+uv add requests
+
+# Add multiple packages
+uv add pandas numpy matplotlib
+
+# Add development dependencies
+uv add --dev pytest black
+```
+
+Your `pyproject.toml` updates automatically:
+
+```toml
+[project]
+name = "ai-assistant"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "requests>=2.32.0",
+    "pandas>=2.2.0",
+    "numpy>=1.26.0",
+    "matplotlib>=3.8.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.0.0",
+    "black>=24.0.0",
+]
+```
+
+## The lock file
+
+uv creates `uv.lock` - this locks exact versions:
+
+```
+# uv.lock (auto-generated)
+version = 1
+requires-python = ">=3.12"
+
+[[package]]
+name = "requests"
+version = "2.32.3"
+dependencies = [
+    { name = "certifi" },
+    { name = "charset-normalizer" },
+    ...
+]
+```
+
+This ensures everyone gets exactly the same packages.
+
+## Running your code
+
+Three ways to run Python with uv:
+
+```bash
+# Method 1: uv run (recommended)
+uv run python hello.py
+
+# Method 2: Activate venv (traditional)
+source .venv/bin/activate  # Mac/Linux
+# or
+.venv\Scripts\activate     # Windows
+
+# Method 3: Direct path
+.venv/bin/python hello.py
+```
+
+<Tip>
+  `uv run` is recommended - it always uses the right Python!
+</Tip>
+
+## Common uv commands
+
+```bash
+# Create new project
+uv init project-name
+
+# Add packages
+uv add package-name
+
+# Remove packages
+uv remove package-name
+
+# Install all dependencies
+uv sync
+
+# Update packages
+uv add --upgrade package-name
+
+# Show installed packages
+uv pip list
+
+# Run Python scripts
+uv run python script.py
+```
+
+## Working with existing projects
+
+Got a project with `requirements.txt`? No problem:
+
+```bash
+# Convert requirements.txt to pyproject.toml
+uv add -r requirements.txt
+
+# Or just install from requirements.txt
+uv pip install -r requirements.txt
+```
+
+## Virtual environment details
+
+uv creates `.venv` automatically:
+- No activation needed with `uv run`
+- Always in project directory
+- Works with VS Code automatically
+- Add `.venv/` to `.gitignore`
+
+## Tips and tricks
+
+1. **Global tools**: Install tools globally with uv
+   ```bash
+   uv tool install black
+   uv tool install mypy
+   ```
+
+2. **Python versions**: uv can manage Python too
+   ```bash
+   uv python install 3.12
+   uv python install 3.11
+   ```
+
+3. **Scripts**: Add custom commands
+   ```toml
+   [project.scripts]
+   start = "ai_assistant.main:run"
+   test = "pytest tests/"
+   ```
+
+## What's next?
+
+Now let's put it all together - create a complete project from scratch!
+
+<Card
+  title="Complete project setup"
+  icon="flag-checkered"
+  href="/tools/dependencies/complete-setup"
+>
+  Start to finish guide
+</Card>

@@ -1,9 +1,298 @@
 ---
 title: Complete setup
-description: UV + Git workflow
-icon: "circle-check"
+description: From zero to production-ready
+icon: "flag-checkered"
 ---
 
-## Putting it all together
+## Start to finish guide
 
-Placeholder for complete UV + Git + pyproject.toml setup.
+Let's create a complete Python project using everything we've learned. We'll build an AI chat assistant from scratch.
+
+## Step 1: Install uv
+
+First, install uv if you haven't already:
+
+<Tabs>
+  <Tab title="Mac/Linux">
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+  </Tab>
+  
+  <Tab title="Windows">
+    ```powershell
+    powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+    ```
+  </Tab>
+</Tabs>
+
+Restart your terminal after installation.
+
+## Step 2: Create the project
+
+```bash
+# Create new project
+uv init ai-chat-bot
+cd ai-chat-bot
+```
+
+## Step 3: Set up Git
+
+Initialize Git and create `.gitignore`:
+
+```bash
+# Initialize Git
+git init
+
+# The .gitignore already exists with:
+# .venv/
+# __pycache__/
+# *.pyc
+# .env
+```
+
+## Step 4: Add dependencies
+
+```bash
+# Add project dependencies
+uv add openai python-dotenv rich
+
+# Add dev dependencies
+uv add --dev pytest black ruff
+```
+
+## Step 5: Create project structure
+
+```bash
+# Create directories
+mkdir src tests
+
+# Create main package
+mkdir src/ai_chat_bot
+touch src/ai_chat_bot/__init__.py
+```
+
+Your structure:
+```
+ai-chat-bot/
+├── .venv/
+├── .gitignore
+├── pyproject.toml
+├── uv.lock
+├── README.md
+├── .env
+├── src/
+│   └── ai_chat_bot/
+│       ├── __init__.py
+│       ├── main.py
+│       └── chat.py
+└── tests/
+    └── test_chat.py
+```
+
+## Step 6: Create .env file
+
+```bash
+# Create .env for secrets
+echo "OPENAI_API_KEY=your-key-here" > .env
+```
+
+## Step 7: Write the code
+
+Create `src/ai_chat_bot/chat.py`:
+
+```python
+# src/ai_chat_bot/chat.py
+from openai import OpenAI
+from rich.console import Console
+from rich.markdown import Markdown
+import os
+
+console = Console()
+
+class ChatBot:
+    def __init__(self):
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if not api_key:
+            raise ValueError("Please set OPENAI_API_KEY in .env file")
+        
+        self.client = OpenAI(api_key=api_key)
+        self.messages = []
+    
+    def chat(self, user_input: str) -> str:
+        self.messages.append({"role": "user", "content": user_input})
+        
+        response = self.client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=self.messages,
+            temperature=0.7,
+        )
+        
+        assistant_message = response.choices[0].message.content
+        self.messages.append({"role": "assistant", "content": assistant_message})
+        
+        return assistant_message
+```
+
+Create `src/ai_chat_bot/main.py`:
+
+```python
+# src/ai_chat_bot/main.py
+from dotenv import load_dotenv
+from rich.console import Console
+from rich.prompt import Prompt
+from .chat import ChatBot
+
+console = Console()
+
+def main():
+    # Load environment variables
+    load_dotenv()
+    
+    # Create chatbot
+    try:
+        bot = ChatBot()
+    except ValueError as e:
+        console.print(f"[red]Error: {e}[/red]")
+        return
+    
+    console.print("[bold green]AI Chat Bot[/bold green]")
+    console.print("Type 'quit' to exit\n")
+    
+    while True:
+        user_input = Prompt.ask("[blue]You[/blue]")
+        
+        if user_input.lower() == 'quit':
+            break
+        
+        response = bot.chat(user_input)
+        console.print(f"[green]Bot:[/green] {response}\n")
+    
+    console.print("[yellow]Goodbye![/yellow]")
+
+if __name__ == "__main__":
+    main()
+```
+
+## Step 8: Update pyproject.toml
+
+Add entry point to `pyproject.toml`:
+
+```toml
+[project.scripts]
+chat = "ai_chat_bot.main:main"
+```
+
+## Step 9: Test the project
+
+```bash
+# Run directly
+uv run python -m ai_chat_bot.main
+
+# Or use the script
+uv run chat
+```
+
+## Step 10: Create tests
+
+Create `tests/test_chat.py`:
+
+```python
+# tests/test_chat.py
+import pytest
+from unittest.mock import Mock, patch
+from ai_chat_bot.chat import ChatBot
+
+def test_chatbot_init_no_api_key():
+    with patch.dict('os.environ', {}, clear=True):
+        with pytest.raises(ValueError):
+            ChatBot()
+
+def test_chatbot_chat():
+    with patch.dict('os.environ', {'OPENAI_API_KEY': 'test-key'}):
+        with patch('ai_chat_bot.chat.OpenAI') as mock_openai:
+            # Mock the API response
+            mock_response = Mock()
+            mock_response.choices = [Mock(message=Mock(content="Hello!"))]
+            mock_openai.return_value.chat.completions.create.return_value = mock_response
+            
+            bot = ChatBot()
+            response = bot.chat("Hi")
+            
+            assert response == "Hello!"
+            assert len(bot.messages) == 2
+```
+
+Run tests:
+```bash
+uv run pytest
+```
+
+## Step 11: Format code
+
+```bash
+# Format with black
+uv run black src tests
+
+# Lint with ruff
+uv run ruff check src tests
+```
+
+## Step 12: Push to GitHub
+
+```bash
+# Add all files
+git add .
+
+# Commit
+git commit -m "Initial commit: AI chat bot with uv"
+
+# Create repo on GitHub, then:
+git remote add origin git@github.com:YOUR-USERNAME/ai-chat-bot.git
+git push -u origin main
+```
+
+## Complete workflow summary
+
+1. **Install uv** - Modern Python tooling
+2. **Create project** - `uv init project-name`
+3. **Set up Git** - Initialize and configure
+4. **Add packages** - `uv add package-name`
+5. **Structure code** - Organize in src/
+6. **Environment** - Use .env for secrets
+7. **Write code** - Build your application
+8. **Test** - Write and run tests
+9. **Format** - Keep code clean
+10. **Push** - Share on GitHub
+
+## Project template
+
+Want to skip the setup? Create a template repository on GitHub:
+
+1. Create this structure once
+2. Click "Use this template" for new projects
+3. Clone and start coding immediately
+
+<Note>
+  The instructor will create a Python starter template you can use. Check the course resources!
+</Note>
+
+## Pro tips
+
+1. **Always use .env** for secrets
+2. **Commit early and often**
+3. **Write tests as you go**
+4. **Keep dependencies minimal**
+5. **Document in README.md**
+
+## What's next?
+
+You now have all the tools for professional Python development! Time to build something amazing.
+
+<Card
+  title="Build projects"
+  icon="hammer"
+  href="/projects/text-analyzer/index"
+>
+  Apply your skills
+</Card>

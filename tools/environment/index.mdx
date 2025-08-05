@@ -1,19 +1,21 @@
 ---
 title: Environment & secrets
-description: Manage API keys and configuration
+description: Keep your API keys safe
 icon: "key"
 ---
 
-## Keep your secrets safe
+## Never put secrets in your code
 
-When building Python applications, you'll need to manage:
-- API keys (OpenAI, Anthropic, etc.)
-- Database credentials
-- Configuration that changes between environments
+When working with APIs or databases, you'll need:
+- API keys
+- Passwords
+- Connection strings
 
-**Never put these directly in your code!** Let's learn the right way.
+Putting these directly in your code is dangerous - anyone can see them!
 
-## What we'll cover
+## The solution
+
+Environment variables let you keep secrets separate from your code. We'll learn two approaches:
 
 <CardGroup cols={2}>
   <Card
@@ -21,18 +23,18 @@ When building Python applications, you'll need to manage:
     icon="gear"
     href="/tools/environment/variables"
   >
-    Learn the basics and .env files
+    What they are and how they work
   </Card>
   
   <Card
-    title="Best practices"
+    title="Using .env files"
     icon="file-shield"
     href="/tools/environment/dotenv"
   >
-    Advanced patterns and examples
+    The easy way with .env files
   </Card>
 </CardGroup>
 
-<Warning>
-  Remember: Always add `.env` to your `.gitignore` file to keep secrets out of Git!
-</Warning>
+<Tip>
+  Most Python projects use `.env` files - they're simple and work great for local development.
+</Tip>

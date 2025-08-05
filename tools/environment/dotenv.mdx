@@ -1,72 +1,14 @@
 ---
 title: Using .env files
-description: Best practices and examples
+description: The easy way to manage secrets
 icon: "file-shield"
 ---
 
-## The .env file pattern
+## What is a .env file?
 
-A `.env` file stores your environment variables in a simple text file. It's the standard way to manage configuration in Python projects.
+A `.env` file is a simple text file that stores your environment variables. Instead of typing `export` commands, you write them once in a file.
 
-## Basic structure
-
-Create a file named `.env` in your project root:
-
-```
-# .env
-API_KEY=sk-1234567890abcdef
-DATABASE_URL=sqlite:///myapp.db
-DEBUG=True
-PORT=8080
-```
-
-Rules:
-- One variable per line
-- No spaces around the `=`
-- No quotes needed (unless they're part of the value)
-- Comments start with `#`
-
-## Working with AI APIs
-
-Here's how to safely use API keys for AI services:
-
-```python
-# ai_example.py
-from dotenv import load_dotenv
-import os
-import requests
-
-# Load environment variables
-load_dotenv()
-
-# Get API key from environment
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
-
-if not OPENAI_API_KEY:
-    print("Error: Please set OPENAI_API_KEY in your .env file")
-    exit(1)
-
-# Use the API key
-headers = {
-    "Authorization": f"Bearer {OPENAI_API_KEY}",
-    "Content-Type": "application/json"
-}
-
-# Make API calls...
-```
-
-Your `.env` file:
-```
-# AI Service Keys
-OPENAI_API_KEY=sk-...your-key-here...
-ANTHROPIC_API_KEY=sk-ant-...your-key-here...
-
-# Other config
-MODEL_NAME=gpt-3.5-turbo
-MAX_TOKENS=150
-```
-
-## Complete workflow
+## Basic setup
 
 ### 1. Install python-dotenv
 
@@ -76,241 +18,132 @@ pip install python-dotenv
 
 ### 2. Create .env file
 
+Create a file named `.env` in your project:
+
 ```
 # .env
-DATABASE_URL=postgresql://user:pass@localhost/mydb
-REDIS_URL=redis://localhost:6379
-SECRET_KEY=my-super-secret-key-change-this
-DEBUG=False
-```
-
-### 3. Create .env.example
-
-Show others what variables they need:
-
-```
-# .env.example (commit this to Git)
-DATABASE_URL=your_database_url_here
-REDIS_URL=redis://localhost:6379
-SECRET_KEY=generate_a_secret_key
+API_KEY=sk-1234567890abcdef
+DATABASE_URL=sqlite:///myapp.db
 DEBUG=True
 ```
 
-### 4. Update .gitignore
+### 3. Load in Python
+
+```python
+from dotenv import load_dotenv
+import os
+
+# Load the .env file
+load_dotenv()
+
+# Now use your variables
+api_key = os.environ.get('API_KEY')
+debug = os.environ.get('DEBUG')
+
+print(f"API Key: {api_key}")
+print(f"Debug mode: {debug}")
+```
+
+That's it! Much easier than export commands.
+
+## Critical: Add to .gitignore
 
 <Warning>
-  **Critical**: Always add `.env` to `.gitignore`:
+  **Never commit .env files!** They contain secrets. Add to `.gitignore` immediately:
   
   ```
   # .gitignore
   .env
   .venv/
   __pycache__/
-  *.pyc
   ```
 </Warning>
 
-### 5. Use in your code
+## Complete example
+
+Here's a real example with an API:
 
 ```python
 # app.py
 from dotenv import load_dotenv
 import os
+import requests
 
-# Load .env file
+# Load environment variables
 load_dotenv()
 
-# Configuration
-class Config:
-    DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///dev.db')
-    SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-key')
-    DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
-    
-    # Type conversion examples
-    PORT = int(os.environ.get('PORT', '5000'))
-    MAX_RETRIES = int(os.environ.get('MAX_RETRIES', '3'))
-    TIMEOUT = float(os.environ.get('TIMEOUT', '30.0'))
+# Get API key
+API_KEY = os.environ.get('OPENAI_API_KEY')
 
-# Use configuration
-print(f"Running on port {Config.PORT}")
-print(f"Debug mode: {Config.DEBUG}")
-```
-
-## Advanced patterns
-
-### Multiple environments
-
-Create different .env files:
-- `.env.development`
-- `.env.production`
-- `.env.test`
-
-Load the right one:
-```python
-import os
-from dotenv import load_dotenv
-
-# Determine environment
-env = os.environ.get('ENVIRONMENT', 'development')
-
-# Load appropriate .env file
-load_dotenv(f'.env.{env}')
-```
-
-### Validation
-
-Validate required variables:
-```python
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-# Required variables
-REQUIRED_VARS = ['API_KEY', 'DATABASE_URL', 'SECRET_KEY']
-
-# Check all are present
-missing = [var for var in REQUIRED_VARS if not os.environ.get(var)]
-
-if missing:
-    print(f"Error: Missing required environment variables: {', '.join(missing)}")
-    print("Please check your .env file")
+if not API_KEY:
+    print("Please set OPENAI_API_KEY in .env file")
     exit(1)
+
+# Use the API
+headers = {"Authorization": f"Bearer {API_KEY}"}
+# Make your API calls...
 ```
 
-### Type conversion helpers
-
-```python
-import os
-
-def get_bool(key, default=False):
-    """Get boolean from environment"""
-    value = os.environ.get(key, str(default))
-    return value.lower() in ('true', '1', 'yes', 'on')
-
-def get_int(key, default=0):
-    """Get integer from environment"""
-    try:
-        return int(os.environ.get(key, str(default)))
-    except ValueError:
-        return default
-
-def get_list(key, default=None):
-    """Get comma-separated list from environment"""
-    value = os.environ.get(key, '')
-    return value.split(',') if value else (default or [])
-
-# Usage
-DEBUG = get_bool('DEBUG')
-PORT = get_int('PORT', 8000)
-ALLOWED_HOSTS = get_list('ALLOWED_HOSTS', ['localhost'])
+Your `.env` file:
 ```
+# .env
+OPENAI_API_KEY=sk-your-actual-key-here
+MODEL=gpt-3.5-turbo
+MAX_TOKENS=100
+```
+
+## Show others what they need
+
+Create `.env.example` (this one you DO commit):
+
+```
+# .env.example
+OPENAI_API_KEY=your-api-key-here
+MODEL=gpt-3.5-turbo
+MAX_TOKENS=100
+```
+
+This shows other developers what variables they need without exposing your actual keys.
+
+## Rules for .env files
+
+- One variable per line
+- No spaces around `=`
+- No quotes (unless part of the value)
+- Use `#` for comments
+- Always UPPERCASE names
 
 ## Common patterns
 
-### Database URLs
-
 ```
-# Development
+# API Keys
+OPENAI_API_KEY=sk-...
+GITHUB_TOKEN=ghp_...
+
+# Database
 DATABASE_URL=sqlite:///local.db
 
-# Production
-DATABASE_URL=postgresql://user:pass@host:5432/dbname
+# Settings
+DEBUG=True
+PORT=8000
+LOG_LEVEL=INFO
 ```
 
-### API configurations
+## Quick tips
 
-```
-# API Settings
-API_BASE_URL=https://api.example.com
-API_VERSION=v1
-API_KEY=your-key-here
-API_TIMEOUT=30
-```
-
-### Feature flags
-
-```
-# Features
-ENABLE_SIGNUP=True
-ENABLE_PAYMENT=False
-MAINTENANCE_MODE=False
-```
-
-## Best practices
-
-1. **Never commit .env files** - They contain secrets!
-
-2. **Always provide defaults** - Code should work without .env:
-   ```python
-   api_key = os.environ.get('API_KEY', 'dev-key-for-testing')
-   ```
-
-3. **Document variables** - Keep .env.example updated
-
-4. **Use descriptive names** - `DATABASE_URL` not `DB`
-
-5. **Group related variables**:
-   ```
-   # Database
-   DB_HOST=localhost
-   DB_PORT=5432
-   DB_NAME=myapp
-   
-   # Redis
-   REDIS_HOST=localhost
-   REDIS_PORT=6379
-   ```
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="Variables not loading">
-    Make sure you call `load_dotenv()` before accessing variables:
-    ```python
-    from dotenv import load_dotenv
-    import os
-    
-    load_dotenv()  # This must come first!
-    api_key = os.environ.get('API_KEY')
-    ```
-  </Accordion>
-
-  <Accordion title="Wrong file location">
-    By default, `load_dotenv()` looks in the current directory. Specify path if needed:
-    ```python
-    from pathlib import Path
-    from dotenv import load_dotenv
-    
-    # Load from specific path
-    env_path = Path('.') / '.env'
-    load_dotenv(dotenv_path=env_path)
-    ```
-  </Accordion>
-
-  <Accordion title="Variables with quotes">
-    Don't use quotes unless they're part of the value:
-    ```
-    # Wrong
-    API_KEY="sk-123"
-    
-    # Right
-    API_KEY=sk-123
-    
-    # Unless quotes are needed
-    MESSAGE="Hello, World!"
-    ```
-  </Accordion>
-</AccordionGroup>
+1. **Load early**: Put `load_dotenv()` at the start of your program
+2. **Use defaults**: `os.environ.get('PORT', '8000')`
+3. **Check your .gitignore**: Make sure `.env` is listed
+4. **Keep it simple**: Only put configuration that changes
 
 ## What's next?
 
-You now know how to manage configuration and secrets safely. Ready to put it all together!
+You now know how to manage secrets safely! Ready for modern Python tooling?
 
 <Card
-  title="Modern Python setup"
+  title="Modern Python"
   icon="rocket"
   href="/tools/dependencies/index"
 >
-  Complete development environment
+  Next-level Python development
 </Card>

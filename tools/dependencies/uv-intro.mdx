@@ -1,9 +1,164 @@
 ---
-title: Introduction to UV
-description: Modern Python tooling
-icon: "rocket"
+title: Why uv?
+description: The future of Python packaging
+icon: "bolt"
 ---
 
-## Why UV?
+## See the difference
 
-Placeholder for UV introduction.
+Let's install a package with pip vs uv:
+
+### With pip (traditional)
+```bash
+pip install pandas
+# ⏱️ Takes 15-30 seconds
+```
+
+### With uv (modern)
+```bash
+uv pip install pandas
+# ⚡ Takes 1-2 seconds
+```
+
+That's 10-30x faster! And it gets better.
+
+## Real-world comparison
+
+Creating a new project:
+
+<Tabs>
+  <Tab title="Traditional way">
+    ```bash
+    # Create virtual environment
+    python -m venv .venv
+    
+    # Activate it (different per OS!)
+    # Windows: .venv\Scripts\activate
+    # Mac/Linux: source .venv/bin/activate
+    
+    # Install packages
+    pip install requests pandas numpy
+    
+    # Save dependencies
+    pip freeze > requirements.txt
+    ```
+    
+    **Time**: ~45 seconds
+    **Commands**: 4+ (varies by OS)
+  </Tab>
+  
+  <Tab title="With uv">
+    ```bash
+    # Everything in one command
+    uv init
+    uv add requests pandas numpy
+    ```
+    
+    **Time**: ~3 seconds
+    **Commands**: 2
+  </Tab>
+</Tabs>
+
+## Why is uv so fast?
+
+1. **Written in Rust** - Compiled language, not interpreted Python
+2. **Smart caching** - Reuses downloaded files intelligently
+3. **Parallel downloads** - Gets multiple packages at once
+4. **Better algorithms** - Optimized dependency resolution
+
+## More than just speed
+
+### One tool, not five
+
+Traditional Python:
+- `pip` for packages
+- `venv` for virtual environments
+- `pip-compile` for lock files
+- `pyenv` for Python versions
+- `pipx` for global tools
+
+With uv:
+- `uv` does it all
+
+### It just works
+
+No more:
+- "Did I activate my venv?"
+- "Which Python am I using?"
+- "Why is this package conflicting?"
+
+uv handles it automatically.
+
+### Modern features
+
+- **Lock files** - Exact reproducible installs
+- **Workspace support** - Multiple related projects
+- **Script running** - Built-in task runner
+- **Python management** - Install Python versions too
+
+## Installing uv
+
+One command for any system:
+
+<Tabs>
+  <Tab title="Mac/Linux">
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+  </Tab>
+  
+  <Tab title="Windows">
+    ```powershell
+    powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+    ```
+  </Tab>
+</Tabs>
+
+After installation, restart your terminal.
+
+## Quick commands
+
+Here's what you need to know:
+
+```bash
+# Create new project
+uv init my-project
+
+# Add packages
+uv add requests pandas
+
+# Install from existing project
+uv sync
+
+# Run Python
+uv run python script.py
+```
+
+## Should you switch?
+
+**Yes, if you want:**
+- Faster development
+- Simpler commands
+- Less confusion
+- Modern tooling
+
+**Maybe wait if:**
+- You're in a team using pip
+- You have complex legacy setups
+- You're just starting (learn basics first)
+
+<Note>
+  uv is backwards compatible - it can read requirements.txt and work with existing projects!
+</Note>
+
+## What's next?
+
+Let's see uv in action by creating a real project.
+
+<Card
+  title="Using uv"
+  icon="code"
+  href="/tools/dependencies/virtual-env"
+>
+  Create your first uv project
+</Card>

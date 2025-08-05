@@ -195,7 +195,6 @@
             "group": "Modern Python",
             "pages": [
               "tools/dependencies/index",
-              "tools/dependencies/requirements",
               "tools/dependencies/uv-intro",
               "tools/dependencies/virtual-env",
               "tools/dependencies/complete-setup"
