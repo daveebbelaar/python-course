@@ -201,17 +201,6 @@
             ]
           }
         ]
-      },
-      {
-        "tab": "Resources",
-        "groups": [
-          {
-            "group": "Next steps",
-            "pages": [
-              "resources/index"
-            ]
-          }
-        ]
       }
     ],
     "global": {
@@ -232,22 +221,22 @@
     "links": [
       {
         "label": "YouTube",
-        "href": "https://youtube.com/@daveebbelaar"
+        "href": "https://www.youtube.com/@daveebbelaar?sub_confirmation=1"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Datalumina",
-      "href": "https://datalumina.com"
+      "href": "https://academy.datalumina.com"
     }
   },
   "footer": {
     "copyright": "© 2025 Datalumina. All rights reserved.",
     "socials": {
-      "x": "https://x.com/daveebbelaar",
       "github": "https://github.com/daveebbelaar",
+      "instagram": "https://www.instagram.com/daveebbelaar",
       "linkedin": "https://linkedin.com/in/daveebbelaar",
-      "youtube": "https://youtube.com/@daveebbelaar"
+      "youtube": "https://www.youtube.com/@daveebbelaar?sub_confirmation=1"
     }
   },
   "appearance": {
