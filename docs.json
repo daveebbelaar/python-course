@@ -206,6 +206,19 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Next Steps",
+        "groups": [
+          {
+            "group": "Continue learning",
+            "pages": [
+              "next-steps/course-summary",
+              "next-steps/feedback",
+              "next-steps/ai-agents"
+            ]
+          }
+        ]
       }
     ],
     "global": {
@@ -231,8 +244,8 @@
     ],
     "primary": {
       "type": "button",
-      "label": "Datalumina",
-      "href": "https://academy.datalumina.com"
+      "label": "Academy",
+      "href": "https://go.datalumina.com/NzvALxT"
     }
   },
   "footer": {
