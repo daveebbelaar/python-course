@@ -58,6 +58,12 @@
             ]
           },
           {
+            "group": "Resources",
+            "pages": [
+              "getting-started/course-resources"
+            ]
+          },
+          {
             "group": "Python environment",
             "pages": [
               "getting-started/virtual-environments",
