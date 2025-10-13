@@ -5,7 +5,7 @@ This is a comprehensive beginner course for learning Python specifically for AI 
 
 ## Project Setup
 - **Course Name**: Learn Python for AI
-- **Domain**: learn-python.ai
+- **Domain**: python.datalumina.com
 - **Author**: Dave Ebbelaar
 - **Company**: Datalumina
 
@@ -13,10 +13,10 @@ This is a comprehensive beginner course for learning Python specifically for AI 
 The course uses a progressive horizontal tab structure:
 1. **Introduction** - Course welcome, why Python, AI assistants
 2. **Getting Started** - Python setup and developer tools
-3. **Python Fundamentals** - Variables, data types, operators, control flow
-4. **Advanced** - Functions, data structures, external tools
-5. **Build** - Real-world AI projects
-6. **Resources** - Additional learning materials
+3. **Python Basics** - Variables, data types, operators, control flow, data structures
+4. **Building Programs** - Functions, external tools, classes, error handling
+5. **Tools** - Git, GitHub, environment variables, modern Python with uv
+6. **Next Steps** - Course summary, feedback, AI agents follow-up course
 
 ## Style Guide
 
@@ -97,13 +97,16 @@ docs/
 ├── index.mdx                    # Main landing page
 ├── introduction/                # Welcome and motivation
 ├── getting-started/             # Environment setup
-├── fundamentals/                # Basic Python concepts
+├── basics/                      # Basic Python concepts
+├── data-types/                  # Numbers, strings, booleans
 ├── control-flow/                # Program logic
+├── data-structures/             # Lists, dicts, tuples, sets
 ├── functions/                   # Reusable code
-├── data-structures/             # Lists, dicts, etc.
 ├── libraries-apis/              # External tools
-├── projects/                    # Hands-on projects
-└── resources/                   # Additional learning
+├── practical-python/            # Project structure, files
+├── advanced/                    # Error handling, classes
+├── tools/                       # Git, environment, dependencies
+└── next-steps/                  # Summary, feedback, AI agents
 ```
 
 ## Mintlify Configuration
@@ -155,5 +158,8 @@ docs/
 - You don't need to use `<br>` in accordings when it follows a code block or bullet list. Only use `<br>` with an explanation and then a code block or list.
 
 ## Project Memories
-- I replaced 'all arrows with this > , should be standard for arrow icon in project
+- All arrows use this icon: > (should be standard for arrow icon in project)
 - NEVER use text pattern like "why environment variables matter" as it's a clear Claude giveaway and should be adjusted
+- Course completion flow: Tools (complete-setup) > Course Summary > Feedback > AI Agents
+- Anaconda is mentioned but not recommended (stick with venv and pip)
+- All next-steps files are in /next-steps/ folder (course-summary.mdx, feedback.mdx, ai-agents.mdx)
