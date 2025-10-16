@@ -85,6 +85,18 @@ VS Code needs the [Python extension](https://marketplace.visualstudio.com/items?
   The Python extension adds syntax highlighting, code completion, debugging, and more. It's essential for Python development.
 </Note>
 
+## Configure Python execution
+
+After installing the Python extension, enable this important setting:
+
+1. Open Settings (`Ctrl/Cmd + ,`)
+2. Search for "Python Terminal Execute In File Dir"
+3. Check the box to enable it
+
+**What this does**: When you run a Python file, VS Code will execute it from the file's directory instead of your workspace root.
+
+**Why I recommend it**: This prevents common path-related errors. For example, if your script reads a file with `open('data.csv')`, it will look for the file in the same folder as your script, which is usually what you want. Without this setting, it would look in your project root instead, causing "file not found" errors.
+
 ## Additional recommended extensions
 
 While VS Code works great with just the Python extension, here are a few more I recommend:
