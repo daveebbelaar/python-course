@@ -51,11 +51,34 @@ Use the same email you used for GitHub.
 There are three ways to authenticate with GitHub. Choose one:
 
 <Note>
-  **Recommended**: We suggest using HTTPS with a Personal Access Token for beginners. It's the simplest to set up.
+  **Recommended**: We suggest using GitHub CLI for the easiest setup experience. It's modern, simple, and handles authentication automatically.
 </Note>
 
 <Tabs>
-  <Tab title="HTTPS with Token (Recommended)">
+  <Tab title="GitHub CLI (Recommended)">
+    ### GitHub CLI (gh)
+    
+    Modern approach using GitHub's official tool:
+    
+    1. Install GitHub CLI:
+       - **Windows**: Download from [cli.github.com](https://cli.github.com)
+       - **macOS**: `brew install gh`
+       - **Linux**: See [installation guide](https://github.com/cli/cli#installation)
+    
+    2. Authenticate:
+    ```bash
+    gh auth login
+    ```
+    
+    3. Follow the prompts:
+       - Choose GitHub.com
+       - Choose SSH (recommended) or HTTPS
+       - Authenticate with browser
+    
+    That's it! Git will automatically use your gh credentials.
+  </Tab>
+  
+  <Tab title="HTTPS with Token">
     ### Personal Access Token
     
     Traditional method using tokens:
@@ -149,29 +172,6 @@ There are three ways to authenticate with GitHub. Choose one:
     # Not HTTPS URL
     git clone https://github.com/username/repo.git
     ```
-  </Tab>
-  
-  <Tab title="GitHub CLI">
-    ### GitHub CLI (gh)
-    
-    Modern approach using GitHub's official tool:
-    
-    1. Install GitHub CLI:
-       - **Windows**: Download from [cli.github.com](https://cli.github.com)
-       - **macOS**: `brew install gh`
-       - **Linux**: See [installation guide](https://github.com/cli/cli#installation)
-    
-    2. Authenticate:
-    ```bash
-    gh auth login
-    ```
-    
-    3. Follow the prompts:
-       - Choose GitHub.com
-       - Choose SSH (recommended) or HTTPS
-       - Authenticate with browser
-    
-    That's it! Git will automatically use your gh credentials.
   </Tab>
 </Tabs>
 
