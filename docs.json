@@ -244,6 +244,10 @@
   "navbar": {
     "links": [
       {
+        "label": "YouTube",
+        "href": "https://www.youtube.com/@daveebbelaar?sub_confirmation=1"
+      },
+      {
         "label": "Resources",
         "href": "https://datalumina.gumroad.com/l/qlhkx"
       }
@@ -286,8 +290,8 @@
     "maxWidth": "1200px"
   },
   "seo": {
-    "site": "https://learn-python.ai",
+    "site": "https://python.datalumina.com",
     "title": "Learn Python for AI - Complete Beginner Course",
-    "description": "From zero to confident with Python fundamentals and AI workflows in just 3 hours. Free course by Dave Ebbelaar."
+    "description": "Learn Python from scratch with a focus on AI development. This beginner course teaches you the foundations you need to confidently work with Python in AI applications."
   }
 }
