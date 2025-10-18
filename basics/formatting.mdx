@@ -1,104 +1,89 @@
 ---
 title: Code formatting
-description: Automatically format your Python code with Ruff
+description: Keep your code clean and readable
 icon: "wand-magic-sparkles"
 ---
 
 ## What is code formatting?
 
-Writing clean, consistent code is hard when you're learning. That's where automatic formatting comes in.
+Writing clean, consistent code is important. Code formatting means organizing your code so it's easy to read and follows Python's style guidelines.
 
-A **linter** is a tool that checks your code for style issues and potential errors. A **formatter** automatically fixes these issues for you.
+## Basic formatting principles
 
-## Why Ruff?
+Follow these basic rules for readability:
 
-Ruff is a modern Python tool that's incredibly fast and combines multiple tools in one:
-- Linting (finding issues)
-- Formatting (fixing style)
-- Import sorting (organizing imports)
-
-It's also beginner-friendly with clear error messages.
-
-## Install Ruff in VS Code
-
-1. Open VS Code
-2. Press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (Mac)
-3. Search for "Ruff"
-4. Install the official Ruff extension by Astral
-
-<Note>
-  The Ruff extension replaces older tools like Pylint, Black, and isort. You only need this one extension.
-</Note>
-
-## Enable format on save
-
-Let's make VS Code automatically format your code when you save:
-
-1. Press `Ctrl+,` (Windows/Linux) or `Cmd+,` (Mac) to open settings
-2. Search for "format on save"
-3. Check the box for "Editor: Format On Save"
-4. Search for "default formatter"
-5. Set "Python > Formatting: Provider" to "Ruff"
-
-## See it in action
-
-Here's messy code before formatting:
+### Indentation
+Use 4 spaces for indentation (not tabs):
 
 ```python
-import os
-def   calculate_total(items):
-    total=0
-    for item in items:
-        total+=item['price']*item['quantity']
-    return total
-
-shopping_cart=[{'name':'apple','price':0.5,'quantity':6},{'name':'banana','price':0.3,'quantity':8}]
-print(calculate_total(shopping_cart))
+def greet(name):
+    if name:
+        print(f"Hello, {name}!")
+    else:
+        print("Hello!")
 ```
 
-After saving with Ruff (automatic):
+### Spacing
+Add spaces around operators and after commas:
 
 ```python
-import os
+# Good
+x = 1 + 2
+numbers = [1, 2, 3, 4]
 
-
-def calculate_total(items):
-    total = 0
-    for item in items:
-        total += item["price"] * item["quantity"]
-    return total
-
-
-shopping_cart = [
-    {"name": "apple", "price": 0.5, "quantity": 6},
-    {"name": "banana", "price": 0.3, "quantity": 8},
-]
-print(calculate_total(shopping_cart))
+# Bad
+x=1+2
+numbers=[1,2,3,4]
 ```
 
-Ruff automatically:
-- Separated imports
-- Added proper spacing
-- Fixed indentation
-- Made quotes consistent
-- Formatted the list for readability
+### Blank lines
+Use blank lines to separate functions and logical sections:
+
+```python
+def first_function():
+    pass
+
+
+def second_function():
+    pass
+```
+
+### Line length
+Keep lines under 80-100 characters. Break long lines for readability:
+
+```python
+# Good - readable
+long_string = (
+    "This is a very long string that "
+    "spans multiple lines for readability"
+)
+
+# Bad - too long
+long_string = "This is a very long string that spans multiple lines for readability but keeps going and going"
+```
 
 <Tip>
-  If formatting doesn't work on save, right-click in your Python file and select "Format Document". This should trigger Ruff manually.
+  Later in the course, you'll learn about Ruff - a tool that automatically formats your code. But understanding these basics first helps you write better code naturally.
 </Tip>
 
-## Common formatting rules
+## Automatic formatting with Ruff
 
-Ruff follows Python's style guide (PEP 8) automatically:
-- 4 spaces for indentation
-- Spaces around operators (`x = 1`, not `x=1`)
-- Two blank lines between functions
-- Maximum line length of 88 characters
-
-You don't need to memorize these - Ruff handles them for you!
+Want to format your code automatically? Check out the Ruff guide in the tools section:
 
 <Card
-  title="Continue to variables"
+  title="Code quality with Ruff"
+  icon="wand-magic-sparkles"
+  href="/tools/code-quality"
+>
+  Automatically format and lint your code
+</Card>
+
+## What's next?
+
+Now that you understand formatting, let's learn about variables!
+
+<Card
+  title="Variables"
   icon="arrow-right"
   href="/basics/variables"
 >

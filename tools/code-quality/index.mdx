@@ -1,0 +1,123 @@
+---
+title: Formatting with Ruff
+description: Automatically format and lint your Python code
+icon: "wand-magic-sparkles"
+---
+
+## What is Ruff?
+
+Ruff is a modern Python tool that's incredibly fast and combines multiple tools in one:
+- **Linting** - Finding issues and potential errors
+- **Formatting** - Fixing code style automatically
+- **Import sorting** - Organizing imports cleanly
+
+It's beginner-friendly with clear error messages and works seamlessly with VS Code.
+
+<Note>
+  A **linter** checks your code for style issues and potential errors. A **formatter** automatically fixes these issues for you.
+</Note>
+
+## Install Ruff in VS Code
+
+1. Open VS Code
+2. Press `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (Mac)
+3. Search for "Ruff"
+4. Install the official Ruff extension by Astral
+
+<Note>
+  The Ruff extension replaces older tools like Pylint, Black, and isort. You only need this one extension.
+</Note>
+
+## Enable format on save
+
+Let's make VS Code automatically format your code when you save:
+
+1. Press `Ctrl+,` (Windows/Linux) or `Cmd+,` (Mac) to open settings
+2. Search for "format on save"
+3. Check the box for "Editor: Format On Save"
+4. Search for "default formatter"
+5. Set "Python > Formatting: Provider" to "Ruff"
+
+## See it in action
+
+Here's messy code before formatting:
+
+```python
+import os
+def   calculate_total(items):
+    total=0
+    for item in items:
+        total+=item['price']*item['quantity']
+    return total
+
+shopping_cart=[{'name':'apple','price':0.5,'quantity':6},{'name':'banana','price':0.3,'quantity':8}]
+print(calculate_total(shopping_cart))
+```
+
+After saving with Ruff (automatic):
+
+```python
+import os
+
+
+def calculate_total(items):
+    total = 0
+    for item in items:
+        total += item["price"] * item["quantity"]
+    return total
+
+
+shopping_cart = [
+    {"name": "apple", "price": 0.5, "quantity": 6},
+    {"name": "banana", "price": 0.3, "quantity": 8},
+]
+print(calculate_total(shopping_cart))
+```
+
+Ruff automatically:
+- Separated imports
+- Added proper spacing
+- Fixed indentation
+- Made quotes consistent
+- Formatted the list for readability
+
+<Tip>
+  If formatting doesn't work on save, right-click in your Python file and select "Format Document". This should trigger Ruff manually.
+</Tip>
+
+## Common formatting rules
+
+Ruff follows Python's style guide (PEP 8) automatically:
+- 4 spaces for indentation
+- Spaces around operators (`x = 1`, not `x=1`)
+- Two blank lines between functions
+- Maximum line length of 88 characters
+
+You don't need to memorize these - Ruff handles them for you!
+
+## Understanding linting errors
+
+Ruff will underline code issues in your editor:
+
+```python
+# Unused imports (Ruff warns you)
+import os
+import sys
+
+# Only using one
+print("Hello")
+```
+
+Hover over underlined code to see:
+- What the issue is
+- Why it matters
+- How to fix it
+
+<Tip>
+  Don't ignore linting warnings! They help you write better code and catch bugs early.
+</Tip>
+
+## What's next?
+
+With Ruff set up, your code will always look professional and follow best practices automatically.
+

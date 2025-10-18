@@ -203,6 +203,12 @@
             ]
           },
           {
+            "group": "Code quality",
+            "pages": [
+              "tools/code-quality/index"
+            ]
+          },
+          {
             "group": "Modern Python",
             "pages": [
               "tools/dependencies/index",
