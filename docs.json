@@ -19,10 +19,23 @@
         "tab": "Introduction",
         "groups": [
           {
-            "group": "Welcome",
+            "group": "Start here",
             "pages": [
               "index",
               "introduction/welcome",
+              "introduction/is-this-for-you"
+            ]
+          },
+          {
+            "group": "Course guide",
+            "pages": [
+              "introduction/how-to-follow",
+              "introduction/what-you-will-learn"
+            ]
+          },
+          {
+            "group": "Before you begin",
+            "pages": [
               "introduction/why-python",
               "introduction/ai-assistants"
             ]
