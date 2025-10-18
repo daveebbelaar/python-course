@@ -95,6 +95,85 @@ def check_weather():
 check_weather()
 ```
 
+## Variable scope: Local vs Global
+
+Variables in Python have a "scope" - where they can be accessed and used.
+
+### Local variables
+
+Variables created inside a function only exist within that function:
+
+```python
+def calculate_price():
+    price = 100
+    tax = price * 0.1
+    print(f"Total: {price + tax}")
+
+calculate_price()  # Total: 110
+
+# This fails - price doesn't exist outside the function
+print(price)  # NameError: name 'price' is not defined
+```
+
+### Global variables
+
+Variables created outside functions can be accessed anywhere:
+
+```python
+discount_rate = 0.15  # Global variable
+
+def apply_discount(price):
+    discount = price * discount_rate  # Can read global variable
+    return price - discount
+
+result = apply_discount(100)
+print(result)  # 85.0
+```
+
+### Modifying global variables
+
+To change a global variable inside a function, use the `global` keyword:
+
+```python
+counter = 0  # Global variable
+
+def increment():
+    global counter  # Declare we want to modify the global variable
+    counter += 1
+
+increment()
+increment()
+print(counter)  # 2
+```
+
+<Warning>
+  Avoid using `global` when possible. It makes code harder to understand and debug. Instead, pass values as parameters and return results.
+</Warning>
+
+### Best practice: Use parameters and returns
+
+```python
+# Bad - using global variable
+total = 0
+
+def add_to_total(amount):
+    global total
+    total += amount
+
+# Good - using parameters and return
+def add_amounts(current_total, amount):
+    return current_total + amount
+
+total = 0
+total = add_amounts(total, 10)
+total = add_amounts(total, 20)
+print(total)  # 30
+```
+
+<Tip>
+  When a local and global variable have the same name, the local variable "shadows" the global one inside the function. Python always uses the local version first.
+</Tip>
+
 ## Common mistakes
 
 <AccordionGroup>
