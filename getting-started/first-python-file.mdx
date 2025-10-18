@@ -93,6 +93,82 @@ What's happening here:
 
 Don't worry about the long paths - VS Code handles all of this automatically. The important part is seeing your output: "Hello, World!"
 
+## What's happening behind the scenes?
+
+When you click the "Run" button in VS Code, it's actually running a command in the terminal for you. Let's understand what's really happening:
+
+### The basic command
+
+At its core, running a Python file is simple:
+
+```bash
+python hello.py
+```
+
+This tells your computer:
+1. **python** - Find the Python program
+2. **hello.py** - Open this file and execute the code inside
+
+### How Python executes your code
+
+Here's what happens when you run `python hello.py`:
+
+1. **Python reads your file** - Opens `hello.py` and reads the text
+2. **Python interprets the code** - Converts your code into instructions the computer understands
+3. **Python executes line by line** - Runs each instruction from top to bottom
+4. **Output appears in terminal** - Any `print()` statements display their results
+
+```python
+print("Hello, World!")  # Line 1: Python reads this
+                        # Python converts it to machine instructions
+                        # Python executes: display "Hello, World!"
+                        # You see: Hello, World!
+
+print("I'm learning Python")  # Line 2: Same process
+```
+
+### Running manually from the terminal
+
+You can run Python files directly in the terminal without using VS Code's button:
+
+```bash
+# Make sure you're in the same folder as your file
+python hello.py
+```
+
+Or with the full path:
+
+```bash
+# You can run from anywhere if you use the full path
+python /Users/yourname/python-for-ai/hello.py
+```
+
+<Note>
+  VS Code's "Run" button is just a convenient way to run `python your_file.py` in the terminal. The underlying process is exactly the same!
+</Note>
+
+### Python vs python3
+
+On some systems (especially Mac/Linux), you might need to use `python3` instead of `python`:
+
+```bash
+python3 hello.py
+```
+
+This ensures you're using Python 3.x instead of the older Python 2.x. VS Code usually handles this automatically.
+
+### Why this matters
+
+Understanding this is important because:
+- You can run Python files from any terminal, not just VS Code
+- You'll see these commands in tutorials and documentation
+- Later, you'll pass arguments to your programs: `python script.py --option value`
+- This is how Python works everywhere: on servers, in production, in automation scripts
+
+<Tip>
+  Think of VS Code as a fancy wrapper around the terminal. When you click "Run," you're really just typing `python hello.py` into the terminal. VS Code makes it easier, but the fundamentals stay the same.
+</Tip>
+
 ## The integrated terminal
 
 The terminal at the bottom is the same as your system's terminal, but inside VS Code. Here's how to work with it:
