@@ -115,8 +115,12 @@ Here's what happens when you run `python hello.py`:
 
 1. **Python reads your file** - Opens `hello.py` and reads the text
 2. **Python interprets the code** - Converts your code into instructions the computer understands
-3. **Python executes line by line** - Runs each instruction from top to bottom
+3. **Python executes line by line** - Runs each instruction from top to bottom, left to right
 4. **Output appears in terminal** - Any `print()` statements display their results
+
+<Note>
+  Python always executes code **top to bottom** (one line after another) and **left to right** (within each line). This means the order of your code matters!
+</Note>
 
 ```python
 print("Hello, World!")  # Line 1: Python reads this
@@ -126,6 +130,11 @@ print("Hello, World!")  # Line 1: Python reads this
 
 print("I'm learning Python")  # Line 2: Same process
 ```
+
+This execution order means:
+- Line 2 can't run before Line 1
+- What you write first happens first
+- Later in the course, you'll see how to control this flow with conditions and loops
 
 ### Running manually from the terminal
 
