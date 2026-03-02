@@ -41,7 +41,11 @@ pip install pandas
 ```
 
 <Note>
-  If you get an error, try `pip3 install pandas` or install it through VS Code's terminal.
+  If you get an error, try `pip3 install pandas` or install it through VS Code's terminal.<br>
+  You might also need to add the `openpyxl` module to your `.venv` if you experience the following error:</p>
+  ModuleNotFoundError: No module named 'openpyxl'</p>
+  It's used internally by Pandas to read or write Excel files.<br>
+  Try `pip3 install openpyxl` or `uv add openpyxl` depending on the package manager you are using.</p>
 </Note>
 
 Update your `analyzer.py`:
