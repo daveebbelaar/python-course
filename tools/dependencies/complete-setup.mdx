@@ -145,7 +145,82 @@ DEBUG=True
 
 **Important**: `.env` is already in `.gitignore` - your secrets are safe!
 
-## Step 8: Initialize Git
+## step 8 docker to run code in any pc:
+
+Docker:
+  1. Reads Dockerfile
+  2. Builds environment
+  3. Creates image
+
+if you want delop on docker
+Create Docker Hub account : https://hub.docker.com/
+
+Login from terminal : 
+```bash
+docker login --need username,password
+```
+
+Install Docker Engine from:
+Docker Official Docs
+
+After install:
+```bash
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+Add yourself to docker group:
+```bash
+sudo usermod -aG docker $USER
+```
+Then reboot/logout and 
+Create Dockerfile
+
+```dockerfile
+# Use official Python image
+FROM python:3.12-slim
+
+# Set working folder
+WORKDIR /app
+
+# Install uv
+RUN pip install uv
+
+# Copy project files
+COPY . .
+
+# Install dependencies
+RUN uv sync
+
+# Run application
+CMD ["uv", "run", "python", "main.py"]
+```
+
+Build Docker Image
+``` bash
+docker build -t my-project-name .
+
+```
+What happens:
+
+```bash
+docker push username/my-project:latest
+```
+  1. Uploads image layers
+  2. Stores image on Docker Hub
+  3. Makes image downloadable anywhere
+
+What happens:
+```bash
+docker pull username/my-project:latest
+```
+  1. Downloads image
+  2. Recreates environment locally in any pc
+
+Run container
+```bash
+docker run username/my-project:latest
+```
+## Step 9: Initialize Git
 
 ```bash
 # Initialize Git repository
@@ -163,7 +238,7 @@ git commit -m "Initial commit"
 - All files except those in `.gitignore` are staged
 - Your first snapshot is saved
 
-## Step 9: Create GitHub repository
+## Step 10: Create GitHub repository
 
 Create the repository directly from your terminal:
 
@@ -274,6 +349,9 @@ git init
 git add .
 git commit -m "Initial commit"
 gh repo create project-name --private --source=. --remote=origin --push
+docker build -t my-project .
+docker run my-project
+
 
 # Daily development
 uv add package-name        # Add packages
@@ -302,6 +380,10 @@ code .
 uv add requests pandas python-dotenv
 uv add --dev ipykernel
 echo "API_KEY=your-key" > .env
+
+docker build -t my-project .
+docker run my-project
+
 git init
 git add .
 git commit -m "Initial commit"
